@@ -1,0 +1,99 @@
+@use "responsive" as *;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 131rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  @include media-max($mobile) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.font-10-r {
+  font: var(--font-10-r);
+}
+.font-12-r {
+  font: var(--font-12-r);
+}
+.font-14-r {
+  font: var(--font-14-r);
+}
+.font-16-r {
+  font: var(--font-16-r);
+}
+.font-18-r {
+  font: var(--font-18-r);
+}
+.font-20-r {
+  font: var(--font-20-r);
+}
+.font-22-r {
+  font: var(--font-22-r);
+}
+.font-24-r {
+  font: var(--font-24-r);
+}
+.font-26-r {
+  font: var(--font-26-r);
+}
+.font-28-r {
+  font: var(--font-28-r);
+}
+
+.font-10-b {
+  font: var(--font-10-b);
+}
+.font-12-b {
+  font: var(--font-12-b);
+}
+.font-14-b {
+  font: var(--font-14-b);
+}
+.font-16-b {
+  font: var(--font-16-b);
+}
+.font-18-b {
+  font: var(--font-18-b);
+}
+.font-20-b {
+  font: var(--font-20-b);
+}
+.font-22-b {
+  font: var(--font-22-b);
+}
+.font-24-b {
+  font: var(--font-24-b);
+}
+.font-26-b {
+  font: var(--font-26-b);
+}
+
+.font-28-b {
+  font: var(--font-28-b);
+  @include media-max($tablet) {
+    font: var(--font-22-b);
+  }
+}

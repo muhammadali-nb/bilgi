@@ -1,0 +1,43 @@
+:root {
+  --p-scrollbar-width: 5px;
+
+  /* ================== fonts ================== */
+  --primary-font: 'Montserrat', sans-serif;
+
+  --secondary-font: 'Roboto', sans-serif;
+
+  /* --font-{size}-{weight} */
+  --font-10-r: normal 400 1.0rem/1.2 var(--primary-font);
+  --font-12-r: normal 400 1.2rem/1.2 var(--primary-font);
+  --font-14-r: normal 400 1.4rem/1.2 var(--primary-font);
+  --font-16-r: normal 400 1.6rem/1.2 var(--primary-font);
+  --font-18-r: normal 400 1.8rem/1.2 var(--primary-font);
+  --font-20-r: normal 400 2.0rem/1.2 var(--primary-font);
+  --font-22-r: normal 400 2.2rem/1.2 var(--primary-font);
+  --font-24-r: normal 400 2.4rem/1.2 var(--primary-font);
+  --font-26-r: normal 400 2.6rem/1.2 var(--primary-font);
+  --font-28-r: normal 400 2.8rem/1.2 var(--primary-font);
+
+  --font-10-b: normal 700 1.0rem/1.2 var(--primary-font);
+  --font-12-b: normal 700 1.2rem/1.2 var(--primary-font);
+  --font-14-b: normal 700 1.4rem/1.2 var(--primary-font);
+  --font-16-b: normal 700 1.6rem/1.2 var(--primary-font);
+  --font-18-b: normal 700 1.8rem/1.2 var(--primary-font);
+  --font-20-b: normal 700 2.0rem/1.2 var(--primary-font);
+  --font-22-b: normal 700 2.2rem/1.2 var(--primary-font);
+  --font-24-b: normal 700 2.4rem/1.2 var(--primary-font);
+  --font-26-b: normal 700 2.6rem/1.2 var(--primary-font);
+  --font-28-b: normal 700 2.8rem/1.2 var(--primary-font);
+
+  /* ================== other ================== */
+  --radius-s: .3rem;
+  --radius-m: .5rem;
+  --radius-l: 1rem;
+  --radius-round: 50%;
+
+  --transition-fast: all 0.3s;
+  --transition-slow: all 0.4s;
+
+  --page-padding: 1.6rem;
+  /* ================== other ================== */
+}
