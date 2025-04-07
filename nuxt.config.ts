@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { createResolver } from '@nuxt/kit';
-import { COOKIE_LOCALE_KEY, DEFAULT_LANGUAGE, localeItems } from './locales/constants';
+import { COOKIE_LOCALE_KEY, DEFAULT_LANGUAGE, localeItems } from './i18n/constants';
 
 const { resolve } = createResolver(import.meta.url);
 
@@ -51,11 +51,13 @@ export default defineNuxtConfig({
 
   i18n: {
     lazy: true,
-    vueI18n: './locales/config.ts',
+    vueI18n: 'config.ts',
     defaultLocale: DEFAULT_LANGUAGE,
     strategy: 'prefix_except_default',
-    langDir: '../locales/langs',
     locales: localeItems,
+    bundle: {
+      optimizeTranslationDirective: false,
+    },
     compilation: {
       strictMessage: false,
     },
