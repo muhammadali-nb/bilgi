@@ -1,43 +1,146 @@
 :root {
-  --p-scrollbar-width: 5px;
+  --primary-50: rgb(236, 235, 254);
+  --primary-100: rgb(217, 214, 252);
+  --primary-200: rgb(197, 194, 250);
+  --primary-300: rgb(178, 173, 247);
+  --primary-400: rgb(158, 153, 245);
+  --primary-500: rgb(139, 132, 242); /* Base primary color */
+  --primary-600: rgb(112, 101, 240);
+  --primary-700: rgb(93, 84, 196);
+  --primary-800: rgb(74, 67, 152);
+  --primary-900: rgb(55, 50, 108);
+  --primary-950: rgb(36, 33, 64);
 
-  /* ================== fonts ================== */
-  --primary-font: 'Montserrat', sans-serif;
+  --secondary-50: rgb(255, 239, 235);
+  --secondary-100: rgb(255, 221, 213);
+  --secondary-200: rgb(255, 204, 192);
+  --secondary-300: rgb(255, 183, 166);
+  --secondary-400: rgb(255, 157, 136);
+  --secondary-500: rgb(255, 138, 102); /* Base secondary color */
+  --secondary-600: rgb(230, 117, 84);
+  --secondary-700: rgb(204, 96, 70);
+  --secondary-800: rgb(179, 76, 57);
+  --secondary-900: rgb(153, 57, 45);
+  --secondary-950: rgb(102, 30, 21);
 
-  --secondary-font: 'Roboto', sans-serif;
+  /* ================== colors ================== */
+
+  --white: rgba(255, 255, 255, 1);
+
+  --light-bg: rgba(237, 234, 225, 1);
+  --dark-bg: rgba(20, 22, 24, 1);
+
+  --white-text: var(--white);
+  --dark-text: rgba(46, 46, 46, 1);
+
+  --form-element-dark: rgba(43, 45, 47, 1);
+  --form-element-light: var(--white);
+
+  --element-dark: var(--primary-500);
+  --element-surface-dark: rgba(53, 53, 53, 1);
+
+  --element-light: rgba(222, 224, 213, 1);
+  --element-surface-light: rgba(252, 252, 252, 1);
+
+  --card-bg-dark: var(--element-dark);
+  --card-bg-light: var(--element-surface-light);
+
+  /* reusable variables */
+  --card-bg: var(--card-bg-light);
+  --card-bg-05: var(--form-element-light);
+  --card-bg-01: rgba(218, 215, 207, 1);
+
+  --site-bg: var(--light-bg);
+  --site-text: var(--dark-text);
+  --form-element-background: var(--form-element-light);
+  --site-secondary-text: rgba(0, 9, 41, 0.5);
+
+  --primary-surface-color: var(--site-text);
+
+  --time-line-bg: rgba(249, 246, 240, 1);
+  --time-line-grey: rgba(157, 157, 157, 1);
+  --time-line-grey-disabled: rgba(232, 232, 223, 1);
+
+  /* reusable variables */
+
+  /* ================== colors end ================== */
+
+  /*  ================== fonts ================== */
+
+  --primary-font: "Inter", sans-serif;
 
   /* --font-{size}-{weight} */
-  --font-10-r: normal 400 1.0rem/1.2 var(--primary-font);
-  --font-12-r: normal 400 1.2rem/1.2 var(--primary-font);
-  --font-14-r: normal 400 1.4rem/1.2 var(--primary-font);
-  --font-16-r: normal 400 1.6rem/1.2 var(--primary-font);
-  --font-18-r: normal 400 1.8rem/1.2 var(--primary-font);
-  --font-20-r: normal 400 2.0rem/1.2 var(--primary-font);
-  --font-22-r: normal 400 2.2rem/1.2 var(--primary-font);
-  --font-24-r: normal 400 2.4rem/1.2 var(--primary-font);
-  --font-26-r: normal 400 2.6rem/1.2 var(--primary-font);
-  --font-28-r: normal 400 2.8rem/1.2 var(--primary-font);
+  --font-12-n: normal normal 12px/1.2 var(--primary-font);
+  --font-12-b: normal 700 12px/1.2 var(--primary-font);
+  --font-14-n: normal normal 14px/1.2 var(--primary-font);
+  --font-14-b: normal 700 14px/1.2 var(--primary-font);
 
-  --font-10-b: normal 700 1.0rem/1.2 var(--primary-font);
-  --font-12-b: normal 700 1.2rem/1.2 var(--primary-font);
-  --font-14-b: normal 700 1.4rem/1.2 var(--primary-font);
-  --font-16-b: normal 700 1.6rem/1.2 var(--primary-font);
-  --font-18-b: normal 700 1.8rem/1.2 var(--primary-font);
-  --font-20-b: normal 700 2.0rem/1.2 var(--primary-font);
-  --font-22-b: normal 700 2.2rem/1.2 var(--primary-font);
-  --font-24-b: normal 700 2.4rem/1.2 var(--primary-font);
-  --font-26-b: normal 700 2.6rem/1.2 var(--primary-font);
-  --font-28-b: normal 700 2.8rem/1.2 var(--primary-font);
+  --font-16-n: normal normal 16px/1.2 var(--primary-font);
 
-  /* ================== other ================== */
-  --radius-s: .3rem;
-  --radius-m: .5rem;
-  --radius-l: 1rem;
-  --radius-round: 50%;
+  --font-16-b: normal 700 16px/1.2 var(--primary-font);
+  /*  ================== fonts end =============== */
 
-  --transition-fast: all 0.3s;
+  /*  ================== other ================ */
+
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+
   --transition-slow: all 0.4s;
+  --transition-fast: all 0.2s;
 
-  --page-padding: 1.6rem;
-  /* ================== other ================== */
+  --dark-gradient: radial-gradient(circle, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  /*--light-gradient: radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 100%);*/
+  /*  =============== other end =============== */
+
+  --image-overlay-gradient: var(--dark-gradient);
+}
+.font-12-n {
+  font: var(--font-12-n) !important;
+}
+
+.font-14-n {
+  font: var(--font-14-n) !important;
+}
+.font-14-b {
+  font: var(--font-14-b) !important;
+}
+.font-16-n {
+  font: var(--font-16-n) !important;
+}
+.font-16-b {
+  font: var(--font-16-b) !important;
+}
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+  justify-content: flex-start;
+}
+
+html.app-dark {
+  // --primary-50: rgb(232, 234, 237);
+  // --primary-100: rgb(199, 204, 211);
+  // --primary-200: rgb(158, 163, 176);
+  // --primary-300: rgb(118, 123, 142);
+  // --primary-400: rgb(78, 83, 109);
+  // --primary-500: rgb(35, 37, 41); /* Base primary color */
+  // --primary-600: rgb(31, 32, 36);
+  // --primary-700: rgb(27, 28, 32);
+  // --primary-800: rgb(23, 24, 28);
+  // --primary-900: rgb(19, 20, 24);
+  // --primary-950: rgb(15, 16, 20);
+
+  --card-bg: var(--card-bg-dark);
+  --card-bg-05: var(--form-element-dark);
+  --card-bg-01: var(--element-surface-dark);
+  --site-bg: var(--dark-bg);
+  --site-text: var(--white-text);
+  --form-element-background: var(--form-element-dark);
+
+  --time-line-bg: rgba(32, 32, 32, 1);
+  --time-line-grey: rgba(92, 92, 92, 1);
+  --time-line-grey-disabled: rgba(52, 52, 52, 1);
 }

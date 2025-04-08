@@ -1,7 +1,7 @@
 {
   "name": "nuxt-app",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -10,16 +10,24 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/scripts": "^0.11.5",
     "@nuxtjs/i18n": "^9.5.2",
+    "@primeuix/themes": "^1.0.1",
+    "@primevue/forms": "^4.3.3",
+    "@primevue/themes": "^4.1.0",
     "@vueuse/core": "^12.7.0",
     "@vueuse/nuxt": "^12.7.0",
     "nuxt": "^3.15.4",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.3.3",
+    "unenv": "^1.10.0",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.3.0",
     "@nuxt/types": "^2.18.1",
+    "@primevue/nuxt-module": "^4.1.0",
     "@types/node": "^22.13.5",
     "eslint": "^9.21.0",
     "sass": "^1.85.1"
