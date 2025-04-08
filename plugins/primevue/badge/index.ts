@@ -10,7 +10,7 @@ export const badgeConfig = () => {
     },
 
     secondary: {
-      color: 'var(--secondary-surface-color)',
+      color: 'var(--site-btn-text)',
       background: 'var(--secondary-500)',
     },
   };

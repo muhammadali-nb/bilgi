@@ -1,6 +1,6 @@
 export const dialogPt = () => {
   return {
-    title: 'font-24-b',
+    title: 'font-20-sb',
     pcCloseButton: {
 
       root: {
@@ -11,6 +11,7 @@ export const dialogPt = () => {
   <path d="M9.87845 9.87894L14.1211 14.1216" stroke="#000C16" stroke-width="1.5" stroke-linecap="round"
     stroke-linejoin="round" />
 </svg>`,
+
       },
 
     },

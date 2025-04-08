@@ -52,6 +52,7 @@
 
   --site-bg: var(--light-bg);
   --site-text: var(--dark-text);
+  --site-btn-text: var(--white);
   --form-element-background: var(--form-element-light);
   --site-secondary-text: rgba(0, 9, 41, 0.5);
 
@@ -78,6 +79,10 @@
   --font-16-n: normal normal 16px/1.2 var(--primary-font);
 
   --font-16-b: normal 700 16px/1.2 var(--primary-font);
+
+  --font-20-sb: normal 600 20px/1.2 var(--primary-font);
+  --font-20-b: normal 700 20px/1.2 var(--primary-font);
+  --font-24-b: normal 700 24px/1.2 var(--primary-font);
   /*  ================== fonts end =============== */
 
   /*  ================== other ================ */
@@ -111,6 +116,18 @@
 .font-16-b {
   font: var(--font-16-b) !important;
 }
+
+.font-24-b {
+  font: normal 700 24px/1.2 var(--primary-font) !important;
+}
+
+.font-20-sb {
+  font: normal 600 20px/1.2 var(--primary-font) !important;
+}
+.font-20-b {
+  font: normal 700 20px/1.2 var(--primary-font) !important;
+}
+
 .text-right {
   text-align: right;
 }

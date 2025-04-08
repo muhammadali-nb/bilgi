@@ -3,15 +3,15 @@ import { badgeConfig } from '../badge';
 export const buttonsConfig = () => {
   return {
     primary: {
-      color: 'var(--primary-surface-color)',
-      hoverColor: 'var(--primary-surface-color)',
-      activeColor: 'var(--primary-surface-color)',
+      color: 'var(--site-btn-text)',
+      hoverColor: 'var(--site-btn-text)',
+      activeColor: 'var(--site-btn-text)',
     },
 
     secondary: {
-      color: 'var(--secondary-surface-color)',
-      hoverColor: 'var(--secondary-surface-color)',
-      activeColor: 'var(--secondary-surface-color)',
+      color: 'var(--site-btn-text)',
+      hoverColor: 'var(--site-btn-text)',
+      activeColor: 'var(--site-btn-text)',
 
       background: 'var(--secondary-500)',
       hoverBackground: 'var(--secondary-600)',

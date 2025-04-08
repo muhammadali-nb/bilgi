@@ -3,6 +3,7 @@ const visible = ref(false);
 </script>
 
 <template>
+  <h1>hello world</h1>
   <div class="page">
     <Button icon="pi pi-home" aria-label="Save" @click="visible = true" />
     <Button label="Profile" icon="pi pi-user" />

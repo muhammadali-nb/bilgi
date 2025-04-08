@@ -5,6 +5,10 @@ html body {
       border-radius: var(--p-dialog-border-radius) var(--p-dialog-border-radius) 0 0;
     }
 
+    &-close-button {
+      border-radius: 0 !important;
+    }
+
     &.drawer-dialog {
       margin: 0;
       border-radius: 0 var(--p-dialog-border-radius) var(--p-dialog-border-radius) 0;
