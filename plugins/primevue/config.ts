@@ -24,8 +24,8 @@ const customPreset = definePreset(Aura, {
       none: '0',
       xs: '.3rem',
       sm: '.5rem',
-      md: '.5rem',
-      lg: '1rem',
+      md: '1rem',
+      lg: '1.5rem',
     },
   },
 

@@ -39,8 +39,51 @@ html body {
     position: absolute !important;
   }
 
+  .p-inputgroup {
+    border: 1px solid var(--p-inputtext-border-color);
+    background: var(--p-form-field-background);
+    box-shadow: var(--p-inputtext-shadow);
+    border-radius: var(--p-inputtext-border-radius);
+    transition:
+      background var(--p-inputtext-transition-duration),
+      color var(--p-inputtext-transition-duration),
+      border-color var(--p-inputtext-transition-duration),
+      outline-color var(--p-inputtext-transition-duration),
+      box-shadow var(--p-inputtext-transition-duration);
+
+    &:hover {
+      border-color: var(--p-inputtext-hover-border-color);
+    }
+
+    &:focus-within {
+      border-color: var(--p-inputtext-focus-border-color);
+      box-shadow: var(--p-inputtext-focus-ring-shadow);
+      outline: var(--p-inputtext-focus-ring-width) var(--p-inputtext-focus-ring-style)
+        var(--p-inputtext-focus-ring-color);
+      outline-offset: var(--p-inputtext-focus-ring-offset);
+    }
+
+    &:has(.p-invalid) {
+      border-color: var(--p-inputtext-invalid-border-color);
+    }
+
+    .p-inputtext {
+      // padding-left: calc(var(--p-inputtext-padding-x) / 2);
+      padding-left: 0;
+      padding-right: var(--p-inputtext-padding-x);
+    }
+
+   .p-inputgroupaddon,
+    .p-inputtext,
+    .p-select {
+      border: 0;
+      box-shadow: none;
+      background: none;
+    }
+  }
+
   .p-inputtext {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .p-selectbutton {

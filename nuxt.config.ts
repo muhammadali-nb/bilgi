@@ -49,7 +49,14 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/i18n',
     '@primevue/nuxt-module',
+    '@nuxtjs/google-fonts',
   ],
+
+  googleFonts: {
+    families: {
+      Inter: [400, 500, 600, 700],
+    },
+  },
 
   primevue: {
     autoImport: true,

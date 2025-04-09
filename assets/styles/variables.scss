@@ -40,7 +40,7 @@
   --element-surface-dark: rgba(53, 53, 53, 1);
 
   --element-light: rgba(222, 224, 213, 1);
-  --element-surface-light: rgba(252, 252, 252, 1);
+  --element-surface-light: rgba(250, 250, 250, 1);
 
   --card-bg-dark: var(--element-dark);
   --card-bg-light: var(--element-surface-light);
@@ -51,6 +51,7 @@
   --card-bg-01: rgba(218, 215, 207, 1);
 
   --site-bg: var(--light-bg);
+  --site-secondary-bg: #f7f7fd;
   --site-text: var(--dark-text);
   --site-btn-text: var(--white);
   --form-element-background: var(--form-element-light);
@@ -73,15 +74,19 @@
   /* --font-{size}-{weight} */
   --font-12-n: normal normal 12px/1.2 var(--primary-font);
   --font-12-b: normal 700 12px/1.2 var(--primary-font);
+
   --font-14-n: normal normal 14px/1.2 var(--primary-font);
   --font-14-b: normal 700 14px/1.2 var(--primary-font);
+  --font-14-r: normal 500 14px/1.2 var(--primary-font);
 
   --font-16-n: normal normal 16px/1.2 var(--primary-font);
-
+  --font-16-r: normal 500 16px/1.2 var(--primary-font);
   --font-16-b: normal 700 16px/1.2 var(--primary-font);
 
+  --font-20-n: normal normal 20px/1.2 var(--primary-font);
   --font-20-sb: normal 600 20px/1.2 var(--primary-font);
   --font-20-b: normal 700 20px/1.2 var(--primary-font);
+
   --font-24-b: normal 700 24px/1.2 var(--primary-font);
   /*  ================== fonts end =============== */
 
@@ -113,12 +118,21 @@
 .font-16-n {
   font: var(--font-16-n) !important;
 }
+
+.font-16-r {
+  font: var(--font-16-r) !important;
+}
+
 .font-16-b {
   font: var(--font-16-b) !important;
 }
 
 .font-24-b {
   font: normal 700 24px/1.2 var(--primary-font) !important;
+}
+
+.font-20-n {
+  font: normal normal 20px/1.2 var(--primary-font) !important;
 }
 
 .font-20-sb {

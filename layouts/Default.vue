@@ -4,11 +4,11 @@ import Header from '@components/layout/Header.vue';
 </script>
 
 <template>
-  <Header />
+  <!-- <Header /> -->
   <div class="inner">
     <slot />
   </div>
-  <Footer />
+  <!-- <Footer /> -->
 </template>
 
 <style scoped lang="scss">

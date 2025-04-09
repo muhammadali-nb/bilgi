@@ -2,11 +2,13 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   font-size: 10px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 body {
@@ -30,6 +32,16 @@ nav ul {
   @include media-max($mobile) {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font: var(--font-16-r);
   }
 }
 

@@ -1,25 +1,56 @@
 <script setup lang="ts">
-const { locales, locale, setLocale } = useI18n();
+import { uzFlagIcon } from '../assets/icons';
+import VIcon from './VIcon.vue';
+
+const { locales, locale } = useI18n();
+
+const regionName = computed(() => locales.value.find(option => option.code === locale.value)?.name);
 </script>
 
 <template>
-  <div class="switcher">
-    <button
-      v-for="lang in locales"
-      :key="lang.code"
-      :class="[lang.code === locale && 'active']"
-      @click="setLocale(lang.code)"
-    >
-      {{ lang.name }}
-    </button>
-    <hr>
-    {{ locale }}
-  </div>
+  <Select v-model="locale" class="lang-switcher" :options="locales" placeholder="Выберите язык" option-value="code" option-label="name">
+    <template #option="slotProps">
+      <div class="lang-switcher__option">
+        <VIcon
+          :icon="uzFlagIcon"
+          no-fill
+        />
+        <p class="font-14-r">
+          {{ slotProps.option.name }}
+        </p>
+      </div>
+    </template>
+    <template #value="slotProps">
+      <div v-if="slotProps.value" class="lang-switcher__option">
+        <VIcon
+          :icon="uzFlagIcon"
+          no-fill
+        />
+        <p class="font-16-r">
+          {{ regionName }}
+        </p>
+      </div>
+      <span v-else>
+        {{ slotProps.placeholder }}
+      </span>
+    </template>
+  </Select>
 </template>
 
 <style scoped lang="scss">
-.active {
-  background: var(--black);
-  color: #fff;
+.lang-switcher {
+  padding: 0 1rem 0 0;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+  :deep(.p-select-dropdown) {
+    display: none;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 }
 </style>

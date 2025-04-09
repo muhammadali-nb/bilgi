@@ -11,12 +11,13 @@ export const inputTextConfig = () => {
     colorScheme: {
       light: {
         shadow: 'var(--input-field-shadow)',
-        borderColor: 'transparent',
+        // borderColor: 'transparent',
       },
       dark: {
         shadow: 'none',
       },
     },
     paddingX: '1.8rem',
+    paddingY: '1.4rem',
   };
 };
