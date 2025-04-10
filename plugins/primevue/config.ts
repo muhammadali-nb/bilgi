@@ -13,6 +13,7 @@ import { inputMaskPt } from './inputMask';
 import { inputNumberConfig, inputNumberPt } from './inputNumber';
 import { inputTextConfig, inputTextPt } from './inputText';
 import { messagePt } from './message';
+import { selectConfig, selectPt } from './select';
 import { tableConfig, tablePt } from './table';
 import { textareaPt } from './textarea';
 import { toastConfig } from './toast';
@@ -129,10 +130,7 @@ const customPreset = definePreset(Aura, {
       iconSize: '2rem',
     },
 
-    select: {
-      dropdownWidth: '3.5rem',
-      dropdownColor: 'var(--primary-500)',
-    },
+    select: selectConfig(),
   },
 });
 
@@ -163,6 +161,8 @@ export const options: PrimeVueConfiguration = {
     datatable: tablePt(),
 
     message: messagePt(),
+
+    select: selectPt(),
   },
 
   theme: {

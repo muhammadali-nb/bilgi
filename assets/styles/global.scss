@@ -35,10 +35,23 @@ nav ul {
   }
 }
 
+.container-xs {
+  max-width: 77rem;
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+  @include media-max($mobile) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 .form__field {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.8rem;
 
   label {
     font: var(--font-16-r);

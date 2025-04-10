@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { uzFlagIcon } from '../assets/icons';
+import { uzFlagIcon } from '../../assets/icons';
 import VIcon from './VIcon.vue';
 
 const { locales, locale } = useI18n();

@@ -1,7 +1,7 @@
 export const textareaPt = () => {
   return {
     root: {
-      class: 'font-18-n',
+      class: 'font-16-n',
     },
   };
 };

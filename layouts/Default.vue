@@ -1,18 +1,23 @@
 <script setup lang="ts">
-import Footer from '@components/layout/Footer.vue';
-import Header from '@components/layout/Header.vue';
+import Navbar from '@components/layout/navbar.vue';
 </script>
 
 <template>
-  <!-- <Header /> -->
   <div class="inner">
-    <slot />
+    <Navbar />
+    <div class="inner__content">
+      <slot />
+    </div>
   </div>
-  <!-- <Footer /> -->
 </template>
 
 <style scoped lang="scss">
 .inner {
   flex-grow: 1;
+
+  &__content{
+    background-color: var(--light-secondary-bg);
+    min-height: 100vh;
+  }
 }
 </style>
