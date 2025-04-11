@@ -7,7 +7,6 @@ const { resolve } = createResolver(import.meta.url);
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
-
   devtools: { enabled: false },
 
   app: {
@@ -27,6 +26,11 @@ export default defineNuxtConfig({
         },
       },
     },
+    resolve: {
+      alias: {
+        '@assets/*': resolve('./assets/'),
+      },
+    },
   },
 
   css: [
@@ -35,6 +39,7 @@ export default defineNuxtConfig({
 
   alias: {
     '@utils': resolve('./utilities/'),
+    '@assets': resolve('./assets/'),
     '@components': resolve('./components/'),
     '@composables': resolve('./composables/'),
     '@language-constants': resolve('./locales/constants'),
@@ -51,6 +56,10 @@ export default defineNuxtConfig({
     '@primevue/nuxt-module',
     '@nuxtjs/google-fonts',
   ],
+
+  // plugins: [
+  //   '~/plugins/primevue/index.ts',
+  // ],
 
   googleFonts: {
     families: {

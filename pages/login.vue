@@ -1,9 +1,14 @@
 <script lang="ts" setup>
 import DigitalSignature from '@components/auth/digital-signature.vue';
+
+import FormField from '@components/shared/FormField.vue';
 import VIcon from '@components/shared/VIcon.vue';
 import { userIcon } from '../assets/icons';
 
 const visible = ref(false);
+const form = reactive({
+  login: '',
+});
 
 definePageMeta({
   layout: 'auth',
@@ -11,41 +16,40 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="login">
-    <form class="login__form" @submit.prevent>
-      <h4 class="login__title">
+  <div class="register">
+    <form class="register__form" @submit.prevent>
+      <h4 class="register__title">
         Вход
       </h4>
-      <p class="login__description font-16-r">
+      <p class="register__description font-16-r">
         Для входа в кабинет введите ваш логин и авторизуйтесь с помощью ЭЦП ключа.
       </p>
 
-      <div class="form__field">
-        <label for="username">Логин</label>
+      <FormField label="Логин" class="form__field">
         <InputGroup>
           <InputGroupAddon>
             <VIcon :icon="userIcon" no-fill />
           </InputGroupAddon>
-          <InputText placeholder="Введите логин" />
+          <InputText v-model="form.login" placeholder="Введите логин" />
         </InputGroup>
-      </div>
-      <div class="form__field">
-        <label for="username">ЭЦП ключ</label>
+      </FormField>
+
+      <FormField label="ЭЦП ключ" class="register__form__digital-signature">
         <Button severity="secondary" label="Выбрать ключ" @click="visible = true" />
-      </div>
+      </FormField>
 
       <Button
         label="Войти"
         severity="primary"
         type="submit"
         fluid
-        class="login__form-submit"
+        class="register__form-submit"
       />
-      <p class="font-14-n login__form-text">
+      <p class="font-14-n register__form-text">
         Уже есть аккаунт? <span class="font-14-b">Войти</span>
       </p>
     </form>
-    <Dialog v-model:visible="visible" header="Выберите ключ" :modal="true" :draggable="false" :close-on-mask="false" style="width: 45rem;" class="digital-signature__dialog">
+    <Dialog v-model:visible="visible" header="Выберите ключ" :draggable="false" modal :close-on-mask="false" style="width: 45rem;" class="digital-signature__dialog">
       <div class="digital-signature__dialog-content">
         <DigitalSignature />
         <DigitalSignature />
@@ -59,7 +63,7 @@ definePageMeta({
 </template>
 
 <style lang="scss" scoped>
-.login {
+.register {
     &__title {
       font-size: 3.2rem;
       font-weight: 700;
@@ -74,8 +78,8 @@ definePageMeta({
     &__form {
       max-width: 36rem;
 
-      .form__field:not(:first-child) {
-        margin: 2rem 0 0 0;
+      &__digital-signature {
+        margin-top: 2.2rem;
       }
 
       &-submit {

@@ -42,15 +42,6 @@ const activeStep = defineModel<number>('activeStep');
         <VIcon v-if="index < steps.length - 1" :icon="nextIcon" no-fill />
       </template>
     </div>
-
-    <!-- <div class="stepper__buttons">
-      <button :disabled="activeStep === 0" @click="prev">
-        Назад
-      </button>
-      <button :disabled="activeStep === steps.length - 1" @click="next">
-        Далее
-      </button>
-    </div> -->
   </div>
 </template>
 

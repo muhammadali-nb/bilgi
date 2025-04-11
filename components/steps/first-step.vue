@@ -1,5 +1,10 @@
 <script lang="ts" setup>
-const selectedCity = ref();
+import FileUploader from '@components/shared/file-uploader.vue';
+import FormField from '@components/shared/FormField.vue';
+import PhoneInput from '@components/shared/phone-Input.vue';
+import Textarea from 'primevue/textarea';
+
+const selectedCity = ref('NY');
 const cities = ref([
   { name: 'New York', code: 'NY' },
   { name: 'Rome', code: 'RM' },
@@ -15,59 +20,89 @@ const cities = ref([
       ЗАЯВЛЕНИЕ
     </h4>
 
-    <div class="form__field step-form__input">
-      <label for="price">Необходимая сумма целевого кредита (сум):</label>
-      <InputNumber placeholder="Введите сумму" name="price" />
+    <div class="step-form__grid">
+      <FormField label="Необходимая сумма целевого кредита (сум):" class="colspan-2">
+        <InputNumber placeholder="Введите сумму" name="price" />
+      </FormField>
+
+      <FormField label="Количество молодых специалистов, которых обучат и трудоустроят:">
+        <InputNumber placeholder="Введите сумму" name="specialists" />
+      </FormField>
+
+      <FormField label="Льготный период:">
+        <Select v-model="selectedCity" :options="cities" option-label="name" option-value="code" placeholder="Select a City" />
+      </FormField>
+
+      <FormField label="Срок возврата целевого кредита (лет): ">
+        <Select v-model="selectedCity" :options="cities" option-label="name" option-value="code" placeholder="Select a City" />
+      </FormField>
+
+      <FormField label="Обеспечение кредита">
+        <Select v-model="selectedCity" :options="cities" option-label="name" option-value="code" placeholder="Select a City" />
+      </FormField>
+
+      <div class="colspan-2">
+        <p class="font-16-r">
+          Предполагаемый график возврата целевого кредита
+        </p>
+        <div class="step-form__grid">
+          <FormField label="(сумма долга, проценты)">
+            <Select v-model="selectedCity" :options="cities" option-label="name" option-value="code" placeholder="Select a City" />
+          </FormField>
+
+          <FormField label="(ежемесячный, квартальный, другой)">
+            <Select v-model="selectedCity" :options="cities" option-label="name" option-value="code" placeholder="Select a City" />
+          </FormField>
+        </div>
+      </div>
     </div>
 
-    <div class="step-form__grid">
-      <div class="form__field step-form__input field-align">
-        <label for="specialists">Количество молодых специалистов, которых обучат и трудоустроят:</label>
-        <InputNumber placeholder="Введите сумму" name="specialists" />
-      </div>
-      <div class="form__field step-form__input field-align">
-        <label for="grace">Льготный период:</label>
-        <Select v-model="selectedCity" :options="cities" option-label="name" placeholder="Select a City" />
-      </div>
-      <div class="form__field step-form__input field-align">
-        <label for="grace">Срок возврата целевого кредита (лет):</label>
-        <Select v-model="selectedCity" :options="cities" option-label="name" placeholder="Select a City" />
-      </div>
-      <div class="form__field step-form__input field-align">
-        <label for="grace">Обеспечение кредита</label>
-        <Select v-model="selectedCity" :options="cities" option-label="name" placeholder="Select a City" />
-      </div>
-    </div>
-    <div>
-      <p class="font-16-r">
-        Предполагаемый график возврата целевого кредита
-      </p>
-      <div class="step-form__grid">
-        <div class="form__field step-form__input field-align">
-          <label for="grace">(сумма долга, проценты)</label>
-          <Select v-model="selectedCity" :options="cities" option-label="name" placeholder="Select a City" />
-        </div>
-        <div class="form__field step-form__input field-align">
-          <label for="grace">(ежемесячный, квартальный, другой)</label>
-          <Select v-model="selectedCity" :options="cities" option-label="name" placeholder="Select a City" />
-        </div>
-      </div>
-    </div>
-    <h2 class="font-20-sb step-form__subtitle">
+    <h3 class="font-20-sb step-form__subtitle">
       Экономическое обоснование целевого кредита
-    </h2>
-    <div class="form__field step-form__input field-align">
-      <label for="grace">Содержание проекта:</label>
-      <TextArea style="resize: none;" name="grace" rows="5" cols="30" />
+    </h3>
+    <div class="step-form__target">
+      <FormField label="Содержание проекта:">
+        <Textarea placeholder="Select a City" style="resize: false;" rows="7" />
+      </FormField>
+
+      <FormField label="Собственные средства, привлеченные для реализации проекта (сум):">
+        <InputNumber placeholder="Введите сумму" name="price" />
+      </FormField>
+
+      <FormField label="Информация о социальных показателях деятельности организации:">
+        <Textarea placeholder="Select a City" style="resize: false;" rows="7" />
+      </FormField>
     </div>
-    <div class="form__field step-form__input">
-      <label for="price">Собственные средства, привлеченные для реализации проекта (сум):</label>
-      <InputNumber placeholder="Введите сумму" name="price" />
+    <h3 class="font-20-sb step-form__subtitle">
+      Контактная информация
+    </h3>
+    <div class="step-form__grid">
+      <FormField label="Контактное лицо" class="colspan-2">
+        <InputText placeholder="Ф.И.О" name="price" />
+      </FormField>
+
+      <FormField label="Мобильный">
+        <PhoneInput model-value="" placeholder="Введите сумму" name="price" />
+      </FormField>
+
+      <FormField label="Рабочий ">
+        <PhoneInput model-value="" placeholder="Введите сумму" name="price" />
+      </FormField>
+
+      <FormField label="Домашний">
+        <PhoneInput model-value="" placeholder="Введите сумму" name="price" />
+      </FormField>
+
+      <FormField label="E-mail">
+        <InputText model-value="" placeholder="ali@wuwu" name="price" />
+      </FormField>
+
+      <FormField label="Руководитель (Ф.И.О.)" class="colspan-2">
+        <InputText model-value="" placeholder="Ф.И.О" name="price" />
+      </FormField>
     </div>
-    <div class="form__field step-form__input field-align">
-      <label for="grace">Информация о социальных показателях деятельности организации:</label>
-      <TextArea style="resize: none;" name="grace" rows="5" cols="30" />
-    </div>
+    <FileUploader />
+    <Button class="step-form__submit" label="Далее" fluid />
   </form>
 </template>
 
@@ -81,19 +116,29 @@ const cities = ref([
     margin: 0 0 3.2rem 0;
   }
 
-  &__input {
-    margin-bottom: 2rem;
-    justify-content: flex-end;
+  &__subtitle {
+    margin: 3.2rem 0;
   }
 
   &__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 4.4rem;
+    gap: 2rem 4.4rem;
   }
 
-  &__subtitle {
+  &__target  {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+  }
+
+  &__submit {
     margin: 3.2rem 0;
   }
+
+  .colspan-2 {
+    grid-column: span 2;
+  }
+
 }
 </style>

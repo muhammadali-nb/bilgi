@@ -1,5 +1,6 @@
 export interface IPhoneMaskProps {
   invalid?: boolean
+  icon?: boolean
   modelValue: string
 };
 

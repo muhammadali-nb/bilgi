@@ -1,8 +1,9 @@
 export const selectConfig = () => {
   return {
-    dropdownWidth: '3.2rem',
+    dropdownWidth: '4rem',
     paddingX: '1.8rem',
     paddingY: '1.4rem',
+
     // light: {
     //   optionColor: 'var(--site-text)',
     //   optionFocusColor: 'var(--site-text)',
@@ -33,12 +34,16 @@ export const selectPt = () => {
     option: {
       class: 'font-14-n',
     },
-    //   dropdownIcon: {
-    //     innerHTML: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    // <path d="M9 11L11.2929 13.2929C11.6834 13.6834 12.3166 13.6834 12.7071 13.2929L15 11M2 17L2 7C2 4.23858 4.23858 2 7 2L17 2C19.7614 2 22 4.23858 22 7V17C22 19.7614 19.7614 22 17 22H7C4.23858 22 2 19.7614 2 17Z" stroke="#7A8A9E" stroke-width="1.5" stroke-linecap="round"/>
-    // </svg>
-    // `,
-    //   },
-
+    dropdownIcon: {
+      width: '24',
+      height: '24',
+      viewBox: '0 0 24 24',
+      style: '--p-icon-size: "auto"',
+      innerHTML: `
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 10L10.2929 12.2929C10.6834 12.6834 11.3166 12.6834 11.7071 12.2929L14 10M1 16L1 6C1 3.23858 3.23858 1 6 1L16 1C18.7614 1 21 3.23858 21 6V16C21 18.7614 18.7614 21 16 21H6C3.23858 21 1 18.7614 1 16Z" stroke="#7A8A9E" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    `,
+    },
   };
 };

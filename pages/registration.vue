@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import DigitalSignature from '@components/auth/digital-signature.vue';
 
+import FormField from '@components/shared/FormField.vue';
 import PhoneInput from '@components/shared/phone-Input.vue';
 import VIcon from '@components/shared/VIcon.vue';
 import { userIcon } from '../assets/icons';
@@ -26,23 +27,22 @@ definePageMeta({
         Для входа в кабинет введите ваш логин и авторизуйтесь с помощью ЭЦП ключа.
       </p>
 
-      <div class="form__field">
-        <label for="username">Номер телефона</label>
-        <PhoneInput v-model="form.phone" />
-      </div>
-      <div class="form__field">
-        <label for="username">Логин</label>
+      <FormField label="Номер телефона" class="form__field">
+        <PhoneInput v-model="form.phone" :icon="true" />
+      </FormField>
+
+      <FormField label="Логин" class="form__field">
         <InputGroup>
           <InputGroupAddon>
             <VIcon :icon="userIcon" no-fill />
           </InputGroupAddon>
           <InputText v-model="form.login" placeholder="Введите логин" />
         </InputGroup>
-      </div>
-      <div class="form__field">
-        <label for="username">ЭЦП ключ</label>
+      </FormField>
+
+      <FormField label="ЭЦП ключ" class="register__form__digital-signature">
         <Button severity="secondary" label="Выбрать ключ" @click="visible = true" />
-      </div>
+      </FormField>
 
       <Button
         label="Войти"
@@ -83,6 +83,10 @@ definePageMeta({
 
     &__form {
       max-width: 36rem;
+
+      &__digital-signature {
+        margin-top: 3.2rem;
+      }
 
       .form__field:not(:first-child) {
         margin: 2rem 0 0 0;

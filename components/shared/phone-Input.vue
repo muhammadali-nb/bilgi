@@ -13,8 +13,8 @@ const { phoneModel } = usePhoneMask(props, emit);
 <template>
   <InputGroup class="phone-input">
     <InputGroupAddon class="phone-input__addon">
-      <VIcon :icon="phoneIcon" no-fill />
-      <span class="font-16-n phone-input__code">+998</span>
+      <VIcon v-if="icon" :icon="phoneIcon" no-fill />
+      <span class="font-16-n " :class="icon && 'phone-input__code'">+998</span>
     </InputGroupAddon>
     <InputMask v-model="phoneModel" class="phone-input__mask" placeholder="00 000 00 00" mask="99 999 99 99" />
   </InputGroup>
@@ -28,7 +28,8 @@ const { phoneModel } = usePhoneMask(props, emit);
 
   &__addon {
     padding-right: .5rem;
-    transform: translateY(1px);
+    display: flex;
+    align-items: center;
   }
 }
 </style>

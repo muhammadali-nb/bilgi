@@ -3,10 +3,21 @@
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@utils/*": ["./utils/*"],
-      "@components/*": ["./components/*"],
-      "@composables/*": ["./composables/*"],
-      "@language-constants": ["./locales/constants.ts"]
+      "@utils/*": [
+        "./utils/*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@composables/*": [
+        "./composables/*"
+      ],
+      "@assets/*": [
+        "./assets/*"
+      ],
+      "@language-constants": [
+        "./locales/constants.ts"
+      ]
     }
   }
 }
