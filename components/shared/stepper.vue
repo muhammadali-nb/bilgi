@@ -77,8 +77,8 @@ const activeStep = defineModel<number>('activeStep');
     }
 
     &.completed .circle {
-      background-color: var(--primary-100);
-      color:  var(--dark-text)
+      background-color: var(--primary-500);
+      color: var(--white-text);
     }
 
     &.completed .label {
