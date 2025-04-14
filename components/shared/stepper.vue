@@ -7,16 +7,6 @@ const props = defineProps<{
 }>();
 
 const activeStep = defineModel<number>('activeStep');
-
-// const next = () => {
-//   if (activeStep.value === undefined) return;
-//   if (activeStep.value < props.steps.length - 1) activeStep.value++;
-// };
-
-// const prev = () => {
-//   if (activeStep.value === undefined) return;
-//   if (activeStep.value > 0) activeStep.value--;
-// };
 </script>
 
 <template>

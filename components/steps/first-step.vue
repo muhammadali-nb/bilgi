@@ -2,7 +2,12 @@
 import FileUploader from '@components/shared/file-uploader.vue';
 import FormField from '@components/shared/FormField.vue';
 import PhoneInput from '@components/shared/phone-Input.vue';
+import TestFile from '@components/shared/test-file.vue';
 import Textarea from 'primevue/textarea';
+
+const emits = defineEmits<{
+  (e: 'submit'): void
+}>();
 
 const selectedCity = ref('NY');
 const cities = ref([
@@ -101,13 +106,15 @@ const cities = ref([
         <InputText model-value="" placeholder="Ф.И.О" name="price" />
       </FormField>
     </div>
-    <FileUploader />
-    <Button class="step-form__submit" label="Далее" fluid />
+    <!-- <FileUploader /> -->
+    <TestFile />
+    <Button class="step-form__submit" label="Далее" fluid @click="emits('submit')" />
   </form>
 </template>
 
 <style lang="scss" scoped>
 .step-form {
+  background-color: var(--card-bg-05);
   border: 1px solid #DCE1E7;
   border-radius: 1rem;
   padding: 4rem;
