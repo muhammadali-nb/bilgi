@@ -140,6 +140,7 @@ onBeforeUnmount(() => {
   &-body {
     display: flex;
     align-items: center;
+    gap: 1rem;
   }
 
   &-sample {
