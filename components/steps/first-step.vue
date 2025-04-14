@@ -1,13 +1,11 @@
 <script lang="ts" setup>
+import type { StepEmits } from '@composables/ui/steps/types';
 import FileUploader from '@components/shared/file-uploader.vue';
 import FormField from '@components/shared/FormField.vue';
 import PhoneInput from '@components/shared/phone-Input.vue';
-import TestFile from '@components/shared/test-file.vue';
 import Textarea from 'primevue/textarea';
 
-const emits = defineEmits<{
-  (e: 'submit'): void
-}>();
+const emits = defineEmits<StepEmits>();
 
 const selectedCity = ref('NY');
 const cities = ref([
@@ -67,7 +65,7 @@ const cities = ref([
     </h3>
     <div class="step-form__target">
       <FormField label="Содержание проекта:">
-        <Textarea placeholder="Select a City" style="resize: false;" rows="7" />
+        <Textarea style="resize: false;" rows="7" />
       </FormField>
 
       <FormField label="Собственные средства, привлеченные для реализации проекта (сум):">
@@ -75,7 +73,7 @@ const cities = ref([
       </FormField>
 
       <FormField label="Информация о социальных показателях деятельности организации:">
-        <Textarea placeholder="Select a City" style="resize: false;" rows="7" />
+        <Textarea style="resize: false;" rows="7" />
       </FormField>
     </div>
     <h3 class="font-20-sb step-form__subtitle">
@@ -105,9 +103,8 @@ const cities = ref([
       <FormField label="Руководитель (Ф.И.О.)" class="colspan-2">
         <InputText model-value="" placeholder="Ф.И.О" name="price" />
       </FormField>
+      <FileUploader label="Документ, подтверждающий право на осуществление деятельности образования (лицензия/подтверждение/разрешение);" class="colspan-2" />
     </div>
-    <!-- <FileUploader /> -->
-    <TestFile />
     <Button class="step-form__submit" label="Далее" fluid @click="emits('submit')" />
   </form>
 </template>

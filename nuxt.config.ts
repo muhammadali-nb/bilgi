@@ -38,7 +38,7 @@ export default defineNuxtConfig({
   ],
 
   alias: {
-    '@utils': resolve('./utilities/'),
+    '@utils': resolve('./utils/'),
     '@assets': resolve('./assets/'),
     '@components': resolve('./components/'),
     '@composables': resolve('./composables/'),

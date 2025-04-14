@@ -8,8 +8,6 @@ const src = ref<string | null>(null);
 function onFileSelect(event: { files: File[] }) {
   const file = event.files[0];
 
-  console.log(file);
-
   if (!file) return;
 
   const reader = new FileReader();
