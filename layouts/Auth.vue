@@ -64,34 +64,5 @@ import { bilgiLogo } from '../assets/icons';
       text-align: center;
     }
 
-    &__title {
-      font-size: 3.2rem;
-      font-weight: 700;
-      margin-bottom: 1.6rem;
-    }
-
-    &__description {
-      color: var(--site-secondary-text);
-      margin: 0 0 7rem 0;
-    }
-
-    &__form {
-      max-width: 36rem;
-
-      .form__field:not(:first-child) {
-        margin: 2rem 0 0 0;
-      }
-
-      &-submit {
-        margin: 5rem 0 0 0;
-      }
-
-      &-text {
-        width: 100%;
-        color: var(--site-secondary-text);
-        text-align: center;
-        margin: 4rem 0 0 0;
-      }
-    }
   }
 </style>

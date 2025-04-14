@@ -13,6 +13,7 @@ import { inputMaskPt } from './inputMask';
 import { inputNumberConfig, inputNumberPt } from './inputNumber';
 import { inputTextConfig, inputTextPt } from './inputText';
 import { messagePt } from './message';
+import { passwordPt } from './password';
 import { selectConfig, selectPt } from './select';
 import { tableConfig, tablePt } from './table';
 import { textareaPt } from './textarea';
@@ -91,6 +92,7 @@ const customPreset = definePreset(Aura, {
       paddingX: '.5rem',
       paddingY: '1rem',
     },
+    iconSize: '20px',
   },
 
   components: {
@@ -163,6 +165,8 @@ export const options: PrimeVueConfiguration = {
     message: messagePt(),
 
     select: selectPt(),
+
+    password: passwordPt(),
   },
 
   theme: {

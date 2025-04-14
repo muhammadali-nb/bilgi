@@ -35,14 +35,11 @@ export const selectPt = () => {
       class: 'font-14-n',
     },
     dropdownIcon: {
-      width: '24',
-      height: '24',
-      viewBox: '0 0 24 24',
-      style: '--p-icon-size: "auto"',
+      width: '22',
+      height: '22',
+      viewBox: '0 0 22 22',
       innerHTML: `
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M8 10L10.2929 12.2929C10.6834 12.6834 11.3166 12.6834 11.7071 12.2929L14 10M1 16L1 6C1 3.23858 3.23858 1 6 1L16 1C18.7614 1 21 3.23858 21 6V16C21 18.7614 18.7614 21 16 21H6C3.23858 21 1 18.7614 1 16Z" stroke="#7A8A9E" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
     `,
     },
   };

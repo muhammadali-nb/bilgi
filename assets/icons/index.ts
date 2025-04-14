@@ -4,6 +4,8 @@ import document from './document-preview.svg?raw';
 import documentIcon from './document.svg?raw';
 import downSquareIcon from './down-square.svg?raw';
 import uzFlagIcon from './flags/uz.svg?raw';
+import guardIcon from './guard.svg?raw';
+import lockIcon from './lock.svg?raw';
 import nextIcon from './next.svg?raw';
 import phoneIcon from './phone.svg?raw';
 import plusIcon from './plus.svg?raw';
@@ -17,6 +19,8 @@ export {
   document,
   documentIcon,
   downSquareIcon,
+  guardIcon,
+  lockIcon,
   nextIcon,
   phoneIcon,
   plusIcon,

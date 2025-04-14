@@ -18,7 +18,7 @@ definePageMeta({
 <template>
   <div class="register">
     <form class="register__form" @submit.prevent>
-      <h4 class="register__title">
+      <h4 class="register__title font-32-b">
         Вход
       </h4>
       <p class="register__description font-16-r">
@@ -65,8 +65,6 @@ definePageMeta({
 <style lang="scss" scoped>
 .register {
     &__title {
-      font-size: 3.2rem;
-      font-weight: 700;
       margin-bottom: 1.6rem;
     }
 
