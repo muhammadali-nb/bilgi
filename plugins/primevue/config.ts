@@ -13,6 +13,7 @@ import { inputMaskPt } from './inputMask';
 import { inputNumberConfig, inputNumberPt } from './inputNumber';
 import { inputTextConfig, inputTextPt } from './inputText';
 import { messagePt } from './message';
+import { paginatorConfig, paginatorPt } from './paginator';
 import { passwordPt } from './password';
 import { selectConfig, selectPt } from './select';
 import { tableConfig, tablePt } from './table';
@@ -128,6 +129,8 @@ const customPreset = definePreset(Aura, {
 
     checkbox: checkBoxConfig(),
 
+    paginator: paginatorConfig(),
+
     rating: {
       iconSize: '2rem',
     },
@@ -167,6 +170,8 @@ export const options: PrimeVueConfiguration = {
     select: selectPt(),
 
     password: passwordPt(),
+
+    paginator: paginatorPt(),
   },
 
   theme: {

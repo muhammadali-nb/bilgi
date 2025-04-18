@@ -2,5 +2,11 @@
   "hello-world": "Hello world!",
   "advantages": {
     "test-text": "Advantage text"
+  },
+
+  "admin": {
+    "auth": "Auth",
+    "bid": "ZZZZ",
+    "clients": "KKKK"
   }
 }

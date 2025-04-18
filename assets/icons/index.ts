@@ -1,5 +1,6 @@
 import bilgiLogo from './bilgi-logo.svg?raw';
 import closeIcon from './close.svg?raw';
+import document2Icon from './document2.svg?raw';
 import document from './document-preview.svg?raw';
 import documentIcon from './document.svg?raw';
 import downSquareIcon from './down-square.svg?raw';
@@ -12,11 +13,13 @@ import plusIcon from './plus.svg?raw';
 import prevIcon from './prev.svg?raw';
 import testIcon from './test.svg?raw';
 import userIcon from './user.svg?raw';
+import usersIcon from './users.svg?raw';
 
 export {
   bilgiLogo,
   closeIcon,
   document,
+  document2Icon,
   documentIcon,
   downSquareIcon,
   guardIcon,
@@ -27,5 +30,6 @@ export {
   prevIcon,
   testIcon,
   userIcon,
+  usersIcon,
   uzFlagIcon,
 };

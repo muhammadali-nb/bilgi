@@ -65,6 +65,7 @@
   --time-line-grey-disabled: rgba(232, 232, 223, 1);
 
   --box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.5);
+  --box-shadow-card: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
   /* reusable variables */
 
@@ -94,6 +95,8 @@
   --font-24-sb: normal 600 24px/1.2 var(--primary-font);
 
   --font-32-b: normal 700 32px/1.2 var(--primary-font);
+
+  --font-36-b: normal 700 36px/1.2 var(--primary-font);
 
   /*  ================== fonts end =============== */
 
@@ -155,6 +158,10 @@
 
 .font-32-b {
   font: normal 700 32px/1.2 var(--primary-font) !important;
+}
+
+.font-36-b {
+  font: normal 700 36px/1.2 var(--primary-font) !important;
 }
 
 .text-right {

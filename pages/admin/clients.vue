@@ -1,6 +1,10 @@
 <script lang="ts" setup>
+definePageMeta({
+  layout: 'admin',
+});
 </script>
 
 <template>
-  <div />
+  hello world
+  <h1>hello world</h1>
 </template>

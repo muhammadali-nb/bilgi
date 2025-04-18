@@ -2,5 +2,11 @@
   "hello-world": "Salam aleykum!",
   "advantages": {
     "test-text": "Что-то на узбекском"
+  },
+
+  "admin": {
+    "auth": "AAA",
+    "bid": "ZZZ",
+    "clients": "CCCCC"
   }
 }

@@ -5,19 +5,17 @@ import { bilgiLogo } from '../../assets/icons';
 </script>
 
 <template>
-  <nav class="navbar">
-    <div class="container">
-      <div class="navbar__content">
-        <VIcon :icon="bilgiLogo" no-fill class="navbar__logo" />
-        <LangSwitcher class="navbar__lang-switcher" />
-      </div>
+  <header class="header">
+    <div class="header__content container">
+      <VIcon :icon="bilgiLogo" no-fill :size="80" />
+      <LangSwitcher />
     </div>
-  </nav>
+  </header>
 </template>
 
 <style lang="scss" scoped>
-.navbar {
-  padding: 4.2rem 0 2rem 0;
+.header {
+  padding: 1.3rem 0 .3rem;
   position: sticky;
   left: 0;
   top: 0;
@@ -29,10 +27,5 @@ import { bilgiLogo } from '../../assets/icons';
     justify-content: space-between;
     align-items: center;
   }
-
-    &__logo {
-      height: 4rem;
-    }
-
-  }
+}
 </style>

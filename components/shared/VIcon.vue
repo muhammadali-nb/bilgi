@@ -9,7 +9,7 @@ const props = defineProps<{
 
 const colorVal = computed(() => props.color || 'unset');
 const background = computed(() => props.spanBg || 'transparent');
-const iconSize = computed(() => props.size ?? 'auto');
+const iconSize = computed(() => props.size ? `${props.size}px` : 'auto');
 </script>
 
 <template>

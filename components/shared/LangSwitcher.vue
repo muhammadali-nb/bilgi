@@ -2,13 +2,13 @@
 import { uzFlagIcon } from '../../assets/icons';
 import VIcon from './VIcon.vue';
 
-const { locales, locale } = useI18n();
+const { locales, locale, setLocale } = useI18n();
 
 const regionName = computed(() => locales.value.find(option => option.code === locale.value)?.name);
 </script>
 
 <template>
-  <Select v-model="locale" class="lang-switcher" :options="locales" placeholder="Выберите язык" option-value="code" option-label="name">
+  <Select v-model="locale" class="lang-switcher" :options="locales" placeholder="Выберите язык" option-value="code" option-label="name" @update:model-value="setLocale">
     <template #option="slotProps">
       <div class="lang-switcher__option">
         <VIcon
