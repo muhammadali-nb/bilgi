@@ -72,9 +72,14 @@ html body {
   .p-datatable-table {
     border-radius: var(--radius-m);
     overflow: hidden;
-    td {
-      word-break: break-word;
-    }
+
+    font: var(--font-14-n);
+
+    // td {
+    //   padding: 1.4rem 1rem .7rem;
+
+    //   // word-break: break-word;
+    // }
   }
 
   .p-password-toggle-mask-icon {
@@ -89,7 +94,7 @@ html body {
 
     &-content {
       background: var(--form-element-background);
-      padding: 12px;
+      padding: 7px;
       border-radius: 100px;
     }
   }
@@ -135,6 +140,14 @@ html body {
   //     }
   //   }
   // }
+
+  .p-selectbutton {
+    box-shadow: var(--box-shadow-card);
+
+    .p-togglebutton {
+      min-width: 18em;
+    }
+  }
 
   .p-popover-content {
     .p-datepicker-panel {

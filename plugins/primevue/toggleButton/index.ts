@@ -5,6 +5,10 @@ export const toggleButtonConfig = () => {
     colorScheme: {
       light: {
         color: 'var(--text-color)',
+        background: 'var(--element-light)',
+        checked: {
+          background: 'var(--element-light)',
+        },
       },
       dark: {
         color: 'var(--text-color)',
@@ -16,7 +20,7 @@ export const toggleButtonConfig = () => {
 export const toggleButtonPt = () => {
   return {
     label: {
-      class: 'font-16-b',
+      class: 'font-16-r',
     },
   };
 };

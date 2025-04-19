@@ -45,6 +45,7 @@ const { navigationList } = useNavigation();
     height: 100%;
     flex: 1;
     background-color: var(--site-secondary-bg);
+    position: relative;
   }
 
   &__header {

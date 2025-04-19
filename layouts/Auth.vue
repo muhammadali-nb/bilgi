@@ -29,7 +29,7 @@ import { bilgiLogo } from '../assets/icons';
 .auth-layout {
     &__container {
       display: flex;
-      height: 100vh;
+      min-height: 100dvb;
     }
 
     &__left,

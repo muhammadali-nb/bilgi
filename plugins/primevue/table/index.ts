@@ -5,7 +5,8 @@ export const tableConfig = () => {
     },
 
     bodyCell: {
-      padding: '1.4rem 1.5rem',
+      padding: '1.4rem 1rem .7rem',
+
     },
 
     // colorScheme: {

@@ -1,4 +1,5 @@
 import bilgiLogo from './bilgi-logo.svg?raw';
+import chekedIcon from './cheked.svg?raw';
 import closeIcon from './close.svg?raw';
 import document2Icon from './document2.svg?raw';
 import document from './document-preview.svg?raw';
@@ -11,12 +12,15 @@ import nextIcon from './next.svg?raw';
 import phoneIcon from './phone.svg?raw';
 import plusIcon from './plus.svg?raw';
 import prevIcon from './prev.svg?raw';
+import rejectedIcon from './rejected.svg?raw';
 import testIcon from './test.svg?raw';
 import userIcon from './user.svg?raw';
+
 import usersIcon from './users.svg?raw';
 
 export {
   bilgiLogo,
+  chekedIcon,
   closeIcon,
   document,
   document2Icon,
@@ -28,6 +32,7 @@ export {
   phoneIcon,
   plusIcon,
   prevIcon,
+  rejectedIcon,
   testIcon,
   userIcon,
   usersIcon,

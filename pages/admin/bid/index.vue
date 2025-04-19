@@ -31,7 +31,9 @@ definePageMeta({
       <Column field="status" header="Статус" />
       <Column field="status" header="Действие">
         <template #body>
-          <Button label="Просмотреть" severity="primary" />
+          <NuxtLink to="/admin/bid/123">
+            <Button label="Просмотреть" severity="primary" size="small" />
+          </NuxtLink>
         </template>
       </Column>
     </DataTable>
