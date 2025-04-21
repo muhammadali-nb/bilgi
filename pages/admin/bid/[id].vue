@@ -1,12 +1,16 @@
 <script lang="ts" setup>
 import FieldStatus from '@components/admin/field-status.vue';
+import { useAdminHeader } from '@store/admin-header';
 
 const value = ref('Заявка');
 const options = ref(['Заявка', 'Учредительные', 'Финансовые', 'Обеспечение']);
+const adminHeaderStore = useAdminHeader();
 
 definePageMeta({
   layout: 'admin',
 });
+
+adminHeaderStore.setBidNumber('123');
 </script>
 
 <template>
@@ -76,6 +80,7 @@ definePageMeta({
 <style scoped lang="scss">
   .bid-detail {
     padding: 2rem;
+    overflow: auto;height: 100%;
 
     &__content {
       margin-top: 2.8rem;
@@ -84,7 +89,7 @@ definePageMeta({
       border-radius: var(--radius-l);
 
       display: grid;
-      grid-template-columns: 1fr 1fr 80rem;
+      grid-template-columns: 1fr 1fr 50%;
       gap: 8rem;
 
       &-column {

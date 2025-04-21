@@ -4,9 +4,8 @@
     "test-text": "Advantage text"
   },
 
-  "admin": {
-    "auth": "Auth",
-    "bid": "ZZZZ",
-    "clients": "KKKK"
-  }
+  "admin-auth": "Auth",
+  "admin-bid": "bid",
+  "admin-bid-id": "bid id",
+  "admin-clients": "clients"
 }

@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-defineProps<{
+const props = defineProps<{
   title: string
   value: string
   severity: 'default' | 'success' | 'error'
 }>();
+
+const cardSeverity = computed(() => props.severity === 'success' ? 'var(--p-green-600)' : props.severity === 'error' ? 'var(--p-red-500)' : '');
 </script>
 
 <template>
@@ -24,5 +26,10 @@ defineProps<{
   width: 100%;
   border-radius: var(--radius-l);
   box-shadow: var(--box-shadow-card);
+
+  h1 {
+    color: v-bind(cardSeverity);
+  }
+
 }
 </style>

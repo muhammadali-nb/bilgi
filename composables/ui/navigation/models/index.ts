@@ -3,13 +3,13 @@ import { document2Icon, usersIcon } from '@assets/icons';
 
 export const adminNavigation: INavigationItem[] = [
   {
-    name: 'admin.bid',
+    name: 'admin-bid',
     path: '/admin/bid',
     icon: document2Icon,
   },
 
   {
-    name: 'admin.clients',
+    name: 'admin-clients',
     path: '/admin/clients',
     icon: usersIcon,
   },

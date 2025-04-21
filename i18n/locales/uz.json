@@ -4,9 +4,8 @@
     "test-text": "Что-то на узбекском"
   },
 
-  "admin": {
-    "auth": "AAA",
-    "bid": "ZZZ",
-    "clients": "CCCCC"
-  }
+  "admin-auth": "UZ",
+  "admin-bid": "zz",
+  "admin-bid-id": "zz",
+  "admin-clients": "zz"
 }

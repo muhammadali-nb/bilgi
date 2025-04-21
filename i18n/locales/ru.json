@@ -4,9 +4,8 @@
     "test-text": "Текст преимущества"
   },
 
-  "admin": {
-    "auth": "Авторизация",
-    "bid": "Заявки",
-    "clients": "Клиенты"
-  }
+  "admin-auth": "Авторизация",
+  "admin-bid": "Заявки",
+  "admin-bid-id": "Заявка",
+  "admin-clients": "Клиенты"
 }

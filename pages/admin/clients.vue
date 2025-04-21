@@ -5,6 +5,5 @@ definePageMeta({
 </script>
 
 <template>
-  hello world
-  <h1>hello world</h1>
+  <h1>Клиенты</h1>
 </template>

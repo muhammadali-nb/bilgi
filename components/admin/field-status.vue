@@ -5,6 +5,7 @@ import VIcon from '@components/shared/VIcon.vue';
 defineProps<{
   status: 'success' | 'error'
   label: string
+
 }>();
 </script>
 
@@ -23,16 +24,14 @@ defineProps<{
 <style lang="scss" scoped>
 .filed-status {
 
-    &__header {
+  &__header {
       display: flex;
       align-items: center;
       gap: 1rem;
       margin: 0 0 .7rem ;
-
       label {
         color: var(--site-label-text);
       }
-
     }
   }
 </style>

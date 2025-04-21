@@ -12,6 +12,9 @@
       "@composables/*": [
         "./composables/*"
       ],
+      "@store/*": [
+        "./store/*"
+      ],
       "@assets/*": [
         "./assets/*"
       ],

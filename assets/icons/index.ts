@@ -1,3 +1,4 @@
+import backIcon from './back.svg?raw';
 import bilgiLogo from './bilgi-logo.svg?raw';
 import chekedIcon from './cheked.svg?raw';
 import closeIcon from './close.svg?raw';
@@ -15,10 +16,10 @@ import prevIcon from './prev.svg?raw';
 import rejectedIcon from './rejected.svg?raw';
 import testIcon from './test.svg?raw';
 import userIcon from './user.svg?raw';
-
 import usersIcon from './users.svg?raw';
 
 export {
+  backIcon,
   bilgiLogo,
   chekedIcon,
   closeIcon,

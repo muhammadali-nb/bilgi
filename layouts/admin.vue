@@ -1,14 +1,14 @@
 <script lang="ts" setup>
+import { backIcon } from '@assets/icons';
 import Navigation from '@components/layout/navigation.vue';
+import VIcon from '@components/shared/VIcon.vue';
 import { useNavigation } from '@composables/ui/navigation';
+import { useAdminHeader } from '@store/admin-header';
 
 const { navigationList } = useNavigation();
-// const route = useRoute();
+const adminHeaderStore = useAdminHeader();
 
-// const routeName = computed(() => {
-//   if (typeof route.name !== 'string' || route.name.includes('/admin')) return '';
-//   return route.name.split('__')[0].replaceAll('-', '.');
-// });
+const $router = useRouter();
 </script>
 
 <template>
@@ -18,7 +18,13 @@ const { navigationList } = useNavigation();
     </aside>
     <div class="admin-layout__content">
       <div class="admin-layout__header font-16-n">
-        Все заявки
+        <Button v-if="adminHeaderStore.isBackButtonEnabled" variant="text" @click="$router.back()">
+          <VIcon :icon="backIcon" />
+        </Button>
+        <p class="admin-layout__header-title">
+          {{ $t(adminHeaderStore.name) }}
+          <span v-if="adminHeaderStore.bidNumber">{{ adminHeaderStore.bidNumber }}</span>
+        </p>
       </div>
 
       <main class="content">
@@ -33,6 +39,7 @@ const { navigationList } = useNavigation();
   height: 100dvh;
   display: flex;
   align-items: center;
+  overflow: hidden;
 
   aside {
     min-width: 30rem;
@@ -51,6 +58,18 @@ const { navigationList } = useNavigation();
   &__header {
     padding: 2.4rem 2.2rem;
     background-color: var(--card-bg-05);
+    display: flex;
+    align-items: center;
+
+    :deep(.p-button) {
+
+      padding: 1px;
+
+    }
+
+    &-title {
+      margin: 0 0 0 1rem;
+    }
   }
 }
 </style>
