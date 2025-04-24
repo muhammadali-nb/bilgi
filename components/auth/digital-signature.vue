@@ -39,6 +39,7 @@
     padding: 1.4rem;
     background-color: var(--card-bg);
     border-radius: 1rem;
+    cursor: pointer;
 
     &__item {
       display: flex;

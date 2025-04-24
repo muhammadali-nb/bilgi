@@ -38,21 +38,28 @@ const $router = useRouter();
 .admin-layout {
   height: 100dvh;
   display: flex;
-  align-items: center;
-  overflow: hidden;
 
   aside {
+    max-width: 30rem;
     min-width: 30rem;
-    height: 100%;
     background-color: var(--primary-500);
     padding: 8rem 1.5rem;
+    flex-grow: 1;
   }
 
   &__content {
-    height: 100%;
-    flex: 1;
     background-color: var(--site-secondary-bg);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    main {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 2rem 2rem 0;
+    }
   }
 
   &__header {
@@ -62,9 +69,7 @@ const $router = useRouter();
     align-items: center;
 
     :deep(.p-button) {
-
       padding: 1px;
-
     }
 
     &-title {

@@ -3,11 +3,22 @@ import DigitalSignature from '@components/auth/digital-signature.vue';
 
 import FormField from '@components/shared/FormField.vue';
 import VIcon from '@components/shared/VIcon.vue';
+import { useEcpKey } from '@composables/ecp-key';
 import { userIcon } from '../assets/icons';
 
+const { connect, sendRequest } = useEcpKey();
 const visible = ref(false);
 const form = reactive({
   login: '',
+});
+
+const params = {
+  plugin: 'certkey',
+  name: 'list_disks',
+};
+
+onBeforeMount(() => {
+  connect();
 });
 
 definePageMeta({
@@ -44,6 +55,7 @@ definePageMeta({
         type="submit"
         fluid
         class="register__form-submit"
+        @click="sendRequest('getDisks', JSON.stringify(params))"
       />
       <p class="font-14-n register__form-text">
         Уже есть аккаунт? <span class="font-14-b">Войти</span>

@@ -15,7 +15,9 @@ adminHeaderStore.setBidNumber('123');
 
 <template>
   <div class="bid-detail">
-    <SelectButton v-model="value" :options="options" />
+    <div>
+      <SelectButton v-model="value" :options="options" />
+    </div>
 
     <div class="bid-detail__content">
       <div class="bid-detail__content-column">
@@ -78,43 +80,42 @@ adminHeaderStore.setBidNumber('123');
 </template>
 
 <style scoped lang="scss">
-  .bid-detail {
-    padding: 2rem;
-    overflow: auto;height: 100%;
+.bid-detail {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
-    &__content {
-      margin-top: 2.8rem;
-      box-shadow: var(--box-shadow-card);
-      padding: 1.4rem 2rem 2.8rem 2rem;
-      border-radius: var(--radius-l);
+  &__content {
+    margin-top: 2.8rem;
+    box-shadow: var(--box-shadow-card);
+    padding: 1.4rem 2rem 2.8rem 2rem;
+    border-radius: var(--radius-l);
 
-      display: grid;
-      grid-template-columns: 1fr 1fr 50%;
-      gap: 8rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 50%;
+    gap: 8rem;
 
-      &-column {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-    }
-
-    &__footer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      z-index: 3;
-      padding: 2.2rem;
-      width: 100%;
-      background-color: var(--white);
-
+    &-column {
       display: flex;
-      justify-content: flex-end;
+      flex-direction: column;
       gap: 1rem;
-
-      :deep(.p-button) {
-        padding: 2rem 5rem;
-      }
     }
   }
+
+  &__footer {
+    padding: 2.2rem;
+    min-width: 100%;
+    background-color: var(--white);
+
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+
+    margin: auto -2rem 0 ;
+
+    :deep(.p-button) {
+      padding: 2rem 5rem;
+    }
+  }
+}
 </style>

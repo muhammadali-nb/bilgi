@@ -30,6 +30,5 @@ const cardSeverity = computed(() => props.severity === 'success' ? 'var(--p-gree
   h1 {
     color: v-bind(cardSeverity);
   }
-
 }
 </style>
