@@ -3,7 +3,9 @@ import type { StepEmits } from '@composables/ui/steps/types';
 import FileUploader from '@components/shared/file-uploader.vue';
 import FormField from '@components/shared/FormField.vue';
 import PhoneInput from '@components/shared/phone-Input.vue';
-import Textarea from 'primevue/textarea';
+import { useValidationRules } from '@composables/ui/validation-rules';
+
+import useVuelidate from '@vuelidate/core';
 
 const emits = defineEmits<StepEmits>();
 
@@ -15,6 +17,29 @@ const cities = ref([
   { name: 'Istanbul', code: 'IST' },
   { name: 'Paris', code: 'PRS' },
 ]);
+
+const { min, max, requiredField } = useValidationRules();
+
+interface IFirstStepFields {
+  sumValue: number
+  employersCount: number
+}
+
+const formObj = reactive<IFirstStepFields>({
+  sumValue: 0,
+  employersCount: 0,
+});
+
+const rules: Record<keyof IFirstStepFields, any> = {
+  sumValue: {
+    ...min(10),
+    ...max(20),
+    ...requiredField(),
+  },
+  employersCount: requiredField(),
+};
+
+const $v = useVuelidate(rules, formObj);
 </script>
 
 <template>
@@ -22,14 +47,17 @@ const cities = ref([
     <h4 class="step-form__title font-24-sb">
       ЗАЯВЛЕНИЕ
     </h4>
-
     <div class="step-form__grid">
-      <FormField label="Необходимая сумма целевого кредита (сум):" class="colspan-2">
-        <InputNumber placeholder="Введите сумму" name="price" />
+      <FormField
+        label="Необходимая сумма целевого кредита (сум):"
+        class="colspan-2"
+        :errors="$v.sumValue.$errors"
+      >
+        <InputNumber v-model="$v.sumValue.$model" :invalid="$v.sumValue.$error" placeholder="Введите сумму" name="sumValue" />
       </FormField>
 
-      <FormField label="Количество молодых специалистов, которых обучат и трудоустроят:">
-        <InputNumber placeholder="Введите сумму" name="specialists" />
+      <FormField :errors="$v.employersCount.$errors" label="Количество молодых специалистов, которых обучат и трудоустроят:">
+        <InputNumber v-model="$v.employersCount.$model" placeholder="Введите сумму" name="specialists" />
       </FormField>
 
       <FormField label="Льготный период:">
@@ -65,7 +93,7 @@ const cities = ref([
     </h3>
     <div class="step-form__target">
       <FormField label="Содержание проекта:">
-        <Textarea style="resize: false;" rows="7" />
+        <Textarea style="resize: none;" rows="7" />
       </FormField>
 
       <FormField label="Собственные средства, привлеченные для реализации проекта (сум):">
@@ -73,7 +101,7 @@ const cities = ref([
       </FormField>
 
       <FormField label="Информация о социальных показателях деятельности организации:">
-        <Textarea style="resize: false;" rows="7" />
+        <Textarea style="resize: none;" rows="7" />
       </FormField>
     </div>
     <h3 class="font-20-sb step-form__subtitle">
@@ -127,7 +155,7 @@ const cities = ref([
   &__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem 4.4rem;
+    gap: 1rem 4.4rem;
   }
 
   &__target  {

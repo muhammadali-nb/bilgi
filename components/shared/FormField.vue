@@ -1,9 +1,9 @@
 <script setup lang="ts">
-// import type { ErrorObject } from '@vuelidate/core';
+import type { ErrorObject } from '@vuelidate/core';
 
 defineProps<{
   label: string
-  // errors?: ErrorObject[]
+  errors?: ErrorObject[]
 }>();
 </script>
 
@@ -11,9 +11,11 @@ defineProps<{
   <div class="input-container">
     <label class="input__label font-16-r">{{ label }}</label>
     <slot />
-    <!-- <small v-for="(error, idx) in errors" :key="idx" class="error-color">
-      {{ error.$message }}
-    </small> -->
+    <div class="error-container">
+      <Message v-for="(error, idx) in errors" :key="idx" severity="error" variant="simple">
+        {{ error.$message }}
+      </Message>
+    </div>
   </div>
 </template>
 
@@ -21,9 +23,15 @@ defineProps<{
 .input-container {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+
   .input__label {
     padding-bottom: 8px;
     margin-bottom: auto;
+  }
+
+  .error-container {
+    min-height: 1.65rem;
   }
 }
 </style>
