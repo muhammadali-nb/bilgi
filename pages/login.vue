@@ -4,22 +4,23 @@ import DigitalSignature from '@components/auth/digital-signature.vue';
 import FormField from '@components/shared/FormField.vue';
 import VIcon from '@components/shared/VIcon.vue';
 import { useEcpKey } from '@composables/ecp-key';
-import { userIcon } from '../assets/icons';
+import { parseCertificateInfo } from '@composables/ecp-key/model';
+import { lockIcon, userIcon } from '../assets/icons';
 
-const { connect, sendRequest } = useEcpKey();
+const { connect, getKeys, keyList, isConnected } = useEcpKey();
 const visible = ref(false);
 const form = reactive({
   login: '',
 });
 
-const params = {
-  plugin: 'certkey',
-  name: 'list_disks',
-};
-
 onBeforeMount(() => {
   connect();
 });
+
+const handleOpenDialog = () => {
+  getKeys();
+  visible.value = true;
+};
 
 definePageMeta({
   layout: 'auth',
@@ -45,8 +46,17 @@ definePageMeta({
         </InputGroup>
       </FormField>
 
+      <FormField label="Пароль">
+        <InputGroup>
+          <InputGroupAddon>
+            <VIcon :icon="lockIcon" no-fill />
+          </InputGroupAddon>
+          <Password placeholder="Введите пароль" toggle-mask :feedback="false" />
+        </InputGroup>
+      </FormField>
+
       <FormField label="ЭЦП ключ" class="register__form__digital-signature">
-        <Button severity="secondary" label="Выбрать ключ" @click="visible = true" />
+        <Button severity="secondary" label="Выбрать ключ" :disabled="!isConnected" @click="handleOpenDialog" />
       </FormField>
 
       <Button
@@ -55,7 +65,6 @@ definePageMeta({
         type="submit"
         fluid
         class="register__form-submit"
-        @click="sendRequest('getDisks', JSON.stringify(params))"
       />
       <p class="font-14-n register__form-text">
         Уже есть аккаунт? <span class="font-14-b">Войти</span>
@@ -63,12 +72,21 @@ definePageMeta({
     </form>
     <Dialog v-model:visible="visible" header="Выберите ключ" :draggable="false" modal :close-on-mask="false" style="width: 45rem;" class="digital-signature__dialog">
       <div class="digital-signature__dialog-content">
-        <DigitalSignature />
-        <DigitalSignature />
+        <template v-if="keyList.length">
+          <DigitalSignature
+            v-for="item in keyList"
+            :key="item.name"
+            :item="parseCertificateInfo(item.alias)"
+          />
+        </template>
+
+        <p v-else class="digital-signature__dialog__empty font-16-n">
+          Ключи не найдены
+        </p>
       </div>
 
       <template #footer>
-        <Button label="Аторизоваться" fluid />
+        <Button label="Аторизоваться" fluid :disabled="!keyList.length" />
       </template>
     </Dialog>
   </div>
@@ -111,6 +129,12 @@ definePageMeta({
       display: flex;
       flex-direction: column;
       gap: 1.6rem;
+    }
+
+    &__empty {
+      text-align: center;
+      color: var(--site-secondary-text);
+      padding: 2rem 0;
     }
   }
 </style>

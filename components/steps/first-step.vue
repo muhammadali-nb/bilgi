@@ -3,12 +3,13 @@ import type { StepEmits } from '@composables/ui/steps/types';
 import FileUploader from '@components/shared/file-uploader.vue';
 import FormField from '@components/shared/FormField.vue';
 import PhoneInput from '@components/shared/phone-Input.vue';
-import { useValidationRules } from '@composables/ui/validation-rules';
 
-import useVuelidate from '@vuelidate/core';
+import { useAppMainForm } from '@store/main-form';
+import { getYearFromMonthLength } from '@utils/years-counter';
+import { useI18n } from 'vue-i18n';
 
 const emits = defineEmits<StepEmits>();
-
+const { t } = useI18n();
 const selectedCity = ref('NY');
 const cities = ref([
   { name: 'New York', code: 'NY' },
@@ -18,28 +19,19 @@ const cities = ref([
   { name: 'Paris', code: 'PRS' },
 ]);
 
-const { min, max, requiredField } = useValidationRules();
+const appMainForm = useAppMainForm();
 
-interface IFirstStepFields {
-  sumValue: number
-  employersCount: number
-}
+const months = [12, 36, 60];
 
-const formObj = reactive<IFirstStepFields>({
-  sumValue: 0,
-  employersCount: 0,
+const gracePeriodOptions = computed(() => {
+  return months.map((month) => {
+    const monthValue = getYearFromMonthLength(month);
+    return {
+      name: `${t(monthValue.type, monthValue.value)}`,
+      value: month,
+    };
+  });
 });
-
-const rules: Record<keyof IFirstStepFields, any> = {
-  sumValue: {
-    ...min(10),
-    ...max(20),
-    ...requiredField(),
-  },
-  employersCount: requiredField(),
-};
-
-const $v = useVuelidate(rules, formObj);
 </script>
 
 <template>
@@ -51,25 +43,59 @@ const $v = useVuelidate(rules, formObj);
       <FormField
         label="Необходимая сумма целевого кредита (сум):"
         class="colspan-2"
-        :errors="$v.sumValue.$errors"
+        :errors="appMainForm.$v.targetCreditAmount.$errors"
       >
-        <InputNumber v-model="$v.sumValue.$model" :invalid="$v.sumValue.$error" placeholder="Введите сумму" name="sumValue" />
+        <InputNumber
+          v-model="appMainForm.$v.targetCreditAmount.$model"
+          :invalid="appMainForm.$v.targetCreditAmount.$error"
+          placeholder="Введите сумму"
+          name="targetCreditAmount"
+        />
       </FormField>
 
-      <FormField :errors="$v.employersCount.$errors" label="Количество молодых специалистов, которых обучат и трудоустроят:">
-        <InputNumber v-model="$v.employersCount.$model" placeholder="Введите сумму" name="specialists" />
+      <FormField
+        :errors="appMainForm.$v.youngSpecialistsCount.$errors"
+        label="Количество молодых специалистов, которых обучат и трудоустроят:"
+      >
+        <InputNumber
+          v-model="appMainForm.$v.youngSpecialistsCount.$model"
+          :invalid="appMainForm.$v.youngSpecialistsCount.$error"
+          placeholder="Введите количество"
+          name="youngSpecialistsCount"
+        />
       </FormField>
 
-      <FormField label="Льготный период:">
-        <Select v-model="selectedCity" :options="cities" option-label="name" option-value="code" placeholder="Select a City" />
+      <FormField label="Льготный период:" :errors="appMainForm.$v.gracePeriod.$errors">
+        <Select
+          v-model="appMainForm.$v.gracePeriod.$model"
+          :invalid="appMainForm.$v.gracePeriod.$error"
+          :options="gracePeriodOptions"
+          placeholder="Выберите период"
+          option-label="name"
+          option-value="value"
+        />
       </FormField>
 
-      <FormField label="Срок возврата целевого кредита (лет): ">
-        <Select v-model="selectedCity" :options="cities" option-label="name" option-value="code" placeholder="Select a City" />
+      <FormField label="Срок возврата целевого кредита (лет):" :errors="appMainForm.$v.creditReturnPeriodYears.$errors">
+        <Select
+          v-model="appMainForm.$v.creditReturnPeriodYears.$model"
+          :invalid="appMainForm.$v.creditReturnPeriodYears.$error"
+          :options="gracePeriodOptions"
+          placeholder="Выберите срок"
+          option-label="name"
+          option-value="value"
+        />
       </FormField>
 
-      <FormField label="Обеспечение кредита">
-        <Select v-model="selectedCity" :options="cities" option-label="name" option-value="code" placeholder="Select a City" />
+      <FormField :errors="appMainForm.$v.creditSecurityType.$errors" label="Обеспечение кредита">
+        <Select
+          v-model="appMainForm.$v.creditSecurityType.$model"
+          :invalid="appMainForm.$v.creditSecurityType.$error"
+          :options="cities"
+          option-label="name"
+          option-value="code"
+          placeholder="Выберите"
+        />
       </FormField>
 
       <div class="colspan-2">
@@ -77,12 +103,26 @@ const $v = useVuelidate(rules, formObj);
           Предполагаемый график возврата целевого кредита
         </p>
         <div class="step-form__grid">
-          <FormField label="(сумма долга, проценты)">
-            <Select v-model="selectedCity" :options="cities" option-label="name" option-value="code" placeholder="Select a City" />
+          <FormField :errors="appMainForm.$v.plannedCreditReturnSchedule.$errors" label="(сумма долга, проценты)">
+            <Select
+              v-model="appMainForm.$v.plannedCreditReturnSchedule.$model"
+              :invalid="appMainForm.$v.plannedCreditReturnSchedule.$error"
+              :options="cities"
+              option-label="name"
+              option-value="code"
+              placeholder="Выберите"
+            />
           </FormField>
 
-          <FormField label="(ежемесячный, квартальный, другой)">
-            <Select v-model="selectedCity" :options="cities" option-label="name" option-value="code" placeholder="Select a City" />
+          <FormField :errors="appMainForm.$v.creditReturnFrequency.$errors" label="(ежемесячный, квартальный, другой)">
+            <Select
+              v-model="appMainForm.$v.creditReturnFrequency.$model"
+              :invalid="appMainForm.$v.creditReturnFrequency.$error"
+              :options="cities"
+              option-label="name"
+              option-value="code"
+              placeholder="Выберите"
+            />
           </FormField>
         </div>
       </div>
@@ -91,49 +131,114 @@ const $v = useVuelidate(rules, formObj);
     <h3 class="font-20-sb step-form__subtitle">
       Экономическое обоснование целевого кредита
     </h3>
+
     <div class="step-form__target">
-      <FormField label="Содержание проекта:">
-        <Textarea style="resize: none;" rows="7" />
+      <!-- Описание проекта -->
+      <FormField :errors="appMainForm.$v.projectDescription.$errors" label="Содержание проекта:">
+        <Textarea
+          v-model="appMainForm.$v.projectDescription.$model"
+          style="resize: none;"
+          rows="7"
+          :invalid="appMainForm.$v.projectDescription.$error"
+        />
       </FormField>
 
-      <FormField label="Собственные средства, привлеченные для реализации проекта (сум):">
-        <InputNumber placeholder="Введите сумму" name="price" />
+      <!-- Собственные средства -->
+      <FormField :errors="appMainForm.$v.ownFundsAmount.$errors" label="Собственные средства, привлеченные для реализации проекта (сум):">
+        <InputNumber
+          v-model="appMainForm.$v.ownFundsAmount.$model"
+          :invalid="appMainForm.$v.ownFundsAmount.$error"
+          placeholder="Введите сумму"
+          name="ownFundsAmount"
+        />
       </FormField>
 
-      <FormField label="Информация о социальных показателях деятельности организации:">
-        <Textarea style="resize: none;" rows="7" />
+      <!-- Социальные показатели -->
+      <FormField :errors="appMainForm.$v.organizationSocialIndicators.$errors" label="Информация о социальных показателях деятельности организации:">
+        <Textarea
+          v-model="appMainForm.$v.organizationSocialIndicators.$model"
+          style="resize: none;"
+          rows="7"
+          :invalid="appMainForm.$v.organizationSocialIndicators.$error"
+        />
       </FormField>
     </div>
+
     <h3 class="font-20-sb step-form__subtitle">
       Контактная информация
     </h3>
+
     <div class="step-form__grid">
-      <FormField label="Контактное лицо" class="colspan-2">
-        <InputText placeholder="Ф.И.О" name="price" />
+      <!-- Контактное лицо -->
+      <FormField :errors="appMainForm.$v.contactPersonFullName.$errors" label="Контактное лицо" class="colspan-2">
+        <InputText
+          v-model="appMainForm.$v.contactPersonFullName.$model"
+          :invalid="appMainForm.$v.contactPersonFullName.$error"
+          placeholder="Ф.И.О"
+          name="contactPersonFullName"
+        />
       </FormField>
 
-      <FormField label="Мобильный">
-        <PhoneInput model-value="" placeholder="Введите сумму" name="price" />
+      <!-- Мобильный телефон -->
+      <FormField :errors="appMainForm.$v.mobilePhone.$errors" label="Мобильный">
+        <PhoneInput
+          v-model="appMainForm.$v.mobilePhone.$model"
+          :invalid="appMainForm.$v.mobilePhone.$error"
+          placeholder="Введите телефон"
+          name="mobilePhone"
+        />
       </FormField>
 
-      <FormField label="Рабочий ">
-        <PhoneInput model-value="" placeholder="Введите сумму" name="price" />
+      <!-- Рабочий телефон -->
+      <FormField :errors="appMainForm.$v.workPhone.$errors" label="Рабочий">
+        <PhoneInput
+          v-model="appMainForm.$v.workPhone.$model"
+          :invalid="appMainForm.$v.workPhone.$error"
+          placeholder="Введите телефон"
+          name="workPhone"
+        />
       </FormField>
 
-      <FormField label="Домашний">
-        <PhoneInput model-value="" placeholder="Введите сумму" name="price" />
+      <FormField :errors="appMainForm.$v.homePhone.$errors" label="Домашний">
+        <PhoneInput
+          v-model="appMainForm.$v.homePhone.$model"
+          :invalid="appMainForm.$v.homePhone.$error"
+          placeholder="Введите телефон"
+          name="homePhone"
+        />
       </FormField>
 
-      <FormField label="E-mail">
-        <InputText model-value="" placeholder="ali@wuwu" name="price" />
+      <FormField :errors="appMainForm.$v.email.$errors" label="E-mail">
+        <InputText
+          v-model="appMainForm.$v.email.$model"
+          :invalid="appMainForm.$v.email.$error"
+          placeholder="ali@wuwu"
+          name="email"
+        />
       </FormField>
 
-      <FormField label="Руководитель (Ф.И.О.)" class="colspan-2">
-        <InputText model-value="" placeholder="Ф.И.О" name="price" />
+      <FormField :errors="appMainForm.$v.directorFullName.$errors" label="Руководитель (Ф.И.О.)" class="colspan-2">
+        <InputText
+          v-model="appMainForm.$v.directorFullName.$model"
+          :invalid="appMainForm.$v.directorFullName.$error"
+          placeholder="Ф.И.О"
+          name="directorFullName"
+        />
       </FormField>
-      <FileUploader label="Документ, подтверждающий право на осуществление деятельности образования (лицензия/подтверждение/разрешение);" class="colspan-2" />
+
+      <FileUploader
+        v-model="appMainForm.$v.applicantQuestionnaireDocumentUrl.$model"
+        label="Документ, подтверждающий право на осуществление деятельности образования (лицензия/подтверждение/разрешение);"
+        class="colspan-2"
+      />
     </div>
-    <Button class="step-form__submit" label="Далее" fluid @click="emits('submit')" />
+
+    <Button
+      class="step-form__submit"
+      label="Далее"
+      fluid
+      @click="appMainForm.handleSubmit()"
+    />
   </form>
 </template>
 

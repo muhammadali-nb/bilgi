@@ -16,9 +16,9 @@ const activeStep = defineModel<number>('activeStep');
         <div
           class="stepper__item"
           :class="{
-            active: index === activeStep,
-            completed: index < (activeStep ?? 0),
-            upcoming: index > (activeStep ?? 0),
+            active: index + 1 === activeStep,
+            completed: index + 1 < (activeStep ?? 0),
+            upcoming: index + 1 > (activeStep ?? 0),
           }"
         >
           <div class="circle">

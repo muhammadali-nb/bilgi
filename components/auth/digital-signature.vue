@@ -1,5 +1,9 @@
 <script lang="ts" setup>
+import type { ParsedCertificateInfo } from '@composables/ecp-key/types';
 
+defineProps<{
+  item: ParsedCertificateInfo
+}>();
 </script>
 
 <template>
@@ -8,8 +12,8 @@
       <label class="font-14-r">
         Ф.И.О
       </label>
-      <p class="font-16-r">
-        Викторов Виктор Викторович
+      <p class="font-16-r text-capitalize">
+        {{ item?.fullName }}
       </p>
     </div>
     <div class="digital-signature__item">
@@ -25,7 +29,7 @@
         Серийный номер
       </label>
       <p class="font-16-r">
-        21342354235
+        {{ item?.serialNumber }}
       </p>
     </div>
   </div>

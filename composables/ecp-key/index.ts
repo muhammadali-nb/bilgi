@@ -1,6 +1,9 @@
+import type { CertificateInfo } from '@composables/ecp-key/types';
+
 export const useEcpKey = () => {
   const socket = ref<WebSocket | null>(null);
   const isConnected = ref(false);
+  const keyList = ref<CertificateInfo[]>([]);
 
   const connect = () => {
     const protocol = window.location.protocol.toLowerCase() === 'https:' ? 'wss' : 'ws';
@@ -29,18 +32,48 @@ export const useEcpKey = () => {
     }
   };
 
-  const sendRequest = (key: string, request: string) => {
-    if (!socket.value || socket.value.readyState !== WebSocket.OPEN) {
-      console.warn('[E-IMZO] Socket not open');
-      return;
-    }
+  const sendRequest = (key: string, request: string): Promise<any> => {
+    return new Promise((resolve, reject) => {
+      if (!socket.value || socket.value.readyState !== WebSocket.OPEN) {
+        console.warn('[E-IMZO] Socket not open');
+        reject('Socket not open');
+        return;
+      }
 
-    socket.value.onmessage = (event) => {
-      console.log(`[E-IMZO] Response (${key}):`, event.data);
+      socket.value.onmessage = (event) => {
+        console.log(`[E-IMZO] Response (${key}):`, event.data);
+        try {
+          const data = JSON.parse(event.data);
+          resolve(data);
+        }
+        catch (e) {
+          reject(e);
+        }
+      };
+
+      console.log(`[E-IMZO] Sending request:`, request);
+      socket.value.send(request);
+    });
+  };
+
+  const getKeys = async () => {
+    const params = {
+      plugin: 'pfx',
+      name: 'list_certificates',
+      arguments: ['C:\\'],
     };
 
-    console.log(`[E-IMZO] Sending request:`, request);
-    socket.value.send(request);
+    try {
+      const response = await sendRequest('get-keys', JSON.stringify(params));
+
+      if (response && response.certificates) {
+        keyList.value = response.certificates;
+      }
+    }
+    catch (e) {
+      console.error('[E-IMZO] Failed to get certificates:', e);
+      return [];
+    }
   };
 
   const disconnect = () => {
@@ -53,7 +86,9 @@ export const useEcpKey = () => {
   return {
     connect,
     sendRequest,
+    getKeys,
     disconnect,
     isConnected,
+    keyList,
   };
 };

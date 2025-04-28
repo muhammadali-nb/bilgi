@@ -1,18 +1,29 @@
 export const useStepper = () => {
+  const $router = useRouter();
   const steps = ['Шаг №1', 'Шаг №2', 'Шаг №3', 'Шаг №4', 'Шаг №5'];
-  const activeStep = ref(0);
+  const activeStep = ref(1);
 
   const next = () => {
     if (activeStep.value === undefined) return;
-    if (activeStep.value < steps.length - 1) activeStep.value++;
+    if (activeStep.value < steps.length) {
+      activeStep.value++;
+      $router.push({ name: $router.currentRoute.value.name, query: { step: activeStep.value } });
+    };
 
     window.scrollTo(0, 0);
   };
 
   const prev = () => {
     if (activeStep.value === undefined) return;
-    if (activeStep.value > 0) activeStep.value--;
+    if (activeStep.value > 1) activeStep.value--;
+    $router.push({ name: $router.currentRoute.value.name, query: { step: activeStep.value } });
     window.scrollTo(0, 0);
+  };
+
+  const checkRouteStep = () => {
+    if ($router.currentRoute.value.query.step && !Number.isNaN(+$router.currentRoute.value.query.step)) {
+      activeStep.value = +$router.currentRoute.value.query.step;
+    }
   };
 
   return {
@@ -20,5 +31,6 @@ export const useStepper = () => {
     activeStep,
     next,
     prev,
+    checkRouteStep,
   };
 };

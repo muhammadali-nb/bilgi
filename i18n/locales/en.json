@@ -7,5 +7,6 @@
   "admin-auth": "Auth",
   "admin-bid": "bid",
   "admin-bid-id": "bid id",
-  "admin-clients": "clients"
+  "admin-clients": "clients",
+  "months": ""
 }

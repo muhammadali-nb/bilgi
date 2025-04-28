@@ -52,7 +52,7 @@ definePageMeta({
               severity="primary"
               type="submit"
               fluid
-              class="admin-auth__form__save"
+              class="admin-auth__form__submit"
             />
           </form>
         </div>
@@ -117,7 +117,7 @@ definePageMeta({
     max-width: 36rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     padding: 3rem 0;
     &__save {
       display: flex;
@@ -130,6 +130,12 @@ definePageMeta({
         gap: .5rem;
       }
      }
+
+    &__submit {
+
+      margin: 2rem 0 0;
+
+    }
   }
 }
 </style>

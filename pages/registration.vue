@@ -4,7 +4,7 @@ import DigitalSignature from '@components/auth/digital-signature.vue';
 import FormField from '@components/shared/FormField.vue';
 import PhoneInput from '@components/shared/phone-Input.vue';
 import VIcon from '@components/shared/VIcon.vue';
-import { userIcon } from '../assets/icons';
+import { lockIcon, userIcon } from '../assets/icons';
 
 const visible = ref(false);
 const form = reactive({
@@ -37,6 +37,15 @@ definePageMeta({
             <VIcon :icon="userIcon" no-fill />
           </InputGroupAddon>
           <InputText v-model="form.login" placeholder="Введите логин" />
+        </InputGroup>
+      </FormField>
+
+      <FormField label="Пароль">
+        <InputGroup>
+          <InputGroupAddon>
+            <VIcon :icon="lockIcon" no-fill />
+          </InputGroupAddon>
+          <Password placeholder="Введите пароль" toggle-mask :feedback="false" />
         </InputGroup>
       </FormField>
 
@@ -87,7 +96,7 @@ definePageMeta({
       }
 
       .form__field:not(:first-child) {
-        margin: 2rem 0 0 0;
+        margin: .3rem 0 0 0;
       }
 
       &-submit {

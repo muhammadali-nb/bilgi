@@ -7,7 +7,9 @@ import SecondStep from '@components/steps/second-step.vue';
 import ThirdStep from '@components/steps/third-step.vue';
 import { useStepper } from '@composables/ui/stepper';
 
-const { activeStep, next, steps, prev } = useStepper();
+const { activeStep, next, steps, prev, checkRouteStep } = useStepper();
+
+checkRouteStep();
 </script>
 
 <template>
@@ -18,11 +20,11 @@ const { activeStep, next, steps, prev } = useStepper();
           Заполнение заявки
         </h3>
         <Stepper v-model:active-step="activeStep" :steps="steps" class="home__steps" />
-        <FirstStep v-if="activeStep === 0" @submit="next" />
-        <SecondStep v-if="activeStep === 1" @prev="prev" @submit="next" />
-        <ThirdStep v-if="activeStep === 2" @prev="prev" @submit="next" />
-        <FourthStep v-if="activeStep === 3" @prev="prev" @submit="next" />
-        <FifthStep v-if="activeStep === 4" @prev="prev" @submit="next" />
+        <FirstStep v-if="activeStep === 1" @submit="next" />
+        <SecondStep v-if="activeStep === 2" @prev="prev" @submit="next" />
+        <ThirdStep v-if="activeStep === 3" @prev="prev" @submit="next" />
+        <FourthStep v-if="activeStep === 4" @prev="prev" @submit="next" />
+        <FifthStep v-if="activeStep === 5" @prev="prev" @submit="next" />
       </div>
     </div>
   </div>
