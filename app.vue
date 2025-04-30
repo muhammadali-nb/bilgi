@@ -7,6 +7,9 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+    <client-only>
+      <Toast />
+    </client-only>
   </div>
 </template>
 

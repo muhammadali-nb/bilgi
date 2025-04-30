@@ -1,5 +1,6 @@
 export const useStepper = () => {
   const $router = useRouter();
+
   const steps = ['Шаг №1', 'Шаг №2', 'Шаг №3', 'Шаг №4', 'Шаг №5'];
   const activeStep = ref(1);
 
@@ -32,5 +33,6 @@ export const useStepper = () => {
     next,
     prev,
     checkRouteStep,
+
   };
 };

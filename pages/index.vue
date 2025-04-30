@@ -9,6 +9,28 @@ import { useStepper } from '@composables/ui/stepper';
 
 const { activeStep, next, steps, prev, checkRouteStep } = useStepper();
 
+// const testLoading = computed(() => status.value === 'pending');
+//
+// await getTest();
+
+/*
+const postFunction = async (body: { name: string, email: string }) => {
+  await $fetch('api/post-endpont', { method: 'POST', body });
+};
+*/
+
+/*
+const name = ref<string>('');
+const email = ref<string>('');
+const bodyValue = computed(() => {
+  return {
+    name: name.value,
+    email: email.value,
+  };
+});
+const { refresh: postData } = useApi('/api/post-endpoint', { method: 'POST', body: bodyValue });
+*/
+
 checkRouteStep();
 </script>
 

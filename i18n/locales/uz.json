@@ -7,5 +7,10 @@
   "admin-auth": "UZ",
   "admin-bid": "zz",
   "admin-bid-id": "zz",
-  "admin-clients": "zz"
+  "admin-clients": "zz",
+  "years": "{n} Yil",
+  "months": "{n} Oy",
+  "pledge": "Garov",
+  "guarantee": "Kafillik",
+  "insurance": "Sug'urta"
 }

@@ -3,15 +3,14 @@ import DigitalSignature from '@components/auth/digital-signature.vue';
 
 import FormField from '@components/shared/FormField.vue';
 import VIcon from '@components/shared/VIcon.vue';
+import { useUserAuth } from '@composables/auth';
 import { useEcpKey } from '@composables/ecp-key';
 import { parseCertificateInfo } from '@composables/ecp-key/model';
 import { lockIcon, userIcon } from '../assets/icons';
 
+const { login, form } = useUserAuth();
 const { connect, getKeys, keyList, isConnected } = useEcpKey();
 const visible = ref(false);
-const form = reactive({
-  login: '',
-});
 
 onBeforeMount(() => {
   connect();
@@ -42,7 +41,7 @@ definePageMeta({
           <InputGroupAddon>
             <VIcon :icon="userIcon" no-fill />
           </InputGroupAddon>
-          <InputText v-model="form.login" placeholder="Введите логин" />
+          <InputText v-model="form.email" placeholder="Введите логин" />
         </InputGroup>
       </FormField>
 
@@ -51,7 +50,7 @@ definePageMeta({
           <InputGroupAddon>
             <VIcon :icon="lockIcon" no-fill />
           </InputGroupAddon>
-          <Password placeholder="Введите пароль" toggle-mask :feedback="false" />
+          <Password v-model="form.password" placeholder="Введите пароль" toggle-mask :feedback="false" />
         </InputGroup>
       </FormField>
 
@@ -65,6 +64,7 @@ definePageMeta({
         type="submit"
         fluid
         class="register__form-submit"
+        @click="login"
       />
       <p class="font-14-n register__form-text">
         Уже есть аккаунт? <span class="font-14-b">Войти</span>

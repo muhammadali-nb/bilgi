@@ -8,5 +8,9 @@
   "admin-bid": "bid",
   "admin-bid-id": "bid id",
   "admin-clients": "clients",
-  "months": ""
+  "years": "{n} Years",
+  "months": "{n} Months",
+  "pledge": "Pledge",
+  "guarantee": "Guarantee",
+  "insurance": "Insurance"
 }

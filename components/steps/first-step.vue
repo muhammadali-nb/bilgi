@@ -1,16 +1,14 @@
 <script lang="ts" setup>
 import type { StepEmits } from '@composables/ui/steps/types';
 import FileUploader from '@components/shared/file-uploader.vue';
+
 import FormField from '@components/shared/FormField.vue';
 import PhoneInput from '@components/shared/phone-Input.vue';
-
+import { paymentComponentOptions, repaymentScheduleTypeOptions } from '@composables/main-form/data';
 import { useAppMainForm } from '@store/main-form';
-import { getYearFromMonthLength } from '@utils/years-counter';
-import { useI18n } from 'vue-i18n';
 
 const emits = defineEmits<StepEmits>();
-const { t } = useI18n();
-const selectedCity = ref('NY');
+
 const cities = ref([
   { name: 'New York', code: 'NY' },
   { name: 'Rome', code: 'RM' },
@@ -20,18 +18,6 @@ const cities = ref([
 ]);
 
 const appMainForm = useAppMainForm();
-
-const months = [12, 36, 60];
-
-const gracePeriodOptions = computed(() => {
-  return months.map((month) => {
-    const monthValue = getYearFromMonthLength(month);
-    return {
-      name: `${t(monthValue.type, monthValue.value)}`,
-      value: month,
-    };
-  });
-});
 </script>
 
 <template>
@@ -69,7 +55,7 @@ const gracePeriodOptions = computed(() => {
         <Select
           v-model="appMainForm.$v.gracePeriod.$model"
           :invalid="appMainForm.$v.gracePeriod.$error"
-          :options="gracePeriodOptions"
+          :options="appMainForm.gracePeriodOptions"
           placeholder="Выберите период"
           option-label="name"
           option-value="value"
@@ -80,7 +66,7 @@ const gracePeriodOptions = computed(() => {
         <Select
           v-model="appMainForm.$v.creditReturnPeriodYears.$model"
           :invalid="appMainForm.$v.creditReturnPeriodYears.$error"
-          :options="gracePeriodOptions"
+          :options="appMainForm.gracePeriodOptions"
           placeholder="Выберите срок"
           option-label="name"
           option-value="value"
@@ -91,9 +77,9 @@ const gracePeriodOptions = computed(() => {
         <Select
           v-model="appMainForm.$v.creditSecurityType.$model"
           :invalid="appMainForm.$v.creditSecurityType.$error"
-          :options="cities"
+          :options="appMainForm.creditSecurityTypeOptions"
           option-label="name"
-          option-value="code"
+          option-value="value"
           placeholder="Выберите"
         />
       </FormField>
@@ -107,9 +93,9 @@ const gracePeriodOptions = computed(() => {
             <Select
               v-model="appMainForm.$v.plannedCreditReturnSchedule.$model"
               :invalid="appMainForm.$v.plannedCreditReturnSchedule.$error"
-              :options="cities"
+              :options="repaymentScheduleTypeOptions"
               option-label="name"
-              option-value="code"
+              option-value="value"
               placeholder="Выберите"
             />
           </FormField>
@@ -118,9 +104,9 @@ const gracePeriodOptions = computed(() => {
             <Select
               v-model="appMainForm.$v.creditReturnFrequency.$model"
               :invalid="appMainForm.$v.creditReturnFrequency.$error"
-              :options="cities"
+              :options="paymentComponentOptions"
               option-label="name"
-              option-value="code"
+              option-value="value"
               placeholder="Выберите"
             />
           </FormField>
@@ -133,7 +119,6 @@ const gracePeriodOptions = computed(() => {
     </h3>
 
     <div class="step-form__target">
-      <!-- Описание проекта -->
       <FormField :errors="appMainForm.$v.projectDescription.$errors" label="Содержание проекта:">
         <Textarea
           v-model="appMainForm.$v.projectDescription.$model"
@@ -143,7 +128,6 @@ const gracePeriodOptions = computed(() => {
         />
       </FormField>
 
-      <!-- Собственные средства -->
       <FormField :errors="appMainForm.$v.ownFundsAmount.$errors" label="Собственные средства, привлеченные для реализации проекта (сум):">
         <InputNumber
           v-model="appMainForm.$v.ownFundsAmount.$model"
@@ -153,7 +137,6 @@ const gracePeriodOptions = computed(() => {
         />
       </FormField>
 
-      <!-- Социальные показатели -->
       <FormField :errors="appMainForm.$v.organizationSocialIndicators.$errors" label="Информация о социальных показателях деятельности организации:">
         <Textarea
           v-model="appMainForm.$v.organizationSocialIndicators.$model"
@@ -169,7 +152,6 @@ const gracePeriodOptions = computed(() => {
     </h3>
 
     <div class="step-form__grid">
-      <!-- Контактное лицо -->
       <FormField :errors="appMainForm.$v.contactPersonFullName.$errors" label="Контактное лицо" class="colspan-2">
         <InputText
           v-model="appMainForm.$v.contactPersonFullName.$model"
@@ -179,7 +161,6 @@ const gracePeriodOptions = computed(() => {
         />
       </FormField>
 
-      <!-- Мобильный телефон -->
       <FormField :errors="appMainForm.$v.mobilePhone.$errors" label="Мобильный">
         <PhoneInput
           v-model="appMainForm.$v.mobilePhone.$model"
@@ -189,7 +170,6 @@ const gracePeriodOptions = computed(() => {
         />
       </FormField>
 
-      <!-- Рабочий телефон -->
       <FormField :errors="appMainForm.$v.workPhone.$errors" label="Рабочий">
         <PhoneInput
           v-model="appMainForm.$v.workPhone.$model"
@@ -232,7 +212,6 @@ const gracePeriodOptions = computed(() => {
         class="colspan-2"
       />
     </div>
-
     <Button
       class="step-form__submit"
       label="Далее"

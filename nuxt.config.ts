@@ -59,9 +59,9 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
   ],
 
-  // plugins: [
-  //   '~/plugins/primevue/index.ts',
-  // ],
+  /* plugins: [
+    '~/plugins/request.ts',
+  ], */
 
   googleFonts: {
     families: {
