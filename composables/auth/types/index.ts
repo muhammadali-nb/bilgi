@@ -4,3 +4,9 @@ export interface LoginResponse {
   refreshToken: string
   tokenType: string
 }
+
+export interface IFocusedField {
+  applicationId: number
+  type: string
+  value: string | number
+}

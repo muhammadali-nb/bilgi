@@ -4,7 +4,7 @@ import { setFormModel } from '@composables/main-form/model';
 import { useApi } from '@composables/useApi';
 
 export const useAppMainForm = defineStore('main-form', () => {
-  const { $v, formObj, gracePeriodOptions, creditSecurityTypeOptions } = useMainForm();
+  const { $v, formObj, gracePeriodOptions, creditSecurityTypeOptions, saveField } = useMainForm();
 
   const { data, error, status, refresh: getApplication } = useApi<IMainFormResponse>('/api/Applications/');
 
@@ -23,5 +23,5 @@ export const useAppMainForm = defineStore('main-form', () => {
     }
   });
 
-  return { $v, formObj, handleSubmit, creditSecurityTypeOptions, gracePeriodOptions };
+  return { $v, formObj, handleSubmit, creditSecurityTypeOptions, gracePeriodOptions, saveField };
 });

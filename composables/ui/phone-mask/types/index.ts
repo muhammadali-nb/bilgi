@@ -2,6 +2,9 @@ export interface IPhoneMaskProps {
   invalid?: boolean
   icon?: boolean
   modelValue: string
+  defaultValue?: string
+  placeholder?: string
+  name?: string
 };
 
 export interface IPhoneMaskEmit {

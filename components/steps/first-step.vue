@@ -9,14 +9,6 @@ import { useAppMainForm } from '@store/main-form';
 
 const emits = defineEmits<StepEmits>();
 
-const cities = ref([
-  { name: 'New York', code: 'NY' },
-  { name: 'Rome', code: 'RM' },
-  { name: 'London', code: 'LDN' },
-  { name: 'Istanbul', code: 'IST' },
-  { name: 'Paris', code: 'PRS' },
-]);
-
 const appMainForm = useAppMainForm();
 </script>
 
@@ -25,6 +17,7 @@ const appMainForm = useAppMainForm();
     <h4 class="step-form__title font-24-sb">
       ЗАЯВЛЕНИЕ
     </h4>
+
     <div class="step-form__grid">
       <FormField
         label="Необходимая сумма целевого кредита (сум):"
@@ -36,6 +29,7 @@ const appMainForm = useAppMainForm();
           :invalid="appMainForm.$v.targetCreditAmount.$error"
           placeholder="Введите сумму"
           name="targetCreditAmount"
+          @blur="appMainForm.saveField('targetCreditAmount', appMainForm.$v.targetCreditAmount.$model)"
         />
       </FormField>
 
@@ -48,6 +42,7 @@ const appMainForm = useAppMainForm();
           :invalid="appMainForm.$v.youngSpecialistsCount.$error"
           placeholder="Введите количество"
           name="youngSpecialistsCount"
+          @blur="appMainForm.saveField('youngSpecialistsCount', appMainForm.$v.youngSpecialistsCount.$model)"
         />
       </FormField>
 
@@ -59,6 +54,7 @@ const appMainForm = useAppMainForm();
           placeholder="Выберите период"
           option-label="name"
           option-value="value"
+          @blur="appMainForm.saveField('gracePeriod', appMainForm.$v.gracePeriod.$model)"
         />
       </FormField>
 
@@ -70,6 +66,7 @@ const appMainForm = useAppMainForm();
           placeholder="Выберите срок"
           option-label="name"
           option-value="value"
+          @blur="appMainForm.saveField('creditReturnPeriodYears', appMainForm.$v.creditReturnPeriodYears.$model)"
         />
       </FormField>
 
@@ -81,6 +78,7 @@ const appMainForm = useAppMainForm();
           option-label="name"
           option-value="value"
           placeholder="Выберите"
+          @blur="appMainForm.saveField('creditSecurityType', appMainForm.$v.creditSecurityType.$model)"
         />
       </FormField>
 
@@ -97,6 +95,7 @@ const appMainForm = useAppMainForm();
               option-label="name"
               option-value="value"
               placeholder="Выберите"
+              @blur="appMainForm.saveField('plannedCreditReturnSchedule', appMainForm.$v.plannedCreditReturnSchedule.$model)"
             />
           </FormField>
 
@@ -108,6 +107,7 @@ const appMainForm = useAppMainForm();
               option-label="name"
               option-value="value"
               placeholder="Выберите"
+              @blur="appMainForm.saveField('creditReturnFrequency', appMainForm.$v.creditReturnFrequency.$model)"
             />
           </FormField>
         </div>
@@ -117,7 +117,6 @@ const appMainForm = useAppMainForm();
     <h3 class="font-20-sb step-form__subtitle">
       Экономическое обоснование целевого кредита
     </h3>
-
     <div class="step-form__target">
       <FormField :errors="appMainForm.$v.projectDescription.$errors" label="Содержание проекта:">
         <Textarea
@@ -125,6 +124,7 @@ const appMainForm = useAppMainForm();
           style="resize: none;"
           rows="7"
           :invalid="appMainForm.$v.projectDescription.$error"
+          @blur="appMainForm.saveField('projectDescription', appMainForm.$v.projectDescription.$model)"
         />
       </FormField>
 
@@ -134,6 +134,7 @@ const appMainForm = useAppMainForm();
           :invalid="appMainForm.$v.ownFundsAmount.$error"
           placeholder="Введите сумму"
           name="ownFundsAmount"
+          @blur="appMainForm.saveField('ownFundsAmount', appMainForm.$v.ownFundsAmount.$model)"
         />
       </FormField>
 
@@ -143,6 +144,7 @@ const appMainForm = useAppMainForm();
           style="resize: none;"
           rows="7"
           :invalid="appMainForm.$v.organizationSocialIndicators.$error"
+          @blur="appMainForm.saveField('organizationSocialIndicators', appMainForm.$v.organizationSocialIndicators.$model)"
         />
       </FormField>
     </div>
@@ -158,6 +160,7 @@ const appMainForm = useAppMainForm();
           :invalid="appMainForm.$v.contactPersonFullName.$error"
           placeholder="Ф.И.О"
           name="contactPersonFullName"
+          @blur="appMainForm.saveField('contactPersonFullName', appMainForm.$v.contactPersonFullName.$model)"
         />
       </FormField>
 
@@ -165,8 +168,8 @@ const appMainForm = useAppMainForm();
         <PhoneInput
           v-model="appMainForm.$v.mobilePhone.$model"
           :invalid="appMainForm.$v.mobilePhone.$error"
-          placeholder="Введите телефон"
           name="mobilePhone"
+          @complete="appMainForm.saveField('mobilePhone', appMainForm.$v.mobilePhone.$model)"
         />
       </FormField>
 
@@ -174,8 +177,8 @@ const appMainForm = useAppMainForm();
         <PhoneInput
           v-model="appMainForm.$v.workPhone.$model"
           :invalid="appMainForm.$v.workPhone.$error"
-          placeholder="Введите телефон"
           name="workPhone"
+          @complete="appMainForm.saveField('workPhone', appMainForm.$v.workPhone.$model)"
         />
       </FormField>
 
@@ -183,8 +186,8 @@ const appMainForm = useAppMainForm();
         <PhoneInput
           v-model="appMainForm.$v.homePhone.$model"
           :invalid="appMainForm.$v.homePhone.$error"
-          placeholder="Введите телефон"
           name="homePhone"
+          @complete="appMainForm.saveField('homePhone', appMainForm.$v.homePhone.$model)"
         />
       </FormField>
 
@@ -194,6 +197,7 @@ const appMainForm = useAppMainForm();
           :invalid="appMainForm.$v.email.$error"
           placeholder="ali@wuwu"
           name="email"
+          @blur="appMainForm.saveField('email', appMainForm.$v.email.$model)"
         />
       </FormField>
 
@@ -203,6 +207,7 @@ const appMainForm = useAppMainForm();
           :invalid="appMainForm.$v.directorFullName.$error"
           placeholder="Ф.И.О"
           name="directorFullName"
+          @blur="appMainForm.saveField('directorFullName', appMainForm.$v.directorFullName.$model)"
         />
       </FormField>
 

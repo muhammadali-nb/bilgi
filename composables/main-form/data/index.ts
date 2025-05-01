@@ -17,7 +17,7 @@ export const creditSecurityTypeOptionsData = [
   },
 ];
 
-export const repaymentScheduleTypeOptions = [
+export const repaymentScheduleTypeOptions = [ // уточнить у Проект менежера
   {
     name: 'Ежемесячный',
     value: 1,
@@ -40,7 +40,7 @@ export const repaymentScheduleTypeOptions = [
   },
 ];
 
-export const paymentComponentOptions = [
+export const paymentComponentOptions = [ // уточнить у Проект менежера
   {
     name: 'Сумма долга + проценты',
     value: 1,

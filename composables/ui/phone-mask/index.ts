@@ -1,13 +1,10 @@
 import type { IPhoneMaskEmit, IPhoneMaskProps } from './types';
-import { OnlyNumericRegex } from './utils';
+import { CODE, MASK_LENGTH, OnlyNumericRegex } from './utils';
 
 export const usePhoneMask = (props: IPhoneMaskProps, emit: IPhoneMaskEmit) => {
-  const phone = ref<string>('');
-
-  const CODE = '+998';
-  const MASK_LENGTH = 9;
   const FULL_LENGTH = CODE.replace(OnlyNumericRegex, '').length + MASK_LENGTH;
 
+  const phone = ref<string>(props.modelValue || '');
   const phoneNumber = computed(() => CODE + phone.value.replace(OnlyNumericRegex, ''));
 
   const isPhoneCorrect = computed(() => {

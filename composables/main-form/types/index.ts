@@ -4,8 +4,8 @@ export interface IMainForm {
   gracePeriod: MainFormPeriod
   creditReturnPeriodYears: MainFormPeriod // уточнить
   creditSecurityType: MainFormCreditType
-  plannedCreditReturnSchedule: string
-  creditReturnFrequency: string
+  plannedCreditReturnSchedule: number
+  creditReturnFrequency: number
   projectDescription: string
   ownFundsAmount: number
   organizationSocialIndicators: string
