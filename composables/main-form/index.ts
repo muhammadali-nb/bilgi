@@ -1,4 +1,4 @@
-import type { IFocusedField } from '@composables/auth/types';
+import type { IFocusedField, ISelectedFile } from '@composables/auth/types';
 import type { IMainForm } from '@composables/main-form/types';
 import { creditSecurityTypeOptionsData, monthsForm } from '@composables/main-form/data';
 import { setFormModel } from '@composables/main-form/model';
@@ -6,14 +6,15 @@ import { useValidationRules } from '@composables/ui/validation-rules';
 import { useApi } from '@composables/useApi';
 import { getYearFromMonthLength } from '@utils/years-counter';
 import useVuelidate from '@vuelidate/core';
-import { computed, reactive } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 export const useMainForm = () => {
   const { t } = useI18n();
+  // const { $i18n } = useNuxtApp();
   const { requiredField } = useValidationRules();
-  const formObj = reactive(setFormModel());
-  const focusedField = ref<IFocusedField | null>(null);
+  const formObj = ref<IMainForm>(setFormModel());
+  const focusedField = ref<IFocusedField>();
+  const selectedFile = ref<ISelectedFile>();
+  const formDataRef = ref<FormData | null>(null);
 
   const creditSecurityTypeOptions = computed(() =>
     creditSecurityTypeOptionsData.map(type => ({
@@ -61,24 +62,46 @@ export const useMainForm = () => {
   });
 
   const saveField = async (field: keyof IMainForm, value: string | number) => {
-    if (!field || !value) {
-      return;
-    }
+    if (!field || !value) return;
 
     focusedField.value = {
       applicationId: 1,
       type: field,
       value: value.toString(),
     };
+
     await saveFieldFn();
-    focusedField.value = null;
+    focusedField.value = undefined;
   };
 
+  const saveFile = async (field: string, file: File) => {
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('applicationId', '1');
+    formData.append('file', file);
+
+    const { data: fileData, status } = await useFetch('/api/files', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (status.value === 'success' && fileData) {
+      focusedField.value = {
+        applicationId: 1,
+        type: field,
+        value: fileData.value,
+      };
+
+      await saveFieldFn();
+    }
+  };
   return {
     $v,
     formObj,
     gracePeriodOptions,
     creditSecurityTypeOptions,
-    saveField,
+    saveField, saveFile,
+
   };
 };

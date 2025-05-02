@@ -6,8 +6,17 @@ import FourthStep from '@components/steps/fourth-step.vue';
 import SecondStep from '@components/steps/second-step.vue';
 import ThirdStep from '@components/steps/third-step.vue';
 import { useStepper } from '@composables/ui/stepper';
+import { useAppMainForm } from '@store/main-form';
 
 const { activeStep, next, steps, prev, checkRouteStep } = useStepper();
+const appMainForm = useAppMainForm();
+
+const formInit = async () => {
+  checkRouteStep();
+  await appMainForm.getApplication();
+};
+
+await formInit();
 
 // const testLoading = computed(() => status.value === 'pending');
 //
@@ -30,8 +39,6 @@ const bodyValue = computed(() => {
 });
 const { refresh: postData } = useApi('/api/post-endpoint', { method: 'POST', body: bodyValue });
 */
-
-checkRouteStep();
 </script>
 
 <template>

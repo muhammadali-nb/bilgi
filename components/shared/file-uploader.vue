@@ -3,19 +3,23 @@ import { document, documentIcon, plusIcon } from '@assets/icons';
 import VIcon from './VIcon.vue';
 
 const props = defineProps<{
-  multiple?: boolean
   accept?: string
   label: string
+  url?: string
 }>();
 
 const emit = defineEmits<{
-  (e: 'files', files: File[]): void
+  (e: 'update', files: File): void
 }>();
+
+function getFileNameFromUrl(url: string) {
+  return url.substring(url.lastIndexOf('/') + 1);
+}
 
 const inputRef = ref<HTMLInputElement | null>(null);
 const isDragOver = ref(false);
-const files = ref<File[]>([]);
-const previews = ref<{ url: string, name: string, type: string }[]>([]);
+const file = ref<File | null>(null);
+const preview = ref<{ url: string, name: string, type: string } | null>(null);
 
 function openFileDialog() {
   inputRef.value?.click();
@@ -23,8 +27,8 @@ function openFileDialog() {
 
 function onFileChange(e: Event) {
   const target = e.target as HTMLInputElement;
-  if (target.files) {
-    handleFiles(Array.from(target.files));
+  if (target.files && target.files[0]) {
+    processIncomingFile(target.files[0]);
   }
 }
 
@@ -38,33 +42,47 @@ function onDragLeave() {
 
 function onDrop(e: DragEvent) {
   isDragOver.value = false;
-  if (e.dataTransfer?.files) {
-    handleFiles(Array.from(e.dataTransfer.files));
+  if (e.dataTransfer?.files && e.dataTransfer.files[0]) {
+    processIncomingFile(e.dataTransfer.files[0]);
   }
 }
 
-function handleFiles(selectedFiles: File[]) {
-  if (!props.multiple) {
-    files.value = selectedFiles.slice(0, 1);
-  }
-  else {
-    files.value = [...files.value, ...selectedFiles];
-  }
-  emit('files', files.value);
-  updatePreviews();
+function processIncomingFile(selectedFile: File) {
+  file.value = selectedFile;
+  emit('update', selectedFile);
+
+  updatePreview();
 }
 
-function updatePreviews() {
-  previews.value.forEach(p => URL.revokeObjectURL(p.url));
-  previews.value = files.value.map(f => ({
-    url: URL.createObjectURL(f),
-    name: f.name,
-    type: f.type,
-  }));
+onMounted(() => {
+  if (props.url) {
+    preview.value = {
+      url: props.url,
+      name: getFileNameFromUrl(props.url),
+      type: '',
+    };
+  }
+
+  console.log(getFileNameFromUrl(props.url));
+});
+
+function updatePreview() {
+  if (preview.value?.url) {
+    URL.revokeObjectURL(preview.value.url);
+  }
+  if (file.value) {
+    preview.value = {
+      url: URL.createObjectURL(file.value),
+      name: file.value.name,
+      type: file.value.type,
+    };
+  }
 }
 
 onBeforeUnmount(() => {
-  previews.value.forEach(p => URL.revokeObjectURL(p.url));
+  if (preview.value?.url) {
+    URL.revokeObjectURL(preview.value.url);
+  }
 });
 </script>
 
@@ -72,12 +90,11 @@ onBeforeUnmount(() => {
   <div class="uploader-container">
     <div class="uploader-header">
       <label class="font-16-r">{{ label }}</label>
-
-      <!-- Сделать как кнопку -->
       <p class="uploader-sample">
         Скачать образец
       </p>
     </div>
+
     <div class="uploader-body">
       <div
         class="uploader"
@@ -90,12 +107,12 @@ onBeforeUnmount(() => {
           ref="inputRef"
           type="file"
           class="hidden"
-          :multiple="multiple"
-          :accept="accept"
+          :accept="props.accept"
           @change="onFileChange"
         >
+
         <div class="uploader-content" @click="openFileDialog">
-          <template v-if="!previews[0]">
+          <template v-if="!preview">
             <VIcon :icon="plusIcon" />
             <p class="font-16-n">
               Загрузить документ
@@ -104,17 +121,12 @@ onBeforeUnmount(() => {
           <template v-else>
             <VIcon :icon="documentIcon" no-fill />
             <p class="font-16-n">
-              {{ previews[0]?.name }}
+              {{ preview.name }}
             </p>
           </template>
         </div>
-        <!-- <ul v-if="previews.length" class="preview-list">
-      <li v-for="(preview, idx) in previews" :key="idx" class="preview-item">
-        <img v-if="preview.type.startsWith('image/')" :src="preview.url" class="preview-img">
-        <span>{{ preview.name }}</span>
-      </li>
-    </ul> -->
       </div>
+
       <VIcon :icon="document" no-fill />
     </div>
   </div>
@@ -146,7 +158,7 @@ onBeforeUnmount(() => {
   &-sample {
     color: var(--primary-600);
     text-decoration: underline;
-    text-wrap: nowrap;
+    white-space: nowrap;
     cursor: pointer;
   }
 
@@ -156,10 +168,6 @@ onBeforeUnmount(() => {
     justify-content: center;
     gap: 10px;
   }
-
-  // &-preview {
-  //   margin: 6px 0 0 0;
-  // }
 }
 
 .hidden {
@@ -169,22 +177,5 @@ onBeforeUnmount(() => {
 .uploader.is-dragover {
   border-color: #007bff;
   background: #f0f8ff;
-}
-.preview-list {
-  margin-top: 15px;
-  list-style: none;
-  padding: 0;
-}
-.preview-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-.preview-img {
-  max-width: 50px;
-  max-height: 50px;
-  object-fit: cover;
-  border-radius: 4px;
 }
 </style>

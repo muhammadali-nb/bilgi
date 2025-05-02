@@ -4,9 +4,17 @@ import { setFormModel } from '@composables/main-form/model';
 import { useApi } from '@composables/useApi';
 
 export const useAppMainForm = defineStore('main-form', () => {
-  const { $v, formObj, gracePeriodOptions, creditSecurityTypeOptions, saveField } = useMainForm();
+  const {
+    $v, formObj,
+    gracePeriodOptions, creditSecurityTypeOptions,
+    saveField,
+    saveFile,
+  } = useMainForm();
 
-  const { data, error, status, refresh: getApplication } = useApi<IMainFormResponse>('/api/Applications/');
+  const {
+    data, error,
+    status, refresh: getApplicationFn,
+  } = useApi<IMainFormResponse>('/api/Applications/');
 
   const handleSubmit = async () => {
     const isFormCorrect = await $v.value.$validate();
@@ -15,13 +23,17 @@ export const useAppMainForm = defineStore('main-form', () => {
     };
   };
 
-  onBeforeMount(async () => {
-    await getApplication();
-
-    if (data.value?.properties) {
-      Object.assign(formObj, setFormModel(data.value?.properties));
+  const getApplication = async () => {
+    if (status.value === 'success') return;
+    await getApplicationFn();
+    if (!error.value && data.value?.properties) {
+      formObj.value = setFormModel(data.value.properties);
+      console.log(data.value.properties);
     }
-  });
+  };
 
-  return { $v, formObj, handleSubmit, creditSecurityTypeOptions, gracePeriodOptions, saveField };
+  return {
+    $v, formObj, handleSubmit, getApplication,
+    creditSecurityTypeOptions, gracePeriodOptions, saveField, saveFile,
+  };
 });

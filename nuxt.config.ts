@@ -52,7 +52,6 @@ export default defineNuxtConfig({
 
   modules: [
     '@vueuse/nuxt',
-    '@vueuse/nuxt',
     '@nuxtjs/i18n',
     '@primevue/nuxt-module',
     '@nuxtjs/google-fonts',

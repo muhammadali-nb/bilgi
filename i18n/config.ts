@@ -18,4 +18,9 @@ export default defineI18nConfig(() => ({
   pluralRules: {
     ru: pluralRuleRU,
   },
+  // messages: {
+  //   en,
+  //   ru,
+  //   uz,
+  // },
 }));

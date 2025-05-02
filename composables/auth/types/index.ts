@@ -10,3 +10,8 @@ export interface IFocusedField {
   type: string
   value: string | number
 }
+
+export interface ISelectedFile {
+  file: File
+  applicationId: number
+}

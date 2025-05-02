@@ -17,7 +17,7 @@ export const setFormModel = (value?: Partial<IMainForm>): Required<IMainForm> =>
     contactPersonFullName: value?.contactPersonFullName ?? '',
     mobilePhone: value?.mobilePhone?.substring(CODE.length) ?? '',
     workPhone: value?.workPhone?.substring(CODE.length) ?? '',
-    homePhone: value?.homePhone?.substring(CODE.length) ?? '',
+    homePhone: '123456789' ?? '',
     email: value?.email ?? '',
     directorFullName: value?.directorFullName ?? '',
     applicantQuestionnaireDocumentUrl: value?.applicantQuestionnaireDocumentUrl ?? '',

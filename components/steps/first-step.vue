@@ -8,7 +8,6 @@ import { paymentComponentOptions, repaymentScheduleTypeOptions } from '@composab
 import { useAppMainForm } from '@store/main-form';
 
 const emits = defineEmits<StepEmits>();
-
 const appMainForm = useAppMainForm();
 </script>
 
@@ -25,11 +24,11 @@ const appMainForm = useAppMainForm();
         :errors="appMainForm.$v.targetCreditAmount.$errors"
       >
         <InputNumber
-          v-model="appMainForm.$v.targetCreditAmount.$model"
+          v-model="appMainForm.formObj.targetCreditAmount"
           :invalid="appMainForm.$v.targetCreditAmount.$error"
           placeholder="Введите сумму"
           name="targetCreditAmount"
-          @blur="appMainForm.saveField('targetCreditAmount', appMainForm.$v.targetCreditAmount.$model)"
+          @blur="appMainForm.saveField('targetCreditAmount', appMainForm.formObj.targetCreditAmount)"
         />
       </FormField>
 
@@ -212,9 +211,10 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FileUploader
-        v-model="appMainForm.$v.applicantQuestionnaireDocumentUrl.$model"
         label="Документ, подтверждающий право на осуществление деятельности образования (лицензия/подтверждение/разрешение);"
         class="colspan-2"
+        :url="appMainForm.formObj.applicantQuestionnaireDocumentUrl"
+        @update="(file) => appMainForm.saveFile('applicantQuestionnaireDocumentUrl', file)"
       />
     </div>
     <Button
@@ -229,7 +229,7 @@ const appMainForm = useAppMainForm();
 <style lang="scss" scoped>
 .step-form {
   background-color: var(--card-bg-05);
-  border: 1px solid #DCE1E7;
+  border: 1px solid #DCE1E7; // add to var
   border-radius: 1rem;
   padding: 4rem;
 

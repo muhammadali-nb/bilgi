@@ -1,16 +1,16 @@
 {
-  "hello-world": "Salam aleykum!",
+  "hello-world": "Hello world!",
   "advantages": {
-    "test-text": "Что-то на узбекском"
+    "test-text": "Advantage text"
   },
 
-  "admin-auth": "UZ",
-  "admin-bid": "zz",
-  "admin-bid-id": "zz",
-  "admin-clients": "zz",
-  "years": "{n} Yil",
-  "months": "{n} Oy",
-  "pledge": "Garov",
-  "guarantee": "Kafillik",
-  "insurance": "Sug'urta"
+  "admin-auth": "Auth",
+  "admin-bid": "bid",
+  "admin-bid-id": "bid id",
+  "admin-clients": "clients",
+  "years": "{n} Years | {n} Years | {n} Years | {n} Years",
+  "months": "{n} Months | {n} Months | {n} Months | {n} Months",
+  "pledge": "Pledge",
+  "guarantee": "Guarantee",
+  "insurance": "Insurance"
 }
