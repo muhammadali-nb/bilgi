@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { StepEmits } from '@composables/ui/steps/types';
-import FileUploader from '@components/shared/file-uploader.vue';
 
+import FileUploader from '@components/shared/file-uploader.vue';
 import FormField from '@components/shared/FormField.vue';
 import PhoneInput from '@components/shared/phone-Input.vue';
 import { paymentComponentOptions, repaymentScheduleTypeOptions } from '@composables/main-form/data';
@@ -28,7 +28,7 @@ const appMainForm = useAppMainForm();
           :invalid="appMainForm.$v.targetCreditAmount.$error"
           placeholder="Введите сумму"
           name="targetCreditAmount"
-          @blur="appMainForm.saveField('targetCreditAmount', appMainForm.formObj.targetCreditAmount)"
+          @blur="appMainForm.handleBlurSave('targetCreditAmount')"
         />
       </FormField>
 
@@ -41,7 +41,7 @@ const appMainForm = useAppMainForm();
           :invalid="appMainForm.$v.youngSpecialistsCount.$error"
           placeholder="Введите количество"
           name="youngSpecialistsCount"
-          @blur="appMainForm.saveField('youngSpecialistsCount', appMainForm.$v.youngSpecialistsCount.$model)"
+          @blur="appMainForm.handleBlurSave('youngSpecialistsCount')"
         />
       </FormField>
 
@@ -53,7 +53,7 @@ const appMainForm = useAppMainForm();
           placeholder="Выберите период"
           option-label="name"
           option-value="value"
-          @blur="appMainForm.saveField('gracePeriod', appMainForm.$v.gracePeriod.$model)"
+          @change="appMainForm.saveField('gracePeriod', appMainForm.$v.gracePeriod.$model)"
         />
       </FormField>
 
@@ -65,7 +65,7 @@ const appMainForm = useAppMainForm();
           placeholder="Выберите срок"
           option-label="name"
           option-value="value"
-          @blur="appMainForm.saveField('creditReturnPeriodYears', appMainForm.$v.creditReturnPeriodYears.$model)"
+          @change="appMainForm.saveField('creditReturnPeriodYears', appMainForm.$v.creditReturnPeriodYears.$model)"
         />
       </FormField>
 
@@ -77,7 +77,7 @@ const appMainForm = useAppMainForm();
           option-label="name"
           option-value="value"
           placeholder="Выберите"
-          @blur="appMainForm.saveField('creditSecurityType', appMainForm.$v.creditSecurityType.$model)"
+          @change="appMainForm.saveField('creditSecurityType', appMainForm.$v.creditSecurityType.$model)"
         />
       </FormField>
 
@@ -94,7 +94,7 @@ const appMainForm = useAppMainForm();
               option-label="name"
               option-value="value"
               placeholder="Выберите"
-              @blur="appMainForm.saveField('plannedCreditReturnSchedule', appMainForm.$v.plannedCreditReturnSchedule.$model)"
+              @change="appMainForm.saveField('plannedCreditReturnSchedule', appMainForm.$v.plannedCreditReturnSchedule.$model)"
             />
           </FormField>
 
@@ -106,7 +106,7 @@ const appMainForm = useAppMainForm();
               option-label="name"
               option-value="value"
               placeholder="Выберите"
-              @blur="appMainForm.saveField('creditReturnFrequency', appMainForm.$v.creditReturnFrequency.$model)"
+              @change="appMainForm.saveField('creditReturnFrequency', appMainForm.$v.creditReturnFrequency.$model)"
             />
           </FormField>
         </div>
@@ -123,7 +123,7 @@ const appMainForm = useAppMainForm();
           style="resize: none;"
           rows="7"
           :invalid="appMainForm.$v.projectDescription.$error"
-          @blur="appMainForm.saveField('projectDescription', appMainForm.$v.projectDescription.$model)"
+          @blur="appMainForm.handleBlurSave('projectDescription')"
         />
       </FormField>
 
@@ -133,7 +133,7 @@ const appMainForm = useAppMainForm();
           :invalid="appMainForm.$v.ownFundsAmount.$error"
           placeholder="Введите сумму"
           name="ownFundsAmount"
-          @blur="appMainForm.saveField('ownFundsAmount', appMainForm.$v.ownFundsAmount.$model)"
+          @blur="appMainForm.handleBlurSave('ownFundsAmount')"
         />
       </FormField>
 
@@ -143,7 +143,7 @@ const appMainForm = useAppMainForm();
           style="resize: none;"
           rows="7"
           :invalid="appMainForm.$v.organizationSocialIndicators.$error"
-          @blur="appMainForm.saveField('organizationSocialIndicators', appMainForm.$v.organizationSocialIndicators.$model)"
+          @blur="appMainForm.handleBlurSave('organizationSocialIndicators')"
         />
       </FormField>
     </div>
@@ -159,7 +159,7 @@ const appMainForm = useAppMainForm();
           :invalid="appMainForm.$v.contactPersonFullName.$error"
           placeholder="Ф.И.О"
           name="contactPersonFullName"
-          @blur="appMainForm.saveField('contactPersonFullName', appMainForm.$v.contactPersonFullName.$model)"
+          @blur="appMainForm.handleBlurSave('contactPersonFullName')"
         />
       </FormField>
 
@@ -168,7 +168,7 @@ const appMainForm = useAppMainForm();
           v-model="appMainForm.$v.mobilePhone.$model"
           :invalid="appMainForm.$v.mobilePhone.$error"
           name="mobilePhone"
-          @complete="appMainForm.saveField('mobilePhone', appMainForm.$v.mobilePhone.$model)"
+          @complete="appMainForm.handleBlurSave('mobilePhone')"
         />
       </FormField>
 
@@ -196,7 +196,7 @@ const appMainForm = useAppMainForm();
           :invalid="appMainForm.$v.email.$error"
           placeholder="ali@wuwu"
           name="email"
-          @blur="appMainForm.saveField('email', appMainForm.$v.email.$model)"
+          @blur="appMainForm.handleBlurSave('email')"
         />
       </FormField>
 
@@ -206,7 +206,7 @@ const appMainForm = useAppMainForm();
           :invalid="appMainForm.$v.directorFullName.$error"
           placeholder="Ф.И.О"
           name="directorFullName"
-          @blur="appMainForm.saveField('directorFullName', appMainForm.$v.directorFullName.$model)"
+          @blur="appMainForm.handleBlurSave('directorFullName')"
         />
       </FormField>
 
@@ -221,7 +221,7 @@ const appMainForm = useAppMainForm();
       class="step-form__submit"
       label="Далее"
       fluid
-      @click="appMainForm.handleSubmit()"
+      @click="appMainForm.submitApplication()"
     />
   </form>
 </template>

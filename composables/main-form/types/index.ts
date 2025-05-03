@@ -18,6 +18,11 @@ export interface IMainForm {
   applicantQuestionnaireDocumentUrl: string
 }
 
+export interface IMainFormRequestBody {
+  id?: string
+  properties: IMainForm
+}
+
 export enum MainFormPeriod {
   OneYear = 12,
   ThreeYears = 36,

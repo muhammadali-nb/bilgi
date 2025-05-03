@@ -2,7 +2,7 @@ export const selectConfig = () => {
   return {
     dropdownWidth: '4rem',
     paddingX: '1.8rem',
-    paddingY: '1.4rem',
+    paddingY: '1.5rem',
 
     // light: {
     //   optionColor: 'var(--site-text)',

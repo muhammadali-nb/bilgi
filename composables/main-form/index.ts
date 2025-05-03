@@ -1,4 +1,4 @@
-import type { IFocusedField, ISelectedFile } from '@composables/auth/types';
+import type { IFocusedField } from '@composables/auth/types';
 import type { IMainForm } from '@composables/main-form/types';
 import { creditSecurityTypeOptionsData, monthsForm } from '@composables/main-form/data';
 import { setFormModel } from '@composables/main-form/model';
@@ -13,8 +13,7 @@ export const useMainForm = () => {
   const { requiredField } = useValidationRules();
   const formObj = ref<IMainForm>(setFormModel());
   const focusedField = ref<IFocusedField>();
-  const selectedFile = ref<ISelectedFile>();
-  const formDataRef = ref<FormData | null>(null);
+  const applicationId = useCookie('applicationId');
 
   const creditSecurityTypeOptions = computed(() =>
     creditSecurityTypeOptionsData.map(type => ({
@@ -23,7 +22,6 @@ export const useMainForm = () => {
     })),
   );
 
-  // Опции для поля "Период льгот"
   const gracePeriodOptions = computed(() =>
     monthsForm.map((month) => {
       const monthValue = getYearFromMonthLength(month);
@@ -62,10 +60,10 @@ export const useMainForm = () => {
   });
 
   const saveField = async (field: keyof IMainForm, value: string | number) => {
-    if (!field || !value) return;
+    if (applicationId && (!field || !value)) return;
 
     focusedField.value = {
-      applicationId: 1,
+      applicationId: applicationId.value ?? 0,
       type: field,
       value: value.toString(),
     };
@@ -88,7 +86,7 @@ export const useMainForm = () => {
 
     if (status.value === 'success' && fileData) {
       focusedField.value = {
-        applicationId: 1,
+        applicationId: applicationId.value ?? 0,
         type: field,
         value: fileData.value,
       };
@@ -102,6 +100,6 @@ export const useMainForm = () => {
     gracePeriodOptions,
     creditSecurityTypeOptions,
     saveField, saveFile,
-
+    applicationId,
   };
 };

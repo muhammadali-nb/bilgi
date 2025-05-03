@@ -6,7 +6,7 @@ export interface LoginResponse {
 }
 
 export interface IFocusedField {
-  applicationId: number
+  applicationId: number | string
   type: string
   value: string | number
 }

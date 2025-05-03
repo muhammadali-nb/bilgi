@@ -62,8 +62,6 @@ onMounted(() => {
       type: '',
     };
   }
-
-  console.log(getFileNameFromUrl(props.url));
 });
 
 function updatePreview() {
@@ -90,9 +88,9 @@ onBeforeUnmount(() => {
   <div class="uploader-container">
     <div class="uploader-header">
       <label class="font-16-r">{{ label }}</label>
-      <p class="uploader-sample">
+      <a class="uploader-sample" :href="url" download>
         Скачать образец
-      </p>
+      </a>
     </div>
 
     <div class="uploader-body">

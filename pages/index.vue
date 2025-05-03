@@ -16,29 +16,12 @@ const formInit = async () => {
   await appMainForm.getApplication();
 };
 
-await formInit();
-
-// const testLoading = computed(() => status.value === 'pending');
-//
-// await getTest();
-
-/*
-const postFunction = async (body: { name: string, email: string }) => {
-  await $fetch('api/post-endpont', { method: 'POST', body });
+const submitStep = async () => {
+  await appMainForm.submitApplication();
+  next();
 };
-*/
 
-/*
-const name = ref<string>('');
-const email = ref<string>('');
-const bodyValue = computed(() => {
-  return {
-    name: name.value,
-    email: email.value,
-  };
-});
-const { refresh: postData } = useApi('/api/post-endpoint', { method: 'POST', body: bodyValue });
-*/
+await formInit();
 </script>
 
 <template>
@@ -48,9 +31,9 @@ const { refresh: postData } = useApi('/api/post-endpoint', { method: 'POST', bod
         <h3 class="font-24-sb home__title">
           Заполнение заявки
         </h3>
-        <Stepper v-model:active-step="activeStep" :steps="steps" class="home__steps" />
-        <FirstStep v-if="activeStep === 1" @submit="next" />
-        <SecondStep v-if="activeStep === 2" @prev="prev" @submit="next" />
+        <Stepper v-model:active-sчtep="activeStep" :steps="steps" class="home__steps" />
+        <FirstStep v-if="activeStep === 1" @submit="submitStep" />
+        <SecondStep v-if="activeStep === 2" @prev="prev" @submit="submitStep" />
         <ThirdStep v-if="activeStep === 3" @prev="prev" @submit="next" />
         <FourthStep v-if="activeStep === 4" @prev="prev" @submit="next" />
         <FifthStep v-if="activeStep === 5" @prev="prev" @submit="next" />
