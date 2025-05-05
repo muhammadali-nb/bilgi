@@ -8,8 +8,9 @@ export const useStepper = () => {
     if (activeStep.value === undefined) return;
     if (activeStep.value < steps.length) {
       activeStep.value++;
+      console.log(activeStep.value);
       $router.push({ name: $router.currentRoute.value.name, query: { step: activeStep.value } });
-    };
+    }
 
     window.scrollTo(0, 0);
   };

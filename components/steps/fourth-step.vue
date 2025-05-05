@@ -50,7 +50,7 @@ const emits = defineEmits<StepEmits>();
 <style lang="scss" scoped>
 .step-form {
   background-color: var(--card-bg-05);
-  border: 1px solid #DCE1E7;
+  border: 1px solid var(--border-color-secondary);
   border-radius: 1rem;
   padding: 4rem;
 

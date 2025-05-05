@@ -6,6 +6,7 @@ const props = defineProps<{
   accept?: string
   label: string
   url?: string
+  invalid?: boolean
 }>();
 
 const emit = defineEmits<{
@@ -20,6 +21,10 @@ const inputRef = ref<HTMLInputElement | null>(null);
 const isDragOver = ref(false);
 const file = ref<File | null>(null);
 const preview = ref<{ url: string, name: string, type: string } | null>(null);
+const errorMessage = ref('');
+
+const hasError = computed(() => props.invalid || !!errorMessage.value);
+const status = computed(() => hasError.value ? 'var(--p-red-500)' : 'var(--border-color)');
 
 function openFileDialog() {
   inputRef.value?.click();
@@ -47,22 +52,31 @@ function onDrop(e: DragEvent) {
   }
 }
 
-function processIncomingFile(selectedFile: File) {
-  file.value = selectedFile;
-  emit('update', selectedFile);
+function isAllowedFileType(file: File): boolean {
+  const allowedTypes = [
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'text/plain',
+  ];
+  const allowedExtensions = ['.pdf', '.doc', '.docx', '.txt'];
 
-  updatePreview();
+  const extension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+
+  return allowedTypes.includes(file.type) || allowedExtensions.includes(extension);
 }
 
-onMounted(() => {
-  if (props.url) {
-    preview.value = {
-      url: props.url,
-      name: getFileNameFromUrl(props.url),
-      type: '',
-    };
+function processIncomingFile(selectedFile: File) {
+  if (!isAllowedFileType(selectedFile)) {
+    errorMessage.value = 'Можно загружать только PDF, Word или текстовые файлы.';
+    return;
   }
-});
+
+  errorMessage.value = '';
+  file.value = selectedFile;
+  emit('update', selectedFile);
+  updatePreview();
+}
 
 function updatePreview() {
   if (preview.value?.url) {
@@ -76,6 +90,16 @@ function updatePreview() {
     };
   }
 }
+
+onMounted(() => {
+  if (props.url) {
+    preview.value = {
+      url: props.url,
+      name: getFileNameFromUrl(props.url),
+      type: '',
+    };
+  }
+});
 
 onBeforeUnmount(() => {
   if (preview.value?.url) {
@@ -105,7 +129,7 @@ onBeforeUnmount(() => {
           ref="inputRef"
           type="file"
           class="hidden"
-          :accept="props.accept"
+          :accept="props.accept || '.pdf,.doc,.docx,.txt'"
           @change="onFileChange"
         >
 
@@ -127,12 +151,16 @@ onBeforeUnmount(() => {
 
       <VIcon :icon="document" no-fill />
     </div>
+
+    <Message v-if="errorMessage" severity="error" variant="simple" class="uploader-error">
+      {{ errorMessage }}
+    </Message>
   </div>
 </template>
 
 <style scoped lang="scss">
 .uploader {
-  border: 2px dashed #BCBCBC;
+  border: 2px dashed v-bind(status);
   border-radius: 8px;
   padding: 22px;
   text-align: center;
@@ -166,6 +194,16 @@ onBeforeUnmount(() => {
     justify-content: center;
     gap: 10px;
   }
+
+  &-error {
+    margin: 1rem 0 0 0;
+  }
+}
+
+.uploader-error {
+  color: var(--p-red-500);
+  font-size: 14px;
+  margin-top: 8px;
 }
 
 .hidden {

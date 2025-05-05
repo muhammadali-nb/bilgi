@@ -10,6 +10,8 @@ export const useAppMainForm = defineStore('main-form', () => {
     saveField,
     saveFile,
     applicationId,
+
+    activeStep, next, steps, prev, checkRouteStep,
   } = useMainForm();
   const stepBody = ref<IMainFormRequestBody>();
   const {
@@ -17,14 +19,14 @@ export const useAppMainForm = defineStore('main-form', () => {
     status, refresh: getApplicationFn,
   } = useApi<IMainFormResponse>('/api/applications/');
 
-  const { refresh: submitStep } = useApi<IMainFormResponse>('/api/applications/', {
+  const { refresh: submitStep, error: submitError } = useApi<IMainFormResponse>('/api/applications/', {
     method: 'post',
     body: stepBody,
   });
 
   const submitApplication = async () => {
     const isFormCorrect = await $v.value.$validate();
-    if (!isFormCorrect && applicationId) return;
+    if (!isFormCorrect && applicationId) return false;
 
     stepBody.value = {
       id: applicationId.value ?? '',
@@ -32,6 +34,12 @@ export const useAppMainForm = defineStore('main-form', () => {
     };
 
     await submitStep();
+    if (submitError.value) {
+      // show error toast
+      return false;
+    }
+
+    return true;
   };
 
   const getApplication = async () => {
@@ -45,12 +53,17 @@ export const useAppMainForm = defineStore('main-form', () => {
 
   const handleBlurSave = async (fieldName: keyof IMainForm) => {
     await nextTick();
-    const value = $v.value[fieldName].$model;
-    await saveField(fieldName, value);
+    const model = $v.value?.[fieldName]?.$model;
+
+    if (model !== undefined) {
+      await saveField(fieldName, model);
+    }
   };
 
   return {
     $v, formObj, submitApplication, getApplication,
     creditSecurityTypeOptions, gracePeriodOptions, saveField, saveFile, handleBlurSave,
+    // stepper
+    activeStep, next, steps, prev, checkRouteStep,
   };
 });

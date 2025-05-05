@@ -59,12 +59,10 @@
   --site-secondary-text: rgba(0, 9, 41, 0.5);
 
   --site-label-text: #a8a8a8;
-
+  --border-color: #bcbcbc;
+  --border-color-secondary: #DCE1E7;
   --primary-surface-color: var(--site-text);
 
-  --time-line-bg: rgba(249, 246, 240, 1);
-  --time-line-grey: rgba(157, 157, 157, 1);
-  --time-line-grey-disabled: rgba(232, 232, 223, 1);
 
   --box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.5);
   --box-shadow-card: 0 0 10px 0 rgba(0, 0, 0, 0.1);
@@ -112,13 +110,13 @@
   --transition-fast: all 0.2s;
 
 
-
   --dark-gradient: radial-gradient(circle, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
   /*--light-gradient: radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 100%);*/
   /*  =============== other end =============== */
 
   --image-overlay-gradient: var(--dark-gradient);
 }
+
 .font-12-n {
   font: var(--font-12-n) !important;
 }
@@ -126,9 +124,11 @@
 .font-14-n {
   font: var(--font-14-n) !important;
 }
+
 .font-14-b {
   font: var(--font-14-b) !important;
 }
+
 .font-16-n {
   font: var(--font-16-n) !important;
 }
@@ -156,6 +156,7 @@
 .font-20-sb {
   font: normal 600 20px/1.2 var(--primary-font) !important;
 }
+
 .font-20-b {
   font: normal 700 20px/1.2 var(--primary-font) !important;
 }

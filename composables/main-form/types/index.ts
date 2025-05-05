@@ -16,6 +16,26 @@ export interface IMainForm {
   email: string
   directorFullName: string
   applicantQuestionnaireDocumentUrl: string
+
+  certificateOfStateRegistration: string
+  organizationCharter: string
+  foundingAgreement: string
+  foundersDecisionToOpenOrganization: string
+  foundersDecisionOnTargetLoan: string
+  orderOnTargetLoan: string
+  ceoAuthorityConfirmation: string
+  chiefAccountantAuthorityConfirmation: string
+  ceoPassport: string
+  chiefAccountantPassport: string
+  itParkResidencyCertificate: string
+  educationActivityPermission: string
+
+  financialStatements: string
+  taxDebtAbsenceCertificate: string
+  bankAccountCertificate: string
+  projectBusinessPlan: string
+  targetFundSpendingEstimate: string
+  leaseAgreement: string
 }
 
 export interface IMainFormRequestBody {

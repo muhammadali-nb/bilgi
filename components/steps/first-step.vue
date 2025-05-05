@@ -21,11 +21,11 @@ const appMainForm = useAppMainForm();
       <FormField
         label="Необходимая сумма целевого кредита (сум):"
         class="colspan-2"
-        :errors="appMainForm.$v.targetCreditAmount.$errors"
+        :errors="appMainForm.$v?.targetCreditAmount?.$errors"
       >
         <InputNumber
           v-model="appMainForm.formObj.targetCreditAmount"
-          :invalid="appMainForm.$v.targetCreditAmount.$error"
+          :invalid="appMainForm.$v?.targetCreditAmount?.$error"
           placeholder="Введите сумму"
           name="targetCreditAmount"
           @blur="appMainForm.handleBlurSave('targetCreditAmount')"
@@ -33,51 +33,54 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        :errors="appMainForm.$v.youngSpecialistsCount.$errors"
+        :errors="appMainForm.$v?.youngSpecialistsCount?.$errors"
         label="Количество молодых специалистов, которых обучат и трудоустроят:"
       >
         <InputNumber
-          v-model="appMainForm.$v.youngSpecialistsCount.$model"
-          :invalid="appMainForm.$v.youngSpecialistsCount.$error"
+          v-model="appMainForm.formObj.youngSpecialistsCount"
+          :invalid="appMainForm.$v?.youngSpecialistsCount?.$error"
           placeholder="Введите количество"
           name="youngSpecialistsCount"
           @blur="appMainForm.handleBlurSave('youngSpecialistsCount')"
         />
       </FormField>
 
-      <FormField label="Льготный период:" :errors="appMainForm.$v.gracePeriod.$errors">
+      <FormField label="Льготный период:" :errors="appMainForm.$v?.gracePeriod?.$errors">
         <Select
-          v-model="appMainForm.$v.gracePeriod.$model"
-          :invalid="appMainForm.$v.gracePeriod.$error"
+          v-model="appMainForm.formObj.gracePeriod"
+          :invalid="appMainForm.$v?.gracePeriod?.$error"
           :options="appMainForm.gracePeriodOptions"
           placeholder="Выберите период"
           option-label="name"
           option-value="value"
-          @change="appMainForm.saveField('gracePeriod', appMainForm.$v.gracePeriod.$model)"
+          @change="appMainForm.saveField('gracePeriod', appMainForm.formObj.gracePeriod)"
         />
       </FormField>
 
-      <FormField label="Срок возврата целевого кредита (лет):" :errors="appMainForm.$v.creditReturnPeriodYears.$errors">
+      <FormField
+        label="Срок возврата целевого кредита (лет):"
+        :errors="appMainForm.$v?.creditReturnPeriodYears?.$errors"
+      >
         <Select
-          v-model="appMainForm.$v.creditReturnPeriodYears.$model"
-          :invalid="appMainForm.$v.creditReturnPeriodYears.$error"
+          v-model="appMainForm.formObj.creditReturnPeriodYears"
+          :invalid="appMainForm.$v?.creditReturnPeriodYears?.$error"
           :options="appMainForm.gracePeriodOptions"
           placeholder="Выберите срок"
           option-label="name"
           option-value="value"
-          @change="appMainForm.saveField('creditReturnPeriodYears', appMainForm.$v.creditReturnPeriodYears.$model)"
+          @change="appMainForm.saveField('creditReturnPeriodYears', appMainForm.formObj.creditReturnPeriodYears)"
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v.creditSecurityType.$errors" label="Обеспечение кредита">
+      <FormField :errors="appMainForm.$v?.creditSecurityType?.$errors" label="Обеспечение кредита">
         <Select
-          v-model="appMainForm.$v.creditSecurityType.$model"
-          :invalid="appMainForm.$v.creditSecurityType.$error"
+          v-model="appMainForm.formObj.creditSecurityType"
+          :invalid="appMainForm.$v?.creditSecurityType?.$error"
           :options="appMainForm.creditSecurityTypeOptions"
           option-label="name"
           option-value="value"
           placeholder="Выберите"
-          @change="appMainForm.saveField('creditSecurityType', appMainForm.$v.creditSecurityType.$model)"
+          @change="appMainForm.saveField('creditSecurityType', appMainForm.formObj.creditSecurityType)"
         />
       </FormField>
 
@@ -86,27 +89,30 @@ const appMainForm = useAppMainForm();
           Предполагаемый график возврата целевого кредита
         </p>
         <div class="step-form__grid">
-          <FormField :errors="appMainForm.$v.plannedCreditReturnSchedule.$errors" label="(сумма долга, проценты)">
+          <FormField :errors="appMainForm.$v?.plannedCreditReturnSchedule?.$errors" label="(сумма долга, проценты)">
             <Select
-              v-model="appMainForm.$v.plannedCreditReturnSchedule.$model"
-              :invalid="appMainForm.$v.plannedCreditReturnSchedule.$error"
+              v-model="appMainForm.formObj.plannedCreditReturnSchedule"
+              :invalid="appMainForm.$v?.plannedCreditReturnSchedule?.$error"
               :options="repaymentScheduleTypeOptions"
               option-label="name"
               option-value="value"
               placeholder="Выберите"
-              @change="appMainForm.saveField('plannedCreditReturnSchedule', appMainForm.$v.plannedCreditReturnSchedule.$model)"
+              @change="appMainForm.saveField('plannedCreditReturnSchedule', appMainForm.formObj.plannedCreditReturnSchedule)"
             />
           </FormField>
 
-          <FormField :errors="appMainForm.$v.creditReturnFrequency.$errors" label="(ежемесячный, квартальный, другой)">
+          <FormField
+            :errors="appMainForm.$v?.creditReturnFrequency?.$errors"
+            label="(ежемесячный, квартальный, другой)"
+          >
             <Select
-              v-model="appMainForm.$v.creditReturnFrequency.$model"
-              :invalid="appMainForm.$v.creditReturnFrequency.$error"
+              v-model="appMainForm.formObj.creditReturnFrequency"
+              :invalid="appMainForm.$v?.creditReturnFrequency?.$error"
               :options="paymentComponentOptions"
               option-label="name"
               option-value="value"
               placeholder="Выберите"
-              @change="appMainForm.saveField('creditReturnFrequency', appMainForm.$v.creditReturnFrequency.$model)"
+              @change="appMainForm.saveField('creditReturnFrequency', appMainForm.formObj.creditReturnFrequency)"
             />
           </FormField>
         </div>
@@ -117,32 +123,38 @@ const appMainForm = useAppMainForm();
       Экономическое обоснование целевого кредита
     </h3>
     <div class="step-form__target">
-      <FormField :errors="appMainForm.$v.projectDescription.$errors" label="Содержание проекта:">
+      <FormField :errors="appMainForm.$v?.projectDescription?.$errors" label="Содержание проекта:">
         <Textarea
-          v-model="appMainForm.$v.projectDescription.$model"
+          v-model="appMainForm.formObj.projectDescription"
           style="resize: none;"
           rows="7"
-          :invalid="appMainForm.$v.projectDescription.$error"
+          :invalid="appMainForm.$v?.projectDescription?.$error"
           @blur="appMainForm.handleBlurSave('projectDescription')"
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v.ownFundsAmount.$errors" label="Собственные средства, привлеченные для реализации проекта (сум):">
+      <FormField
+        :errors="appMainForm.$v?.ownFundsAmount?.$errors"
+        label="Собственные средства, привлеченные для реализации проекта (сум):"
+      >
         <InputNumber
-          v-model="appMainForm.$v.ownFundsAmount.$model"
-          :invalid="appMainForm.$v.ownFundsAmount.$error"
+          v-model="appMainForm.formObj.ownFundsAmount"
+          :invalid="appMainForm.$v?.ownFundsAmount?.$error"
           placeholder="Введите сумму"
           name="ownFundsAmount"
           @blur="appMainForm.handleBlurSave('ownFundsAmount')"
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v.organizationSocialIndicators.$errors" label="Информация о социальных показателях деятельности организации:">
+      <FormField
+        :errors="appMainForm.$v?.organizationSocialIndicators?.$errors"
+        label="Информация о социальных показателях деятельности организации:"
+      >
         <Textarea
-          v-model="appMainForm.$v.organizationSocialIndicators.$model"
+          v-model="appMainForm.formObj.organizationSocialIndicators"
           style="resize: none;"
           rows="7"
-          :invalid="appMainForm.$v.organizationSocialIndicators.$error"
+          :invalid="appMainForm.$v?.organizationSocialIndicators?.$error"
           @blur="appMainForm.handleBlurSave('organizationSocialIndicators')"
         />
       </FormField>
@@ -153,57 +165,57 @@ const appMainForm = useAppMainForm();
     </h3>
 
     <div class="step-form__grid">
-      <FormField :errors="appMainForm.$v.contactPersonFullName.$errors" label="Контактное лицо" class="colspan-2">
+      <FormField :errors="appMainForm.$v?.contactPersonFullName?.$errors" label="Контактное лицо" class="colspan-2">
         <InputText
-          v-model="appMainForm.$v.contactPersonFullName.$model"
-          :invalid="appMainForm.$v.contactPersonFullName.$error"
+          v-model="appMainForm.formObj.contactPersonFullName"
+          :invalid="appMainForm.$v?.contactPersonFullName?.$error"
           placeholder="Ф.И.О"
           name="contactPersonFullName"
           @blur="appMainForm.handleBlurSave('contactPersonFullName')"
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v.mobilePhone.$errors" label="Мобильный">
+      <FormField :errors="appMainForm.$v?.mobilePhone?.$errors" label="Мобильный">
         <PhoneInput
-          v-model="appMainForm.$v.mobilePhone.$model"
-          :invalid="appMainForm.$v.mobilePhone.$error"
+          v-model="appMainForm.formObj.mobilePhone"
+          :invalid="appMainForm.$v?.mobilePhone?.$error"
           name="mobilePhone"
           @complete="appMainForm.handleBlurSave('mobilePhone')"
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v.workPhone.$errors" label="Рабочий">
+      <FormField :errors="appMainForm.$v?.workPhone?.$errors" label="Рабочий">
         <PhoneInput
-          v-model="appMainForm.$v.workPhone.$model"
-          :invalid="appMainForm.$v.workPhone.$error"
+          v-model="appMainForm.formObj.workPhone"
+          :invalid="appMainForm.$v?.workPhone?.$error"
           name="workPhone"
-          @complete="appMainForm.saveField('workPhone', appMainForm.$v.workPhone.$model)"
+          @complete="appMainForm.saveField('workPhone', appMainForm.formObj.workPhone)"
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v.homePhone.$errors" label="Домашний">
+      <FormField :errors="appMainForm.$v?.homePhone?.$errors" label="Домашний">
         <PhoneInput
-          v-model="appMainForm.$v.homePhone.$model"
-          :invalid="appMainForm.$v.homePhone.$error"
+          v-model="appMainForm.formObj.homePhone"
+          :invalid="appMainForm.$v?.homePhone?.$error"
           name="homePhone"
-          @complete="appMainForm.saveField('homePhone', appMainForm.$v.homePhone.$model)"
+          @complete="appMainForm.saveField('homePhone', appMainForm.formObj.homePhone)"
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v.email.$errors" label="E-mail">
+      <FormField :errors="appMainForm.$v?.email?.$errors" label="E-mail">
         <InputText
-          v-model="appMainForm.$v.email.$model"
-          :invalid="appMainForm.$v.email.$error"
+          v-model="appMainForm.formObj.email"
+          :invalid="appMainForm.$v?.email?.$error"
           placeholder="ali@wuwu"
           name="email"
           @blur="appMainForm.handleBlurSave('email')"
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v.directorFullName.$errors" label="Руководитель (Ф.И.О.)" class="colspan-2">
+      <FormField :errors="appMainForm.$v?.directorFullName?.$errors" label="Руководитель (Ф.И.О.)" class="colspan-2">
         <InputText
-          v-model="appMainForm.$v.directorFullName.$model"
-          :invalid="appMainForm.$v.directorFullName.$error"
+          v-model="appMainForm.formObj.directorFullName"
+          :invalid="appMainForm.$v?.directorFullName?.$error"
           placeholder="Ф.И.О"
           name="directorFullName"
           @blur="appMainForm.handleBlurSave('directorFullName')"
@@ -213,6 +225,7 @@ const appMainForm = useAppMainForm();
       <FileUploader
         label="Документ, подтверждающий право на осуществление деятельности образования (лицензия/подтверждение/разрешение);"
         class="colspan-2"
+        :invalid="appMainForm.$v?.applicantQuestionnaireDocumentUrl?.$error"
         :url="appMainForm.formObj.applicantQuestionnaireDocumentUrl"
         @update="(file) => appMainForm.saveFile('applicantQuestionnaireDocumentUrl', file)"
       />
@@ -221,7 +234,7 @@ const appMainForm = useAppMainForm();
       class="step-form__submit"
       label="Далее"
       fluid
-      @click="appMainForm.submitApplication()"
+      @click="emits('submit')"
     />
   </form>
 </template>
@@ -229,7 +242,7 @@ const appMainForm = useAppMainForm();
 <style lang="scss" scoped>
 .step-form {
   background-color: var(--card-bg-05);
-  border: 1px solid #DCE1E7; // add to var
+  border: 1px solid var(--border-color-secondary);
   border-radius: 1rem;
   padding: 4rem;
 
@@ -247,7 +260,7 @@ const appMainForm = useAppMainForm();
     gap: 1rem 4.4rem;
   }
 
-  &__target  {
+  &__target {
     display: flex;
     flex-direction: column;
     gap: 3.2rem;

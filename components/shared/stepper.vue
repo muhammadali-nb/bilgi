@@ -2,7 +2,7 @@
 import { nextIcon } from '../../assets/icons';
 import VIcon from './VIcon.vue';
 
-const props = defineProps<{
+defineProps<{
   steps: string[]
 }>();
 
@@ -87,7 +87,7 @@ const activeStep = defineModel<number>('activeStep');
 
     &.upcoming .circle {
       background-color: var(--primary-50);
-      color:  var(--dark-text);
+      color: var(--dark-text);
     }
 
     &.upcoming .label {
