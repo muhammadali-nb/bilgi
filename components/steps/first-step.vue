@@ -273,6 +273,5 @@ const appMainForm = useAppMainForm();
   .colspan-2 {
     grid-column: span 2;
   }
-
 }
 </style>

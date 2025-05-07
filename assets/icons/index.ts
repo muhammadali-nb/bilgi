@@ -14,6 +14,7 @@ import phoneIcon from './phone.svg?raw';
 import plusIcon from './plus.svg?raw';
 import prevIcon from './prev.svg?raw';
 import rejectedIcon from './rejected.svg?raw';
+import successIcon from './success.svg?raw';
 import testIcon from './test.svg?raw';
 import userIcon from './user.svg?raw';
 import usersIcon from './users.svg?raw';
@@ -34,6 +35,7 @@ export {
   plusIcon,
   prevIcon,
   rejectedIcon,
+  successIcon,
   testIcon,
   userIcon,
   usersIcon,

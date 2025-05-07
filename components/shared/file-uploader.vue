@@ -1,95 +1,17 @@
 <script setup lang="ts">
+import type { IEmitsFileUploader, IPropsFileUploader } from '@composables/ui/file-uploader/types';
 import { document, documentIcon, plusIcon } from '@assets/icons';
+import { useFileUploader } from '@composables/ui/file-uploader';
 import VIcon from './VIcon.vue';
 
-const props = defineProps<{
-  accept?: string
-  label: string
-  url?: string
-  invalid?: boolean
-}>();
+const props = defineProps<IPropsFileUploader>();
+const emit = defineEmits<IEmitsFileUploader>();
 
-const emit = defineEmits<{
-  (e: 'update', files: File): void
-}>();
-
-function getFileNameFromUrl(url: string) {
-  return url.substring(url.lastIndexOf('/') + 1);
-}
-
-const inputRef = ref<HTMLInputElement | null>(null);
-const isDragOver = ref(false);
-const file = ref<File | null>(null);
-const preview = ref<{ url: string, name: string, type: string } | null>(null);
-const errorMessage = ref('');
-
-const hasError = computed(() => props.invalid || !!errorMessage.value);
-const status = computed(() => hasError.value ? 'var(--p-red-500)' : 'var(--border-color)');
-
-function openFileDialog() {
-  inputRef.value?.click();
-}
-
-function onFileChange(e: Event) {
-  const target = e.target as HTMLInputElement;
-  if (target.files && target.files[0]) {
-    processIncomingFile(target.files[0]);
-  }
-}
-
-function onDragOver() {
-  isDragOver.value = true;
-}
-
-function onDragLeave() {
-  isDragOver.value = false;
-}
-
-function onDrop(e: DragEvent) {
-  isDragOver.value = false;
-  if (e.dataTransfer?.files && e.dataTransfer.files[0]) {
-    processIncomingFile(e.dataTransfer.files[0]);
-  }
-}
-
-function isAllowedFileType(file: File): boolean {
-  const allowedTypes = [
-    'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'text/plain',
-  ];
-  const allowedExtensions = ['.pdf', '.doc', '.docx', '.txt'];
-
-  const extension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
-
-  return allowedTypes.includes(file.type) || allowedExtensions.includes(extension);
-}
-
-function processIncomingFile(selectedFile: File) {
-  if (!isAllowedFileType(selectedFile)) {
-    errorMessage.value = 'Можно загружать только PDF, Word или текстовые файлы.';
-    return;
-  }
-
-  errorMessage.value = '';
-  file.value = selectedFile;
-  emit('update', selectedFile);
-  updatePreview();
-}
-
-function updatePreview() {
-  if (preview.value?.url) {
-    URL.revokeObjectURL(preview.value.url);
-  }
-  if (file.value) {
-    preview.value = {
-      url: URL.createObjectURL(file.value),
-      name: file.value.name,
-      type: file.value.type,
-    };
-  }
-}
+const {
+  getFileNameFromUrl, preview, onFileChange,
+  openFileDialog, onDrop, status, onDragOver,
+  onDragLeave, isDragOver, errorMessage, inputRef,
+} = useFileUploader(props, emit);
 
 onMounted(() => {
   if (props.url) {
@@ -142,7 +64,7 @@ onBeforeUnmount(() => {
           </template>
           <template v-else>
             <VIcon :icon="documentIcon" no-fill />
-            <p class="font-16-n">
+            <p class="font-16-n uploader-name">
               {{ preview.name }}
             </p>
           </template>
@@ -193,6 +115,13 @@ onBeforeUnmount(() => {
     align-items: center;
     justify-content: center;
     gap: 10px;
+  }
+
+  &-name {
+    max-width: 40rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
   }
 
   &-error {

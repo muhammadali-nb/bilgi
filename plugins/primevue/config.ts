@@ -12,7 +12,7 @@ import { inputGroupConfig, inputGroupPt } from './inputGroup';
 import { inputMaskPt } from './inputMask';
 import { inputNumberConfig, inputNumberPt } from './inputNumber';
 import { inputTextConfig, inputTextPt } from './inputText';
-import { messagePt } from './message';
+import { messageConfig, messagePt } from './message';
 import { paginatorConfig, paginatorPt } from './paginator';
 import { passwordPt } from './password';
 import { selectConfig, selectPt } from './select';
@@ -136,6 +136,8 @@ const customPreset = definePreset(Aura, {
     },
 
     select: selectConfig(),
+
+    message: messageConfig(),
   },
 });
 

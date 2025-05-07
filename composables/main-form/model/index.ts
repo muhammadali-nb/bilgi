@@ -41,5 +41,16 @@ export const setFormModel = (value?: Partial<IMainForm>): Required<IMainForm> =>
     projectBusinessPlan: value?.projectBusinessPlan ?? '',
     targetFundSpendingEstimate: value?.targetFundSpendingEstimate ?? '',
     leaseAgreement: value?.leaseAgreement ?? '',
+
+    landCadastrePassport: value?.landCadastrePassport ?? '',
+    ownershipDocuments: value?.ownershipDocuments ?? '',
+    realEstateValuationReport: value?.realEstateValuationReport ?? '',
+    vehicleRegistrationCertificate: value?.vehicleRegistrationCertificate ?? '',
+    vehicleValuationReport: value?.vehicleValuationReport ?? '',
+    shareholderResolution: value?.shareholderResolution ?? '',
+    guarantorFinancialAndFoundingDocs: value?.guarantorFinancialAndFoundingDocs ?? '',
+    auditorOpinion: value?.auditorOpinion ?? '',
+    guarantorLetter: value?.guarantorLetter ?? '',
+    insuranceCompanyLetter: value?.insuranceCompanyLetter ?? '',
   };
 };

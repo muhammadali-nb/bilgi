@@ -1,28 +1,30 @@
 <script setup lang="ts">
 import Stepper from '@components/shared/stepper.vue';
-import FifthStep from '@components/steps/fifth-step.vue';
 import FirstStep from '@components/steps/first-step.vue';
 import FourthStep from '@components/steps/fourth-step.vue';
 import SecondStep from '@components/steps/second-step.vue';
+import Status from '@components/steps/status.vue';
 import ThirdStep from '@components/steps/third-step.vue';
+
+import { useStepper } from '@composables/ui/stepper';
 import { useAppMainForm } from '@store/main-form';
 
 const appMainForm = useAppMainForm();
+const { activeStep, next, steps, prev, isFinished, stepGuard } = useStepper();
 
-const formInit = async () => {
-  appMainForm.checkRouteStep();
+const applicationInit = async () => {
   await appMainForm.getApplication();
+  await stepGuard();
 };
 
 const submitStep = async () => {
   const isCorrect = await appMainForm.submitApplication();
-
   if (isCorrect) {
-    appMainForm.next();
+    next();
   }
 };
 
-await formInit();
+await applicationInit();
 </script>
 
 <template>
@@ -32,12 +34,16 @@ await formInit();
         <h3 class="font-24-sb home__title">
           Заполнение заявки
         </h3>
-        <Stepper v-model:active-step="appMainForm.activeStep" :steps="appMainForm.steps" class="home__steps" />
-        <FirstStep v-if="appMainForm.activeStep === 1" @submit="submitStep" />
-        <SecondStep v-if="appMainForm.activeStep === 2" @prev="appMainForm.prev" @submit="submitStep" />
-        <ThirdStep v-if="appMainForm.activeStep === 3" @prev="appMainForm.prev" @submit="submitStep" />
-        <FourthStep v-if="appMainForm.activeStep === 4" @prev="appMainForm.prev" @submit="submitStep" />
-        <FifthStep v-if="appMainForm.activeStep === 5" @prev="appMainForm.prev" @submit="appMainForm.next" />
+
+        <template v-if="!isFinished">
+          <Stepper v-model:active-step="activeStep" :steps="steps" class="home__steps" />
+          <FirstStep v-if="activeStep === 1" @submit="submitStep" />
+          <SecondStep v-if="activeStep === 2" @prev="prev" @submit="submitStep" />
+          <ThirdStep v-if="activeStep === 3" @prev="prev" @submit="submitStep" />
+          <FourthStep v-if="activeStep === 4" @prev="prev" @submit="submitStep" />
+        </template>
+
+        <Status v-else />
       </div>
     </div>
   </div>

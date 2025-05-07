@@ -2,17 +2,21 @@ import type { IFocusedField } from '@composables/auth/types';
 import type { IMainForm } from '@composables/main-form/types';
 import { creditSecurityTypeOptionsData, monthsForm } from '@composables/main-form/data';
 import { setFormModel } from '@composables/main-form/model';
-import { useStepper } from '@composables/ui/stepper';
 import { useValidationRules } from '@composables/ui/validation-rules';
 import { useApi } from '@composables/useApi';
 import { getYearFromMonthLength } from '@utils/years-counter';
 import useVuelidate from '@vuelidate/core';
+import { useRoute } from 'nuxt/app';
 
+// const { $i18n } = useNuxtApp();
 export const useMainForm = () => {
   const { t } = useI18n();
-  const { activeStep, next, steps, prev, checkRouteStep } = useStepper();
+  const $route = useRoute();
+  const activeStep = computed<number>(() => {
+    const step = Number($route.query.step);
+    return Number.isNaN(step) ? 1 : step;
+  });
 
-  // const { $i18n } = useNuxtApp();
   const { requiredField } = useValidationRules();
   const formObj = ref<IMainForm>(setFormModel());
   const focusedField = ref<IFocusedField>();
@@ -77,6 +81,18 @@ export const useMainForm = () => {
       targetFundSpendingEstimate: { ...requiredField() },
       leaseAgreement: { ...requiredField() },
     },
+    {
+      landCadastrePassport: { ...requiredField() },
+      ownershipDocuments: { ...requiredField() },
+      realEstateValuationReport: { ...requiredField() },
+      vehicleRegistrationCertificate: { ...requiredField() },
+      vehicleValuationReport: { ...requiredField() },
+      shareholderResolution: { ...requiredField() },
+      guarantorFinancialAndFoundingDocs: { ...requiredField() },
+      auditorOpinion: { ...requiredField() },
+      guarantorLetter: { ...requiredField() },
+      insuranceCompanyLetter: { ...requiredField() },
+    },
   ];
 
   const currentRules = computed(() => rules[activeStep.value - 1]);
@@ -101,37 +117,30 @@ export const useMainForm = () => {
     focusedField.value = undefined;
   };
 
-  const saveFile = async (field: string, file: File) => {
-    if (!file) return;
+  const saveFile = async (field: keyof IMainForm, file: File) => {
+    if (!file && applicationId.value) return;
 
     const formData = new FormData();
-    formData.append('applicationId', '1');
+    formData.append('applicationId', applicationId.value ?? '0');
     formData.append('file', file);
 
-    const { data: fileData, status } = await useFetch('/api/files', {
+    const { data: fileData, status } = await useFetch<string>('/api/files', {
       method: 'POST',
       body: formData,
     });
 
-    if (status.value === 'success' && fileData) {
-      focusedField.value = {
-        applicationId: applicationId.value ?? 0,
-        type: field,
-        value: fileData.value,
-      };
-
-      await saveFieldFn();
+    if (status.value === 'success' && fileData.value) {
+      (formObj.value as Record<string, any>)[field] = fileData.value;
+      await saveField(field, fileData.value);
     }
   };
+
   return {
-    $v,
+    $v, rules,
     formObj,
     gracePeriodOptions,
     creditSecurityTypeOptions,
-    saveField, saveFile,
-    applicationId,
-
-    // stepper
-    activeStep, next, steps, prev, checkRouteStep,
+    saveField, saveFile, activeStep,
+    applicationId, currentRules,
   };
 };

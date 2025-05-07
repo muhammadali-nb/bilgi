@@ -36,6 +36,17 @@ export interface IMainForm {
   projectBusinessPlan: string
   targetFundSpendingEstimate: string
   leaseAgreement: string
+
+  landCadastrePassport: string
+  ownershipDocuments: string
+  realEstateValuationReport: string
+  vehicleRegistrationCertificate: string
+  vehicleValuationReport: string
+  shareholderResolution: string
+  guarantorFinancialAndFoundingDocs: string
+  auditorOpinion: string
+  guarantorLetter: string
+  insuranceCompanyLetter: string
 }
 
 export interface IMainFormRequestBody {
@@ -60,4 +71,15 @@ export interface IMainFormResponse {
   status: number
   number: number
   properties: IMainForm
+}
+
+export enum ApplicationStatus {
+  New = 0,
+  Consideration,
+  Rejected,
+  Correction,
+  FinalConsideration,
+  FinalRejected,
+  FinalCorrection,
+  Approved,
 }

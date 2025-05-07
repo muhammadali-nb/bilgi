@@ -1,25 +1,31 @@
-import type { IMainForm, IMainFormRequestBody, IMainFormResponse } from '@composables/main-form/types';
+import type { ApplicationStatus, IMainForm, IMainFormRequestBody, IMainFormResponse } from '@composables/main-form/types';
 import { useMainForm } from '@composables/main-form';
 import { setFormModel } from '@composables/main-form/model';
 import { useApi } from '@composables/useApi';
+import { useToastStore } from '@store/toast';
 
 export const useAppMainForm = defineStore('main-form', () => {
+  const stepBody = ref<IMainFormRequestBody>();
+  const applicationStatus = ref<ApplicationStatus>();
   const {
     $v, formObj,
     gracePeriodOptions, creditSecurityTypeOptions,
     saveField,
-    saveFile,
+    saveFile, rules,
     applicationId,
-
-    activeStep, next, steps, prev, checkRouteStep,
   } = useMainForm();
-  const stepBody = ref<IMainFormRequestBody>();
+  const $toast = useToastStore();
   const {
     data, error,
     status, refresh: getApplicationFn,
   } = useApi<IMainFormResponse>('/api/applications/');
 
-  const { refresh: submitStep, error: submitError } = useApi<IMainFormResponse>('/api/applications/', {
+  const {
+    refresh: submitStep,
+    error: submitError,
+    data: submitData,
+    status: submitStatus,
+  } = useApi<IMainFormResponse>('/api/applications/', {
     method: 'post',
     body: stepBody,
   });
@@ -34,8 +40,11 @@ export const useAppMainForm = defineStore('main-form', () => {
     };
 
     await submitStep();
+    if (submitStatus.value === 'success' && submitData.value) {
+      applicationStatus.value = submitData.value.status;
+    }
     if (submitError.value) {
-      // show error toast
+      $toast.error('Ошибка!', 'Файл некорректная форма попробуйте еще раз');
       return false;
     }
 
@@ -61,9 +70,7 @@ export const useAppMainForm = defineStore('main-form', () => {
   };
 
   return {
-    $v, formObj, submitApplication, getApplication,
+    $v, formObj, submitApplication, getApplication, rules, applicationStatus,
     creditSecurityTypeOptions, gracePeriodOptions, saveField, saveFile, handleBlurSave,
-    // stepper
-    activeStep, next, steps, prev, checkRouteStep,
   };
 });
