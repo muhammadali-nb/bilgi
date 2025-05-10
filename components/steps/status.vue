@@ -1,14 +1,10 @@
 <script lang="ts" setup>
 import { successIcon } from '@assets/icons';
 import VIcon from '@components/shared/VIcon.vue';
-import { useAppMainForm } from '@store/main-form';
-
-const appMainForm = useAppMainForm();
 </script>
 
 <template>
   <div class="step-status">
-    {{ appMainForm.applicationStatus }}
     <h4 class="step-status__title font-24-sb">
       Заявка №21355
     </h4>
