@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { rejectedIcon } from '@assets/icons';
-import VIcon from '@components/shared/VIcon.vue';
+import VIcon from '@components/shared/v-icon.vue';
 
 defineProps<{
   status: 'success' | 'error'

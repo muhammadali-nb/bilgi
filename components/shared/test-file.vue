@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { document, plusIcon } from '@assets/icons';
 import { ref } from 'vue';
-import VIcon from './VIcon.vue';
+import VIcon from './v-icon.vue';
 
 const src = ref<string | null>(null);
 

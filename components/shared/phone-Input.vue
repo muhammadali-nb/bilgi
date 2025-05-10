@@ -2,7 +2,7 @@
 import type { IPhoneMaskEmit, IPhoneMaskProps } from '@composables/ui/phone-mask/types';
 import { usePhoneMask } from '@composables/ui/phone-mask';
 import { phoneIcon } from '../../assets/icons';
-import VIcon from './VIcon.vue';
+import VIcon from './v-icon.vue';
 
 const props = defineProps<IPhoneMaskProps>();
 const emit = defineEmits<IPhoneMaskEmit>();

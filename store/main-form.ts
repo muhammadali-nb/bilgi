@@ -1,7 +1,14 @@
-import type { ApplicationStatus, IMainForm, IMainFormRequestBody, IMainFormResponse } from '@composables/main-form/types';
+import type {
+  ApplicationStatus,
+  IMainForm,
+  IMainFormRequestBody,
+  IMainFormResponse,
+  StatusField,
+} from '@composables/main-form/types';
 import { useMainForm } from '@composables/main-form';
 import { setFormModel } from '@composables/main-form/model';
-import { useApi } from '@composables/useApi';
+import { PropertyStatus } from '@composables/main-form/types';
+import { useApi } from '@composables/use-api';
 import { useToastStore } from '@store/toast';
 
 export const useAppMainForm = defineStore('main-form', () => {
@@ -14,11 +21,17 @@ export const useAppMainForm = defineStore('main-form', () => {
     saveFile, rules,
     applicationId,
   } = useMainForm();
+  const formStatuses = ref<StatusField[]>([]);
   const $toast = useToastStore();
   const {
     data, error,
     status, refresh: getApplicationFn,
   } = useApi<IMainFormResponse>('/api/applications/');
+
+  const isRejected = (field: string): boolean => {
+    const item = formStatuses.value.find(s => s.name.toLowerCase() === field.toLowerCase()); // Приводим к нижнему регистру Otabek fix it
+    return item?.status === PropertyStatus.Rejected;
+  };
 
   const {
     refresh: submitStep,
@@ -57,6 +70,7 @@ export const useAppMainForm = defineStore('main-form', () => {
     if (!error.value && data.value?.properties) {
       formObj.value = setFormModel(data.value.properties);
       applicationId.value = data.value.id.toString();
+      formStatuses.value = data.value.propertyStatuses;
     }
   };
 
@@ -70,7 +84,8 @@ export const useAppMainForm = defineStore('main-form', () => {
   };
 
   return {
-    $v, formObj, submitApplication, getApplication, rules, applicationStatus,
+    $v, formObj, submitApplication, getApplication, rules, applicationStatus, isRejected,
     creditSecurityTypeOptions, gracePeriodOptions, saveField, saveFile, handleBlurSave,
+    formStatuses,
   };
 });

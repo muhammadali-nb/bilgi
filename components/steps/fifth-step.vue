@@ -2,7 +2,7 @@
 import type { StepEmits } from '@composables/ui/steps/types';
 import { prevIcon } from '@assets/icons';
 import FileUploader from '@components/shared/file-uploader.vue';
-import VIcon from '@components/shared/VIcon.vue';
+import VIcon from '@components/shared/v-icon.vue';
 
 const emits = defineEmits<StepEmits>();
 </script>

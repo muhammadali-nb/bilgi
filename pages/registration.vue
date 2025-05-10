@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import DigitalSignature from '@components/auth/digital-signature.vue';
 
-import FormField from '@components/shared/FormField.vue';
+import FormField from '@components/shared/form-field.vue';
 import PhoneInput from '@components/shared/phone-Input.vue';
-import VIcon from '@components/shared/VIcon.vue';
+import VIcon from '@components/shared/v-icon.vue';
 import { lockIcon, userIcon } from '../assets/icons';
 
 const visible = ref(false);

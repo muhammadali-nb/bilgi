@@ -2,7 +2,8 @@
 import type { StepEmits } from '@composables/ui/steps/types';
 import { prevIcon } from '@assets/icons';
 import FileUploader from '@components/shared/file-uploader.vue';
-import VIcon from '@components/shared/VIcon.vue';
+import FormField from '@components/shared/form-field.vue';
+import VIcon from '@components/shared/v-icon.vue';
 import { useAppMainForm } from '@store/main-form';
 
 const emits = defineEmits<StepEmits>();
@@ -16,88 +17,137 @@ const appMainForm = useAppMainForm();
     </h4>
 
     <div class="step-form__documents">
-      <FileUploader
-
+      <FormField
         label="Кадастровый паспорт на земельный участок (здания и сооружения), предоставляемый в залог"
-        :invalid="appMainForm.$v?.landCadastrePassport?.$error"
-        :url="appMainForm.formObj.landCadastrePassport"
-        @update="(file) => appMainForm.saveFile('landCadastrePassport', file)"
-      />
+        :is-not-confirmed="appMainForm.isRejected('landCadastrePassport')"
+      >
+        <FileUploader
+          label="Кадастровый паспорт на земельный участок..."
+          :invalid="appMainForm.$v?.landCadastrePassport?.$error"
+          :url="appMainForm.formObj.landCadastrePassport"
+          @update="(file) => appMainForm.saveFile('landCadastrePassport', file)"
+        />
+      </FormField>
 
-      <FileUploader
+      <FormField
         label="Документы, подтверждающие право собственности"
-        :invalid="appMainForm.$v?.ownershipDocuments?.$error"
-        :url="appMainForm.formObj.ownershipDocuments"
-        @update="(file) => appMainForm.saveFile('ownershipDocuments', file)"
-      />
+        :is-not-confirmed="appMainForm.isRejected('ownershipDocuments')"
+      >
+        <FileUploader
+          label="Документы, подтверждающие право собственности"
+          :invalid="appMainForm.$v?.ownershipDocuments?.$error"
+          :url="appMainForm.formObj.ownershipDocuments"
+          @update="(file) => appMainForm.saveFile('ownershipDocuments', file)"
+        />
+      </FormField>
 
-      <FileUploader
+      <FormField
         label="Отчет независимой оценочной организации"
-        :invalid="appMainForm.$v?.realEstateValuationReport?.$error"
-        :url="appMainForm.formObj.realEstateValuationReport"
-        @update="(file) => appMainForm.saveFile('realEstateValuationReport', file)"
-      />
+        :is-not-confirmed="appMainForm.isRejected('realEstateValuationReport')"
+      >
+        <FileUploader
+          label="Отчет независимой оценочной организации"
+          :invalid="appMainForm.$v?.realEstateValuationReport?.$error"
+          :url="appMainForm.formObj.realEstateValuationReport"
+          @update="(file) => appMainForm.saveFile('realEstateValuationReport', file)"
+        />
+      </FormField>
 
       <h5 class="font-20-sb">
         Автотранспорт
       </h5>
 
-      <FileUploader
+      <FormField
         label="Свидетельство о регистрации автомототранспортного средства"
-        :invalid="appMainForm.$v?.vehicleRegistrationCertificate?.$error"
-        :url="appMainForm.formObj.vehicleRegistrationCertificate"
-        @update="(file) => appMainForm.saveFile('vehicleRegistrationCertificate', file)"
-      />
+        :is-not-confirmed="appMainForm.isRejected('vehicleRegistrationCertificate')"
+      >
+        <FileUploader
+          label="Свидетельство о регистрации автомототранспортного средства"
+          :invalid="appMainForm.$v?.vehicleRegistrationCertificate?.$error"
+          :url="appMainForm.formObj.vehicleRegistrationCertificate"
+          @update="(file) => appMainForm.saveFile('vehicleRegistrationCertificate', file)"
+        />
+      </FormField>
 
-      <FileUploader
+      <FormField
         label="Отчет независимой оценочной организации"
-        :invalid="appMainForm.$v?.vehicleValuationReport?.$error"
-        :url="appMainForm.formObj.vehicleValuationReport"
-        @update="(file) => appMainForm.saveFile('vehicleValuationReport', file)"
-      />
+        :is-not-confirmed="appMainForm.isRejected('vehicleValuationReport')"
+      >
+        <FileUploader
+          label="Отчет независимой оценочной организации"
+          :invalid="appMainForm.$v?.vehicleValuationReport?.$error"
+          :url="appMainForm.formObj.vehicleValuationReport"
+          @update="(file) => appMainForm.saveFile('vehicleValuationReport', file)"
+        />
+      </FormField>
 
       <h5 class="font-20-sb">
         Решения и гарантии
       </h5>
 
-      <FileUploader
+      <FormField
         label="Решение общего собрания участников/акционеров"
-        :invalid="appMainForm.$v?.shareholderResolution?.$error"
-        :url="appMainForm.formObj.shareholderResolution"
-        @update="(file) => appMainForm.saveFile('shareholderResolution', file)"
-      />
+        :is-not-confirmed="appMainForm.isRejected('shareholderResolution')"
+      >
+        <FileUploader
+          label="Решение общего собрания участников/акционеров"
+          :invalid="appMainForm.$v?.shareholderResolution?.$error"
+          :url="appMainForm.formObj.shareholderResolution"
+          @update="(file) => appMainForm.saveFile('shareholderResolution', file)"
+        />
+      </FormField>
 
-      <FileUploader
+      <FormField
         label="Финансовая отчетность и учредительные документы"
-        :invalid="appMainForm.$v?.guarantorFinancialAndFoundingDocs?.$error"
-        :url="appMainForm.formObj.guarantorFinancialAndFoundingDocs"
-        @update="(file) => appMainForm.saveFile('guarantorFinancialAndFoundingDocs', file)"
-      />
+        :is-not-confirmed="appMainForm.isRejected('guarantorFinancialAndFoundingDocs')"
+      >
+        <FileUploader
+          label="Финансовая отчетность и учредительные документы"
+          :invalid="appMainForm.$v?.guarantorFinancialAndFoundingDocs?.$error"
+          :url="appMainForm.formObj.guarantorFinancialAndFoundingDocs"
+          @update="(file) => appMainForm.saveFile('guarantorFinancialAndFoundingDocs', file)"
+        />
+      </FormField>
 
-      <FileUploader
+      <FormField
         label="Аудиторское заключение"
-        :invalid="appMainForm.$v?.auditorOpinion?.$error"
-        :url="appMainForm.formObj.auditorOpinion"
-        @update="(file) => appMainForm.saveFile('auditorOpinion', file)"
-      />
+        :is-not-confirmed="appMainForm.isRejected('auditorOpinion')"
+      >
+        <FileUploader
+          label="Аудиторское заключение"
+          :invalid="appMainForm.$v?.auditorOpinion?.$error"
+          :url="appMainForm.formObj.auditorOpinion"
+          @update="(file) => appMainForm.saveFile('auditorOpinion', file)"
+        />
+      </FormField>
 
-      <FileUploader
+      <FormField
         label="Гарантийное письмо поручителя"
-        :invalid="appMainForm.$v?.guarantorLetter?.$error"
-        :url="appMainForm.formObj.guarantorLetter"
-        @update="(file) => appMainForm.saveFile('guarantorLetter', file)"
-      />
+        :is-not-confirmed="appMainForm.isRejected('guarantorLetter')"
+      >
+        <FileUploader
+          label="Гарантийное письмо поручителя"
+          :invalid="appMainForm.$v?.guarantorLetter?.$error"
+          :url="appMainForm.formObj.guarantorLetter"
+          @update="(file) => appMainForm.saveFile('guarantorLetter', file)"
+        />
+      </FormField>
 
       <h5 class="font-20-sb">
         Страховой полис
       </h5>
 
-      <FileUploader
+      <FormField
         label="Письмо Страховой компании о получении обязательства перед займом."
-        :invalid="appMainForm.$v?.insuranceCompanyLetter?.$error"
-        :url="appMainForm.formObj.insuranceCompanyLetter"
-        @update="(file) => appMainForm.saveFile('insuranceCompanyLetter', file)"
-      />
+        :is-not-confirmed="appMainForm.isRejected('insuranceCompanyLetter')"
+      >
+        <FileUploader
+          label="Письмо Страховой компании о получении обязательства перед займом."
+          :invalid="appMainForm.$v?.insuranceCompanyLetter?.$error"
+          :url="appMainForm.formObj.insuranceCompanyLetter"
+          @update="(file) => appMainForm.saveFile('insuranceCompanyLetter', file)"
+        />
+      </FormField>
     </div>
 
     <div class="step-form__controls">

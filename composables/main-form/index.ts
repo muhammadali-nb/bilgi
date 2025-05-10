@@ -3,7 +3,7 @@ import type { IMainForm } from '@composables/main-form/types';
 import { creditSecurityTypeOptionsData, monthsForm } from '@composables/main-form/data';
 import { setFormModel } from '@composables/main-form/model';
 import { useValidationRules } from '@composables/ui/validation-rules';
-import { useApi } from '@composables/useApi';
+import { useApi } from '@composables/use-api';
 import { getYearFromMonthLength } from '@utils/years-counter';
 import useVuelidate from '@vuelidate/core';
 import { useRoute } from 'nuxt/app';

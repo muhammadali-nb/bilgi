@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { INavigationItem } from '@composables/ui/navigation/types';
-import VIcon from '@components/shared/VIcon.vue';
+import VIcon from '@components/shared/v-icon.vue';
 
 defineProps<{
   navigationList: INavigationItem[]

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import LangSwitcher from '@components/shared/LangSwitcher.vue';
-import VIcon from '@components/shared/VIcon.vue';
+import LangSwitcher from '@components/shared/lang-switcher.vue';
+import VIcon from '@components/shared/v-icon.vue';
 import { bilgiLogo } from '../../assets/icons';
 </script>
 

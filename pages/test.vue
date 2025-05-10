@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import DigitalSignature from '@components/auth/digital-signature.vue';
-import LangSwitcher from '@components/shared/LangSwitcher.vue';
-import VIcon from '@components/shared/VIcon.vue';
+import LangSwitcher from '@components/shared/lang-switcher.vue';
+import VIcon from '@components/shared/v-icon.vue';
 import { bilgiLogo, userIcon } from '../assets/icons';
 
 const visible = ref(false);

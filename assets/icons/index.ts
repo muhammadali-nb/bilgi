@@ -18,6 +18,7 @@ import successIcon from './success.svg?raw';
 import testIcon from './test.svg?raw';
 import userIcon from './user.svg?raw';
 import usersIcon from './users.svg?raw';
+import warningIcon from './warning.svg?raw';
 
 export {
   backIcon,
@@ -40,4 +41,5 @@ export {
   userIcon,
   usersIcon,
   uzFlagIcon,
+  warningIcon,
 };

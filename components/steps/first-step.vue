@@ -2,7 +2,7 @@
 import type { StepEmits } from '@composables/ui/steps/types';
 
 import FileUploader from '@components/shared/file-uploader.vue';
-import FormField from '@components/shared/FormField.vue';
+import FormField from '@components/shared/form-field.vue';
 import PhoneInput from '@components/shared/phone-Input.vue';
 import { paymentComponentOptions, repaymentScheduleTypeOptions } from '@composables/main-form/data';
 import { useAppMainForm } from '@store/main-form';
@@ -22,6 +22,7 @@ const appMainForm = useAppMainForm();
         label="Необходимая сумма целевого кредита (сум):"
         class="colspan-2"
         :errors="appMainForm.$v?.targetCreditAmount?.$errors"
+        :is-not-confirmed="appMainForm.isRejected('targetCreditAmount')"
       >
         <InputNumber
           v-model="appMainForm.formObj.targetCreditAmount"
@@ -34,7 +35,8 @@ const appMainForm = useAppMainForm();
 
       <FormField
         :errors="appMainForm.$v?.youngSpecialistsCount?.$errors"
-        label="Количество молодых специалистов, которых обучат и трудоустроят:"
+        label="Кол-во молодых специалистов, которых обучат и трудоустроят:"
+        :is-not-confirmed="appMainForm.isRejected('youngSpecialistsCount')"
       >
         <InputNumber
           v-model="appMainForm.formObj.youngSpecialistsCount"
@@ -45,7 +47,11 @@ const appMainForm = useAppMainForm();
         />
       </FormField>
 
-      <FormField label="Льготный период:" :errors="appMainForm.$v?.gracePeriod?.$errors">
+      <FormField
+        label="Льготный период:"
+        :errors="appMainForm.$v?.gracePeriod?.$errors"
+        :is-not-confirmed="appMainForm.isRejected('gracePeriod')"
+      >
         <Select
           v-model="appMainForm.formObj.gracePeriod"
           :invalid="appMainForm.$v?.gracePeriod?.$error"
@@ -60,6 +66,7 @@ const appMainForm = useAppMainForm();
       <FormField
         label="Срок возврата целевого кредита (лет):"
         :errors="appMainForm.$v?.creditReturnPeriodYears?.$errors"
+        :is-not-confirmed="appMainForm.isRejected('creditReturnPeriodYears')"
       >
         <Select
           v-model="appMainForm.formObj.creditReturnPeriodYears"
@@ -72,7 +79,11 @@ const appMainForm = useAppMainForm();
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v?.creditSecurityType?.$errors" label="Обеспечение кредита">
+      <FormField
+        :errors="appMainForm.$v?.creditSecurityType?.$errors"
+        label="Обеспечение кредита"
+        :is-not-confirmed="appMainForm.isRejected('creditSecurityType')"
+      >
         <Select
           v-model="appMainForm.formObj.creditSecurityType"
           :invalid="appMainForm.$v?.creditSecurityType?.$error"
@@ -89,7 +100,11 @@ const appMainForm = useAppMainForm();
           Предполагаемый график возврата целевого кредита
         </p>
         <div class="step-form__grid">
-          <FormField :errors="appMainForm.$v?.plannedCreditReturnSchedule?.$errors" label="(сумма долга, проценты)">
+          <FormField
+            :errors="appMainForm.$v?.plannedCreditReturnSchedule?.$errors"
+            label="(сумма долга, проценты)"
+            :is-not-confirmed="appMainForm.isRejected('plannedCreditReturnSchedule')"
+          >
             <Select
               v-model="appMainForm.formObj.plannedCreditReturnSchedule"
               :invalid="appMainForm.$v?.plannedCreditReturnSchedule?.$error"
@@ -104,6 +119,7 @@ const appMainForm = useAppMainForm();
           <FormField
             :errors="appMainForm.$v?.creditReturnFrequency?.$errors"
             label="(ежемесячный, квартальный, другой)"
+            :is-not-confirmed="appMainForm.isRejected('creditReturnFrequency')"
           >
             <Select
               v-model="appMainForm.formObj.creditReturnFrequency"
@@ -123,7 +139,11 @@ const appMainForm = useAppMainForm();
       Экономическое обоснование целевого кредита
     </h3>
     <div class="step-form__target">
-      <FormField :errors="appMainForm.$v?.projectDescription?.$errors" label="Содержание проекта:">
+      <FormField
+        :errors="appMainForm.$v?.projectDescription?.$errors"
+        label="Содержание проекта:"
+        :is-not-confirmed="appMainForm.isRejected('projectDescription')"
+      >
         <Textarea
           v-model="appMainForm.formObj.projectDescription"
           style="resize: none;"
@@ -136,6 +156,7 @@ const appMainForm = useAppMainForm();
       <FormField
         :errors="appMainForm.$v?.ownFundsAmount?.$errors"
         label="Собственные средства, привлеченные для реализации проекта (сум):"
+        :is-not-confirmed="appMainForm.isRejected('ownFundsAmount')"
       >
         <InputNumber
           v-model="appMainForm.formObj.ownFundsAmount"
@@ -149,6 +170,7 @@ const appMainForm = useAppMainForm();
       <FormField
         :errors="appMainForm.$v?.organizationSocialIndicators?.$errors"
         label="Информация о социальных показателях деятельности организации:"
+        :is-not-confirmed="appMainForm.isRejected('organizationSocialIndicators')"
       >
         <Textarea
           v-model="appMainForm.formObj.organizationSocialIndicators"
@@ -165,7 +187,12 @@ const appMainForm = useAppMainForm();
     </h3>
 
     <div class="step-form__grid">
-      <FormField :errors="appMainForm.$v?.contactPersonFullName?.$errors" label="Контактное лицо" class="colspan-2">
+      <FormField
+        :errors="appMainForm.$v?.contactPersonFullName?.$errors"
+        label="Контактное лицо"
+        class="colspan-2"
+        :is-not-confirmed="appMainForm.isRejected('contactPersonFullName')"
+      >
         <InputText
           v-model="appMainForm.formObj.contactPersonFullName"
           :invalid="appMainForm.$v?.contactPersonFullName?.$error"
@@ -175,7 +202,11 @@ const appMainForm = useAppMainForm();
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v?.mobilePhone?.$errors" label="Мобильный">
+      <FormField
+        :errors="appMainForm.$v?.mobilePhone?.$errors"
+        label="Мобильный"
+        :is-not-confirmed="appMainForm.isRejected('mobilePhone')"
+      >
         <PhoneInput
           v-model="appMainForm.formObj.mobilePhone"
           :invalid="appMainForm.$v?.mobilePhone?.$error"
@@ -184,7 +215,11 @@ const appMainForm = useAppMainForm();
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v?.workPhone?.$errors" label="Рабочий">
+      <FormField
+        :errors="appMainForm.$v?.workPhone?.$errors"
+        label="Рабочий"
+        :is-not-confirmed="appMainForm.isRejected('workPhone')"
+      >
         <PhoneInput
           v-model="appMainForm.formObj.workPhone"
           :invalid="appMainForm.$v?.workPhone?.$error"
@@ -193,7 +228,11 @@ const appMainForm = useAppMainForm();
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v?.homePhone?.$errors" label="Домашний">
+      <FormField
+        :errors="appMainForm.$v?.homePhone?.$errors"
+        label="Домашний"
+        :is-not-confirmed="appMainForm.isRejected('homePhone')"
+      >
         <PhoneInput
           v-model="appMainForm.formObj.homePhone"
           :invalid="appMainForm.$v?.homePhone?.$error"
@@ -202,7 +241,11 @@ const appMainForm = useAppMainForm();
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v?.email?.$errors" label="E-mail">
+      <FormField
+        :errors="appMainForm.$v?.email?.$errors"
+        label="E-mail"
+        :is-not-confirmed="appMainForm.isRejected('email')"
+      >
         <InputText
           v-model="appMainForm.formObj.email"
           :invalid="appMainForm.$v?.email?.$error"
@@ -212,7 +255,12 @@ const appMainForm = useAppMainForm();
         />
       </FormField>
 
-      <FormField :errors="appMainForm.$v?.directorFullName?.$errors" label="Руководитель (Ф.И.О.)" class="colspan-2">
+      <FormField
+        :errors="appMainForm.$v?.directorFullName?.$errors"
+        label="Руководитель (Ф.И.О.)"
+        class="colspan-2"
+        :is-not-confirmed="appMainForm.isRejected('directorFullName')"
+      >
         <InputText
           v-model="appMainForm.formObj.directorFullName"
           :invalid="appMainForm.$v?.directorFullName?.$error"
@@ -222,14 +270,20 @@ const appMainForm = useAppMainForm();
         />
       </FormField>
 
-      <FileUploader
-        label="Документ, подтверждающий право на осуществление деятельности образования (лицензия/подтверждение/разрешение);"
+      <FormField
+        label="Анкета Заявителя"
         class="colspan-2"
-        :invalid="appMainForm.$v?.applicantQuestionnaireDocumentUrl?.$error"
-        :url="appMainForm.formObj.applicantQuestionnaireDocumentUrl"
-        @update="(file) => appMainForm.saveFile('applicantQuestionnaireDocumentUrl', file)"
-      />
+        :is-not-confirmed="appMainForm.isRejected('applicantQuestionnaireDocumentUrl')"
+      >
+        <FileUploader
+          label="Документ, подтверждающий право на осуществление деятельности образования (лицензия/подтверждение/разрешение);"
+          :invalid="appMainForm.$v?.applicantQuestionnaireDocumentUrl?.$error"
+          :url="appMainForm.formObj.applicantQuestionnaireDocumentUrl"
+          @update="(file) => appMainForm.saveFile('applicantQuestionnaireDocumentUrl', file)"
+        />
+      </FormField>
     </div>
+
     <Button
       class="step-form__submit"
       label="Далее"

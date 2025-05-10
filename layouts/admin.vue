@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { backIcon } from '@assets/icons';
 import Navigation from '@components/layout/navigation.vue';
-import VIcon from '@components/shared/VIcon.vue';
+import VIcon from '@components/shared/v-icon.vue';
 import { useNavigation } from '@composables/ui/navigation';
 import { useAdminHeader } from '@store/admin-header';
 

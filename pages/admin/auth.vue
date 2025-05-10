@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { bilgiLogo, guardIcon, lockIcon, userIcon } from '@assets/icons';
-import FormField from '@components/shared/FormField.vue';
-import VIcon from '@components/shared/VIcon.vue';
+import FormField from '@components/shared/form-field.vue';
+import VIcon from '@components/shared/v-icon.vue';
 
 definePageMeta({
   layout: 'empty',

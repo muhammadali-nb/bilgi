@@ -1,15 +1,23 @@
 <script setup lang="ts">
 import type { ErrorObject } from '@vuelidate/core';
+import { warningIcon } from '@assets/icons';
+import VIcon from '@components/shared/v-icon.vue';
 
-defineProps<{
+const props = defineProps<{
   label: string
   errors?: ErrorObject[]
+  isNotConfirmed?: boolean
 }>();
+
+const warning = computed(() => props.isNotConfirmed ? 'var(--secondary-600)' : '');
 </script>
 
 <template>
   <div class="input-container">
-    <label class="input__label font-16-r">{{ label }}</label>
+    <div class="input__label">
+      <VIcon v-if="isNotConfirmed" :icon="warningIcon" class="icon" />
+      <label class="font-16-r">{{ label }}</label>
+    </div>
     <slot />
     <div class="error-container">
       <Message v-for="(error, idx) in errors" :key="idx" severity="error" variant="simple">
@@ -28,6 +36,15 @@ defineProps<{
   .input__label {
     padding-bottom: 8px;
     margin-bottom: auto;
+    color: v-bind(warning);
+
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    .icon {
+      flex-shrink: 0;
+    }
   }
 
   .error-container {

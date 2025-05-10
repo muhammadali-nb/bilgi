@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { successIcon } from '@assets/icons';
-import VIcon from '@components/shared/VIcon.vue';
+import VIcon from '@components/shared/v-icon.vue';
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import VIcon from '@components/shared/VIcon.vue';
     <h4 class="step-status__title font-24-sb">
       Заявка №21355
     </h4>
-    <Message>
+    <Message severity="info">
       <template #icon>
         <VIcon :icon="successIcon" class="p-message-icon" />
       </template>

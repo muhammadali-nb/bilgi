@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import DigitalSignature from '@components/auth/digital-signature.vue';
 
-import FormField from '@components/shared/FormField.vue';
-import VIcon from '@components/shared/VIcon.vue';
+import FormField from '@components/shared/form-field.vue';
+import VIcon from '@components/shared/v-icon.vue';
 import { useUserAuth } from '@composables/auth';
 import { useEcpKey } from '@composables/ecp-key';
 import { parseCertificateInfo } from '@composables/ecp-key/model';
 import { lockIcon, userIcon } from '../assets/icons';
 
-const { login, form } = useUserAuth();
+const { login, loginForm } = useUserAuth();
 const { connect, getKeys, keyList, isConnected } = useEcpKey();
 const visible = ref(false);
 
@@ -41,7 +41,7 @@ definePageMeta({
           <InputGroupAddon>
             <VIcon :icon="userIcon" no-fill />
           </InputGroupAddon>
-          <InputText v-model="form.email" placeholder="Введите логин" />
+          <InputText v-model="loginForm.email" placeholder="Введите логин" />
         </InputGroup>
       </FormField>
 
@@ -50,7 +50,7 @@ definePageMeta({
           <InputGroupAddon>
             <VIcon :icon="lockIcon" no-fill />
           </InputGroupAddon>
-          <Password v-model="form.password" placeholder="Введите пароль" toggle-mask :feedback="false" />
+          <Password v-model="loginForm.password" placeholder="Введите пароль" toggle-mask :feedback="false" />
         </InputGroup>
       </FormField>
 

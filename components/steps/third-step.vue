@@ -2,7 +2,8 @@
 import type { StepEmits } from '@composables/ui/steps/types';
 import { prevIcon } from '@assets/icons';
 import FileUploader from '@components/shared/file-uploader.vue';
-import VIcon from '@components/shared/VIcon.vue';
+import FormField from '@components/shared/form-field.vue';
+import VIcon from '@components/shared/v-icon.vue';
 import { useAppMainForm } from '@store/main-form';
 
 const emits = defineEmits<StepEmits>();
@@ -12,42 +13,77 @@ const appMainForm = useAppMainForm();
 <template>
   <form class="step-form">
     <div class="step-form__documents">
-      <FileUploader
+      <FormField
         label="Копии финансовой отчетности организации за последний год (за последний год – по кварталам), в объеме, установленном действующим законодательством РУз для квартальных, полугодовых и годовых отчетов, с подтверждением сдачи в налоговый орган; Ф-1, Ф-2, оборот счетов"
-        :invalid="appMainForm.$v?.financialStatements?.$error"
-        :url="appMainForm.formObj.financialStatements"
-        @update="(file) => appMainForm.saveFile('financialStatements', file)"
-      />
-      <FileUploader
+        :is-not-confirmed="appMainForm.isRejected('financialStatements')"
+      >
+        <FileUploader
+          label="Копии финансовой отчетности организации за последний год..."
+          :invalid="appMainForm.$v?.financialStatements?.$error"
+          :url="appMainForm.formObj.financialStatements"
+          @update="(file) => appMainForm.saveFile('financialStatements', file)"
+        />
+      </FormField>
+
+      <FormField
         label="Справка из налогового органа об отсутствии задолженности перед бюджетом;"
-        :invalid="appMainForm.$v?.taxDebtAbsenceCertificate?.$error"
-        :url="appMainForm.formObj.taxDebtAbsenceCertificate"
-        @update="(file) => appMainForm.saveFile('taxDebtAbsenceCertificate', file)"
-      />
-      <FileUploader
+        :is-not-confirmed="appMainForm.isRejected('taxDebtAbsenceCertificate')"
+      >
+        <FileUploader
+          label="Справка из налогового органа об отсутствии задолженности перед бюджетом;"
+          :invalid="appMainForm.$v?.taxDebtAbsenceCertificate?.$error"
+          :url="appMainForm.formObj.taxDebtAbsenceCertificate"
+          @update="(file) => appMainForm.saveFile('taxDebtAbsenceCertificate', file)"
+        />
+      </FormField>
+
+      <FormField
         label="Справка из банков о наличии расчетных счетов, с указанием отсутствия картотеки №2 (оригинал с датой выдачи – не более 30 дней);"
-        :invalid="appMainForm.$v?.bankAccountCertificate?.$error"
-        :url="appMainForm.formObj.bankAccountCertificate"
-        @update="(file) => appMainForm.saveFile('bankAccountCertificate', file)"
-      />
-      <FileUploader
+        :is-not-confirmed="appMainForm.isRejected('bankAccountCertificate')"
+      >
+        <FileUploader
+          label="Справка из банков о наличии расчетных счетов..."
+          :invalid="appMainForm.$v?.bankAccountCertificate?.$error"
+          :url="appMainForm.formObj.bankAccountCertificate"
+          @update="(file) => appMainForm.saveFile('bankAccountCertificate', file)"
+        />
+      </FormField>
+
+      <FormField
         label="Бизнес-план проекта"
-        :invalid="appMainForm.$v?.projectBusinessPlan?.$error"
-        :url="appMainForm.formObj.projectBusinessPlan"
-        @update="(file) => appMainForm.saveFile('projectBusinessPlan', file)"
-      />
-      <FileUploader
+        :is-not-confirmed="appMainForm.isRejected('projectBusinessPlan')"
+      >
+        <FileUploader
+          label="Бизнес-план проекта"
+          :invalid="appMainForm.$v?.projectBusinessPlan?.$error"
+          :url="appMainForm.formObj.projectBusinessPlan"
+          @update="(file) => appMainForm.saveFile('projectBusinessPlan', file)"
+        />
+      </FormField>
+
+      <FormField
         label="Смета целевого расходования денежных средств"
-        :invalid="appMainForm.$v?.targetFundSpendingEstimate?.$error"
-        :url="appMainForm.formObj.targetFundSpendingEstimate"
-        @update="(file) => appMainForm.saveFile('targetFundSpendingEstimate', file)"
-      />
-      <FileUploader
+        :is-not-confirmed="appMainForm.isRejected('targetFundSpendingEstimate')"
+      >
+        <FileUploader
+          label="Смета целевого расходования денежных средств"
+          :invalid="appMainForm.$v?.targetFundSpendingEstimate?.$error"
+          :url="appMainForm.formObj.targetFundSpendingEstimate"
+          @update="(file) => appMainForm.saveFile('targetFundSpendingEstimate', file)"
+        />
+      </FormField>
+
+      <FormField
         label="Договор аренды (если организация арендует помещение);"
-        :invalid="appMainForm.$v?.leaseAgreement?.$error"
-        :url="appMainForm.formObj.leaseAgreement"
-        @update="(file) => appMainForm.saveFile('leaseAgreement', file)"
-      />
+        :is-not-confirmed="appMainForm.isRejected('leaseAgreement')"
+      >
+        <FileUploader
+          label="Договор аренды (если организация арендует помещение);"
+          :invalid="appMainForm.$v?.leaseAgreement?.$error"
+          :url="appMainForm.formObj.leaseAgreement"
+          @update="(file) => appMainForm.saveFile('leaseAgreement', file)"
+        />
+      </FormField>
     </div>
 
     <div class="step-form__controls">

@@ -49,6 +49,12 @@ export interface IMainForm {
   insuranceCompanyLetter: string
 }
 
+export enum PropertyStatus {
+  Pending = 0,
+  Rejected,
+  Approved,
+}
+
 export interface IMainFormRequestBody {
   id?: string
   properties: IMainForm
@@ -66,11 +72,17 @@ export enum MainFormCreditType {
   Insurance = 3, // Страховая
 }
 
+export interface StatusField {
+  name: string
+  status: number
+}
+
 export interface IMainFormResponse {
   id: number
   status: number
   number: number
   properties: IMainForm
+  propertyStatuses: StatusField[]
 }
 
 export enum ApplicationStatus {

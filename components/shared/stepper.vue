@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { nextIcon } from '../../assets/icons';
-import VIcon from './VIcon.vue';
+import VIcon from './v-icon.vue';
 
 defineProps<{
   steps: string[]
