@@ -32,10 +32,10 @@ export const usePhoneMask = (props: IPhoneMaskProps, emit: IPhoneMaskEmit) => {
     }, 0);
   };
 
-  // onBeforeMount(() => {
-  //   if (!props.modelValue) return;
-  //   phone.value = props.modelValue.substring(CODE.length);
-  // });
+  onBeforeMount(() => {
+    if (!props.modelValue) return;
+    phone.value = props.modelValue.substring(CODE.length);
+  });
 
   return {
     resetPhone,

@@ -1,5 +1,4 @@
 import type { IMainForm } from '../types';
-import { CODE } from '@composables/ui/phone-mask/utils';
 import { MainFormCreditType, MainFormPeriod } from '../types';
 
 export const setFormModel = (value?: Partial<IMainForm>): Required<IMainForm> => {
@@ -15,8 +14,8 @@ export const setFormModel = (value?: Partial<IMainForm>): Required<IMainForm> =>
     ownFundsAmount: value?.ownFundsAmount ?? 0,
     organizationSocialIndicators: value?.organizationSocialIndicators ?? '',
     contactPersonFullName: value?.contactPersonFullName ?? '',
-    mobilePhone: value?.mobilePhone?.substring(CODE.length) ?? '',
-    workPhone: value?.workPhone?.substring(CODE.length) ?? '',
+    mobilePhone: value?.mobilePhone ?? '',
+    workPhone: value?.workPhone ?? '',
     homePhone: value?.homePhone ?? '',
     email: value?.email ?? '',
     directorFullName: value?.directorFullName ?? '',

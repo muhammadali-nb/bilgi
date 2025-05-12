@@ -6,6 +6,7 @@ import SecondStep from '@components/steps/second-step.vue';
 import Status from '@components/steps/status.vue';
 import ThirdStep from '@components/steps/third-step.vue';
 
+import { getApplicationStatusHeader, stepTitles } from '@composables/main-form/data';
 import { useStepper } from '@composables/ui/stepper';
 import { useAppMainForm } from '@store/main-form';
 
@@ -24,6 +25,11 @@ const submitStep = async () => {
   }
 };
 
+const currentTitle = computed(() => {
+  if (isFinished.value) return getApplicationStatusHeader(1);
+  return stepTitles[activeStep.value] ?? `Шаг ${activeStep.value}`;
+});
+
 await applicationInit();
 </script>
 
@@ -32,7 +38,7 @@ await applicationInit();
     <div class="container-xs">
       <div class="home__content">
         <h3 class="font-24-sb home__title">
-          Заполнение заявки
+          {{ currentTitle }}
         </h3>
 
         <template v-if="!isFinished">

@@ -1,24 +1,45 @@
 <script lang="ts" setup>
-import { successIcon } from '@assets/icons';
 import VIcon from '@components/shared/v-icon.vue';
+import { getApplicationStatusMeta } from '@composables/main-form/data';
+import { useAppMainForm } from '@store/main-form';
+
+const appMainForm = useAppMainForm();
+
+const statusMeta = computed(() => getApplicationStatusMeta(appMainForm.applicationStatus ?? 1));
+
+function handleActionClick() {
+  switch (statusMeta.value.action?.type) {
+    case 'edit':
+
+      break;
+    case 'resend':
+      break;
+  }
+}
 </script>
 
 <template>
   <div class="step-status">
     <h4 class="step-status__title font-24-sb">
-      Заявка №21355
+      Заявка №{{ appMainForm.applicationId }}
     </h4>
-    <Message severity="info">
+
+    <Message :severity="statusMeta.severity">
       <template #icon>
-        <VIcon :icon="successIcon" class="p-message-icon" />
+        <VIcon :icon="statusMeta.icon" class="p-message-icon" />
       </template>
-      Ваша заявка № 21355 успешно прошла все этапы проверки и готова к выдаче. Пожалуйста, ознакомьтесь с договором перед получением.
+      {{ statusMeta.message }}
     </Message>
-    <p class="font-16-r">
-      Ваша заявка была отклонена в связи с наличием задолженностей. Для дальнейшего рассмотрения вам необходимо погасить все задолженности и предоставить подтверждающие документы.
+
+    <p v-if="statusMeta.description" class="font-16-r">
+      {{ statusMeta.description }}
     </p>
-    <div>
-      <Button label="Скачать договор" />
+
+    <div v-if="statusMeta.action">
+      <Button
+        :label="statusMeta.action.label"
+        @click="handleActionClick"
+      />
     </div>
   </div>
 </template>

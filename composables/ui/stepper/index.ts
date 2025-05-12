@@ -1,36 +1,55 @@
 import { useAppMainForm } from '@store/main-form';
-import useVuelidate from '@vuelidate/core';
+import { computed, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 export const useStepper = () => {
   const $router = useRouter();
   const $route = useRoute();
-  const isFinished = computed(() => $route.query.step === 'done');
-  const steps = ['Шаг №1', 'Шаг №2', 'Шаг №3', 'Шаг №4'];
-  const guardLoading = ref(false);
   const appMainForm = useAppMainForm();
+
+  const steps = ['Шаг №1', 'Шаг №2', 'Шаг №3', 'Шаг №4'];
+  const totalSteps = steps.length;
+  const guardLoading = ref(false);
+  const isLockedOnDone = ref(false);
+
+  const isFinished = computed(() => $route.query.step === 'done');
+
   const activeStep = computed<number>(() => {
+    if (isLockedOnDone.value) return totalSteps + 1;
     const step = Number($route.query.step);
-    return Number.isNaN(step) ? 1 : step;
+    return Number.isNaN(step) ? 1 : Math.min(step, totalSteps);
   });
 
-  const next = () => {
-    if (activeStep.value < steps.length) {
-      $router.push({
+  const next = async () => {
+    if (isLockedOnDone.value) return;
+
+    if (activeStep.value < totalSteps) {
+      await $router.push({
         name: $route.name as string,
         query: { ...$route.query, step: activeStep.value + 1 },
       });
     }
     else {
-      $router.push({
-        name: $route.name as string,
-        query: { ...$route.query, step: 'done' },
-      });
+      const [invalidStep, rejectedStep] = await Promise.all([
+        appMainForm.getFirstInvalidStep(),
+        appMainForm.getStepByRejectedField(),
+      ]);
+
+      if (!invalidStep && !rejectedStep) {
+        isLockedOnDone.value = true;
+        console.log(isLockedOnDone.value);
+        await $router.push({
+          name: $route.name as string,
+          query: { ...$route.query, step: 'done' },
+        });
+      }
     }
+
     window.scrollTo(0, 0);
   };
 
   const prev = () => {
-    if (activeStep.value > 1) {
+    if (activeStep.value > 1 && !isLockedOnDone.value) {
       $router.push({
         name: $route.name as string,
         query: { ...$route.query, step: activeStep.value - 1 },
@@ -42,54 +61,52 @@ export const useStepper = () => {
   const stepGuard = async () => {
     guardLoading.value = true;
 
-    const totalSteps = 4;
-    const routeStepParam = $route.query.step;
-    const isDoneStep = routeStepParam === 'done';
-    const currentStep = isDoneStep ? 'done' : Number(routeStepParam);
-    const isValidStepNumber = typeof currentStep === 'number' && currentStep >= 1 && currentStep <= totalSteps;
+    const routeStep = $route.query.step;
+    const isDoneStep = routeStep === 'done';
 
-    // Проверяем каждый шаг на валидность
-    let firstInvalidStep: number | null = null;
-    for (let i = 0; i < totalSteps; i++) {
-      const validation = useVuelidate(appMainForm.rules[i], appMainForm.formObj);
-      await validation.value.$validate();
+    // Если мы на done и isLockedOnDone не установлен, редиректим на первый невалидный шаг
+    if (isDoneStep && !isLockedOnDone.value) {
+      const [firstInvalidStep, rejectedStep] = await Promise.all([
+        appMainForm.getFirstInvalidStep(),
+        appMainForm.getStepByRejectedField(),
+      ]);
+      const targetStep = rejectedStep ?? firstInvalidStep ?? 1;
 
-      if (validation.value.$error) {
-        firstInvalidStep = i + 1;
-        break;
-      }
-    }
-
-    //  Нельзя на done если не все шаги валидны
-    if (isDoneStep && firstInvalidStep !== null) {
-      $router.push({
+      await $router.push({
         name: $route.name as string,
-        query: { ...$route.query, step: firstInvalidStep },
+        query: { ...$route.query, step: targetStep },
       });
+
       guardLoading.value = false;
       return;
     }
 
-    //  Нельзя попасть на невалидный
-    if (!isDoneStep && !isValidStepNumber) {
-      const fallback = firstInvalidStep ?? 1;
-      $router.push({
+    // Если isLockedOnDone установлен, не разрешаем переход на шаги
+    if (isLockedOnDone.value) {
+      await $router.push({
         name: $route.name as string,
-        query: { ...$route.query, step: fallback },
+        query: { ...$route.query, step: 'done' },
       });
+
       guardLoading.value = false;
       return;
     }
 
-    // Нельзя перескакивать вперёд, если что-то невалидно
-    if (
-      typeof currentStep === 'number'
-      && firstInvalidStep !== null
-      && currentStep > firstInvalidStep
-    ) {
-      $router.push({
+    // Логика для переходов по шагам
+    const [firstInvalidStep, rejectedStep] = await Promise.all([
+      appMainForm.getFirstInvalidStep(),
+      appMainForm.getStepByRejectedField(),
+    ]);
+    const hasErrors = firstInvalidStep !== null || rejectedStep !== null;
+
+    const currentStep = Number(routeStep);
+    const isValidStep = !Number.isNaN(currentStep) && currentStep >= 1 && currentStep <= totalSteps;
+    const targetStep = rejectedStep ?? firstInvalidStep;
+
+    if (!isValidStep || (targetStep !== null && currentStep > targetStep)) {
+      await $router.push({
         name: $route.name as string,
-        query: { ...$route.query, step: firstInvalidStep },
+        query: { ...$route.query, step: targetStep ?? 1 },
       });
     }
 
@@ -104,5 +121,6 @@ export const useStepper = () => {
     isFinished,
     stepGuard,
     guardLoading,
+    isLockedOnDone,
   };
 };

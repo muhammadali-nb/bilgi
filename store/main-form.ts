@@ -10,6 +10,7 @@ import { setFormModel } from '@composables/main-form/model';
 import { PropertyStatus } from '@composables/main-form/types';
 import { useApi } from '@composables/use-api';
 import { useToastStore } from '@store/toast';
+import useVuelidate from '@vuelidate/core';
 
 export const useAppMainForm = defineStore('main-form', () => {
   const stepBody = ref<IMainFormRequestBody>();
@@ -83,9 +84,48 @@ export const useAppMainForm = defineStore('main-form', () => {
     }
   };
 
+  const getFirstInvalidStep = async () => {
+    let firstInvalidStep: number | null = null;
+
+    for (let i = 0; i < rules.length; i++) {
+      const validation = useVuelidate(rules[i], formObj.value);
+      await validation.value.$validate();
+
+      if (validation.value.$error) {
+        firstInvalidStep = i + 1;
+        break;
+      }
+    }
+
+    return firstInvalidStep;
+  };
+
+  // Получаем шаг с отклонённым полем
+  const getStepByRejectedField = (): number | null => {
+    if (!formStatuses.value.length) return null;
+
+    const rejectedField = formStatuses.value.find(
+      s => s.status === PropertyStatus.Rejected,
+    );
+
+    if (!rejectedField) return null;
+
+    const fieldName = rejectedField.name;
+
+    // Ищем шаг, в котором находится это поле
+    for (let i = 0; i < rules.length; i++) {
+      const stepFields = Object.keys(rules[i]);
+      if (stepFields.includes(fieldName)) {
+        return i + 1; // Индексация с 1
+      }
+    }
+
+    return null;
+  };
+
   return {
     $v, formObj, submitApplication, getApplication, rules, applicationStatus, isRejected,
     creditSecurityTypeOptions, gracePeriodOptions, saveField, saveFile, handleBlurSave,
-    formStatuses,
+    formStatuses, getStepByRejectedField, applicationId, getFirstInvalidStep,
   };
 });

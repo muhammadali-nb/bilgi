@@ -95,3 +95,14 @@ export enum ApplicationStatus {
   FinalCorrection,
   Approved,
 }
+
+export interface ApplicationStatusMeta {
+  message: string
+  description?: string
+  icon: string
+  severity: 'success' | 'info' | 'warn' | 'error'
+  action?: {
+    label: string
+    type: 'edit' | 'resend' | 'none'
+  }
+}
