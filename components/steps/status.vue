@@ -4,8 +4,14 @@ import { getApplicationStatusMeta } from '@composables/main-form/data';
 import { useAppMainForm } from '@store/main-form';
 
 const appMainForm = useAppMainForm();
-
+const $router = useRouter();
+const $route = useRoute();
 const statusMeta = computed(() => getApplicationStatusMeta(appMainForm.applicationStatus ?? 1));
+
+const goToRejectedFieldStep = () => {
+  const step = appMainForm.getStepByRejectedField();
+  $router.push({ name: $route.name as string, query: { ...$route.query, step: step ?? 1 } });
+};
 
 function handleActionClick() {
   switch (statusMeta.value.action?.type) {
@@ -38,7 +44,7 @@ function handleActionClick() {
     <div v-if="statusMeta.action">
       <Button
         :label="statusMeta.action.label"
-        @click="handleActionClick"
+        @click="goToRejectedFieldStep"
       />
     </div>
   </div>

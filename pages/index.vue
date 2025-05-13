@@ -14,6 +14,7 @@ const appMainForm = useAppMainForm();
 const { activeStep, next, steps, prev, isFinished, stepGuard } = useStepper();
 
 const applicationInit = async () => {
+  appMainForm.generateFieldToStepMap();
   await appMainForm.getApplication();
   await stepGuard();
 };
@@ -21,7 +22,7 @@ const applicationInit = async () => {
 const submitStep = async () => {
   const isCorrect = await appMainForm.submitApplication();
   if (isCorrect) {
-    next();
+    await next();
   }
 };
 

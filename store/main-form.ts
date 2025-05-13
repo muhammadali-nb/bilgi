@@ -3,14 +3,12 @@ import type {
   IMainForm,
   IMainFormRequestBody,
   IMainFormResponse,
-  StatusField,
 } from '@composables/main-form/types';
 import { useMainForm } from '@composables/main-form';
 import { setFormModel } from '@composables/main-form/model';
 import { PropertyStatus } from '@composables/main-form/types';
 import { useApi } from '@composables/use-api';
 import { useToastStore } from '@store/toast';
-import useVuelidate from '@vuelidate/core';
 
 export const useAppMainForm = defineStore('main-form', () => {
   const stepBody = ref<IMainFormRequestBody>();
@@ -21,8 +19,12 @@ export const useAppMainForm = defineStore('main-form', () => {
     saveField,
     saveFile, rules,
     applicationId,
+    generateFieldToStepMap,
+    fieldToStepMap, formStatuses,
+    getRejectedFields,
+    getFirstInvalidStep,
+    getStepByRejectedField,
   } = useMainForm();
-  const formStatuses = ref<StatusField[]>([]);
   const $toast = useToastStore();
   const {
     data, error,
@@ -52,7 +54,6 @@ export const useAppMainForm = defineStore('main-form', () => {
       id: applicationId.value ?? '',
       properties: formObj.value,
     };
-
     await submitStep();
     if (submitStatus.value === 'success' && submitData.value) {
       applicationStatus.value = submitData.value.status;
@@ -72,6 +73,7 @@ export const useAppMainForm = defineStore('main-form', () => {
       formObj.value = setFormModel(data.value.properties);
       applicationId.value = data.value.id.toString();
       formStatuses.value = data.value.propertyStatuses;
+      applicationStatus.value = data.value.status;
     }
   };
 
@@ -84,48 +86,9 @@ export const useAppMainForm = defineStore('main-form', () => {
     }
   };
 
-  const getFirstInvalidStep = async () => {
-    let firstInvalidStep: number | null = null;
-
-    for (let i = 0; i < rules.length; i++) {
-      const validation = useVuelidate(rules[i], formObj.value);
-      await validation.value.$validate();
-
-      if (validation.value.$error) {
-        firstInvalidStep = i + 1;
-        break;
-      }
-    }
-
-    return firstInvalidStep;
-  };
-
-  // Получаем шаг с отклонённым полем
-  const getStepByRejectedField = (): number | null => {
-    if (!formStatuses.value.length) return null;
-
-    const rejectedField = formStatuses.value.find(
-      s => s.status === PropertyStatus.Rejected,
-    );
-
-    if (!rejectedField) return null;
-
-    const fieldName = rejectedField.name;
-
-    // Ищем шаг, в котором находится это поле
-    for (let i = 0; i < rules.length; i++) {
-      const stepFields = Object.keys(rules[i]);
-      if (stepFields.includes(fieldName)) {
-        return i + 1; // Индексация с 1
-      }
-    }
-
-    return null;
-  };
-
   return {
     $v, formObj, submitApplication, getApplication, rules, applicationStatus, isRejected,
     creditSecurityTypeOptions, gracePeriodOptions, saveField, saveFile, handleBlurSave,
-    formStatuses, getStepByRejectedField, applicationId, getFirstInvalidStep,
+    formStatuses, applicationId, getFirstInvalidStep, getRejectedFields, generateFieldToStepMap, fieldToStepMap, getStepByRejectedField,
   };
 });
