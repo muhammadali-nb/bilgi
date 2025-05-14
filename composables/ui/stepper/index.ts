@@ -12,46 +12,35 @@ export const useStepper = () => {
   const totalSteps = steps.length;
 
   const guardLoading = ref(false);
-  const isLockedOnDone = ref(false);
 
   const isFinished = computed(() => $route.query.step === 'done');
 
   const activeStep = computed<number>(() => {
     const step = Number($route.query.step);
-    return isLockedOnDone.value
-      ? totalSteps + 1
-      : Number.isNaN(step)
-        ? 1
-        : Math.min(step, totalSteps);
+    return Number.isNaN(step) ? 1 : step;
   });
 
   const next = async () => {
-    if (isLockedOnDone.value) return;
-
     if (activeStep.value < totalSteps) {
       await $router.push({
         name: $route.name as string,
         query: { ...$route.query, step: activeStep.value + 1 },
       });
     }
-    // else {
-    //   // Если всё валидно и статус позволяет, идём на done
-    //   if (!invalidStep && !rejectedStep) {
-    //     if (formStatus.value === ApplicationStatus.New || formStatus.value === ApplicationStatus.Correction) {
-    //       isLockedOnDone.value = true;
-    //       await $router.push({
-    //         name: $route.name as string,
-    //         query: { ...$route.query, step: 'done' },
-    //       });
-    //     }
-    //   }
-    // }
+    else {
+      if (appMainForm.applicationStatus === ApplicationStatus.New || appMainForm.applicationStatus === ApplicationStatus.Correction) {
+        await $router.push({
+          name: $route.name as string,
+          query: { ...$route.query, step: 'done' },
+        });
+      }
+    }
 
     window.scrollTo(0, 0);
   };
 
   const prev = () => {
-    if (activeStep.value > 1 && !isLockedOnDone.value) {
+    if (activeStep.value > 1) {
       $router.push({
         name: $route.name as string,
         query: { ...$route.query, step: activeStep.value - 1 },
@@ -91,7 +80,7 @@ export const useStepper = () => {
       return;
     }
 
-    // Если шаг в URL невалидный или превышает первый невалидный шаг — возвращаем на первый невалидный
+    // Если шаг в url невалидный или превышает первый невалидный шаг — возвращаем на первый невалидный
     if (!isValidStep || (firstInvalidStep !== null && routeStep > firstInvalidStep)) {
       await $router.push({
         name: $route.name as string,
@@ -110,6 +99,5 @@ export const useStepper = () => {
     isFinished,
     stepGuard,
     guardLoading,
-    isLockedOnDone,
   };
 };

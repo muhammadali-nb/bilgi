@@ -8,7 +8,10 @@ import { useAdminHeader } from '@store/admin-header';
 const { navigationList } = useNavigation();
 const adminHeaderStore = useAdminHeader();
 
+const $route = useRoute();
 const $router = useRouter();
+
+const bidId = computed(() => $route.params.id);
 </script>
 
 <template>
@@ -21,9 +24,10 @@ const $router = useRouter();
         <Button v-if="adminHeaderStore.isBackButtonEnabled" variant="text" @click="$router.back()">
           <VIcon :icon="backIcon" />
         </Button>
+
         <p class="admin-layout__header-title">
           {{ $t(adminHeaderStore.name) }}
-          <span v-if="adminHeaderStore.bidNumber">{{ adminHeaderStore.bidNumber }}</span>
+          <span v-if="bidId">{{ bidId }}</span>
         </p>
       </div>
 

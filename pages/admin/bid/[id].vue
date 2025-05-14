@@ -1,16 +1,12 @@
 <script lang="ts" setup>
 import FieldStatus from '@components/admin/field-status.vue';
-import { useAdminHeader } from '@store/admin-header';
 
 const value = ref('Заявка');
 const options = ref(['Заявка', 'Учредительные', 'Финансовые', 'Обеспечение']);
-const adminHeaderStore = useAdminHeader();
 
 definePageMeta({
   layout: 'admin',
 });
-
-adminHeaderStore.setBidNumber('123');
 </script>
 
 <template>

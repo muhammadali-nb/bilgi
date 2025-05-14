@@ -21,6 +21,7 @@ const appMainForm = useAppMainForm();
           label="Копии финансовой отчетности организации за последний год..."
           :invalid="appMainForm.$v?.financialStatements?.$error"
           :url="appMainForm.formObj.financialStatements"
+          :warning="appMainForm.isRejected('financialStatements')"
           @update="(file) => appMainForm.saveFile('financialStatements', file)"
         />
       </FormField>
@@ -33,6 +34,7 @@ const appMainForm = useAppMainForm();
           label="Справка из налогового органа об отсутствии задолженности перед бюджетом;"
           :invalid="appMainForm.$v?.taxDebtAbsenceCertificate?.$error"
           :url="appMainForm.formObj.taxDebtAbsenceCertificate"
+          :warning="appMainForm.isRejected('taxDebtAbsenceCertificate')"
           @update="(file) => appMainForm.saveFile('taxDebtAbsenceCertificate', file)"
         />
       </FormField>
@@ -45,6 +47,7 @@ const appMainForm = useAppMainForm();
           label="Справка из банков о наличии расчетных счетов..."
           :invalid="appMainForm.$v?.bankAccountCertificate?.$error"
           :url="appMainForm.formObj.bankAccountCertificate"
+          :warning="appMainForm.isRejected('bankAccountCertificate')"
           @update="(file) => appMainForm.saveFile('bankAccountCertificate', file)"
         />
       </FormField>
@@ -57,6 +60,7 @@ const appMainForm = useAppMainForm();
           label="Бизнес-план проекта"
           :invalid="appMainForm.$v?.projectBusinessPlan?.$error"
           :url="appMainForm.formObj.projectBusinessPlan"
+          :warning="appMainForm.isRejected('projectBusinessPlan')"
           @update="(file) => appMainForm.saveFile('projectBusinessPlan', file)"
         />
       </FormField>
@@ -69,6 +73,7 @@ const appMainForm = useAppMainForm();
           label="Смета целевого расходования денежных средств"
           :invalid="appMainForm.$v?.targetFundSpendingEstimate?.$error"
           :url="appMainForm.formObj.targetFundSpendingEstimate"
+          :warning="appMainForm.isRejected('targetFundSpendingEstimate')"
           @update="(file) => appMainForm.saveFile('targetFundSpendingEstimate', file)"
         />
       </FormField>
@@ -81,6 +86,7 @@ const appMainForm = useAppMainForm();
           label="Договор аренды (если организация арендует помещение);"
           :invalid="appMainForm.$v?.leaseAgreement?.$error"
           :url="appMainForm.formObj.leaseAgreement"
+          :warning="appMainForm.isRejected('leaseAgreement')"
           @update="(file) => appMainForm.saveFile('leaseAgreement', file)"
         />
       </FormField>

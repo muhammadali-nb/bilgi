@@ -87,8 +87,9 @@ export const useAppMainForm = defineStore('main-form', () => {
   };
 
   return {
-    $v, formObj, submitApplication, getApplication, rules, applicationStatus, isRejected,
-    creditSecurityTypeOptions, gracePeriodOptions, saveField, saveFile, handleBlurSave,
-    formStatuses, applicationId, getFirstInvalidStep, getRejectedFields, generateFieldToStepMap, fieldToStepMap, getStepByRejectedField,
+    $v, formObj, submitApplication, getApplication, rules, applicationStatus,
+    isRejected, creditSecurityTypeOptions, gracePeriodOptions, saveField, saveFile,
+    handleBlurSave, formStatuses, applicationId, getFirstInvalidStep, getRejectedFields,
+    generateFieldToStepMap, fieldToStepMap, getStepByRejectedField,
   };
 });

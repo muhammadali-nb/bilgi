@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import StatisticCard from '@components/admin/statistic-card.vue';
+import { useBid } from '@composables/bid';
 import { bidData } from '@composables/mock/admin';
 
+const { getBids } = useBid();
 definePageMeta({
   layout: 'admin',
 });
 const localePath = useLocalePath();
-
+await getBids();
 const dataList = computed(() => bidData);
 </script>
 

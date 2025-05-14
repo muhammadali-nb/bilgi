@@ -25,6 +25,7 @@ const appMainForm = useAppMainForm();
           label="Кадастровый паспорт на земельный участок..."
           :invalid="appMainForm.$v?.landCadastrePassport?.$error"
           :url="appMainForm.formObj.landCadastrePassport"
+          :warning="appMainForm.isRejected('landCadastrePassport')"
           @update="(file) => appMainForm.saveFile('landCadastrePassport', file)"
         />
       </FormField>
@@ -37,6 +38,7 @@ const appMainForm = useAppMainForm();
           label="Документы, подтверждающие право собственности"
           :invalid="appMainForm.$v?.ownershipDocuments?.$error"
           :url="appMainForm.formObj.ownershipDocuments"
+          :warning="appMainForm.isRejected('ownershipDocuments')"
           @update="(file) => appMainForm.saveFile('ownershipDocuments', file)"
         />
       </FormField>
@@ -49,6 +51,7 @@ const appMainForm = useAppMainForm();
           label="Отчет независимой оценочной организации"
           :invalid="appMainForm.$v?.realEstateValuationReport?.$error"
           :url="appMainForm.formObj.realEstateValuationReport"
+          :warning="appMainForm.isRejected('realEstateValuationReport')"
           @update="(file) => appMainForm.saveFile('realEstateValuationReport', file)"
         />
       </FormField>
@@ -65,6 +68,7 @@ const appMainForm = useAppMainForm();
           label="Свидетельство о регистрации автомототранспортного средства"
           :invalid="appMainForm.$v?.vehicleRegistrationCertificate?.$error"
           :url="appMainForm.formObj.vehicleRegistrationCertificate"
+          :warning="appMainForm.isRejected('vehicleRegistrationCertificate')"
           @update="(file) => appMainForm.saveFile('vehicleRegistrationCertificate', file)"
         />
       </FormField>
@@ -77,6 +81,7 @@ const appMainForm = useAppMainForm();
           label="Отчет независимой оценочной организации"
           :invalid="appMainForm.$v?.vehicleValuationReport?.$error"
           :url="appMainForm.formObj.vehicleValuationReport"
+          :warning="appMainForm.isRejected('vehicleValuationReport')"
           @update="(file) => appMainForm.saveFile('vehicleValuationReport', file)"
         />
       </FormField>
@@ -93,6 +98,7 @@ const appMainForm = useAppMainForm();
           label="Решение общего собрания участников/акционеров"
           :invalid="appMainForm.$v?.shareholderResolution?.$error"
           :url="appMainForm.formObj.shareholderResolution"
+          :warning="appMainForm.isRejected('shareholderResolution')"
           @update="(file) => appMainForm.saveFile('shareholderResolution', file)"
         />
       </FormField>
@@ -105,6 +111,7 @@ const appMainForm = useAppMainForm();
           label="Финансовая отчетность и учредительные документы"
           :invalid="appMainForm.$v?.guarantorFinancialAndFoundingDocs?.$error"
           :url="appMainForm.formObj.guarantorFinancialAndFoundingDocs"
+          :warning="appMainForm.isRejected('guarantorFinancialAndFoundingDocs')"
           @update="(file) => appMainForm.saveFile('guarantorFinancialAndFoundingDocs', file)"
         />
       </FormField>
@@ -117,6 +124,7 @@ const appMainForm = useAppMainForm();
           label="Аудиторское заключение"
           :invalid="appMainForm.$v?.auditorOpinion?.$error"
           :url="appMainForm.formObj.auditorOpinion"
+          :warning="appMainForm.isRejected('auditorOpinion')"
           @update="(file) => appMainForm.saveFile('auditorOpinion', file)"
         />
       </FormField>
@@ -129,6 +137,7 @@ const appMainForm = useAppMainForm();
           label="Гарантийное письмо поручителя"
           :invalid="appMainForm.$v?.guarantorLetter?.$error"
           :url="appMainForm.formObj.guarantorLetter"
+          :warning="appMainForm.isRejected('guarantorLetter')"
           @update="(file) => appMainForm.saveFile('guarantorLetter', file)"
         />
       </FormField>
@@ -145,6 +154,7 @@ const appMainForm = useAppMainForm();
           label="Письмо Страховой компании о получении обязательства перед займом."
           :invalid="appMainForm.$v?.insuranceCompanyLetter?.$error"
           :url="appMainForm.formObj.insuranceCompanyLetter"
+          :warning="appMainForm.isRejected('insuranceCompanyLetter')"
           @update="(file) => appMainForm.saveFile('insuranceCompanyLetter', file)"
         />
       </FormField>

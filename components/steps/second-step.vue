@@ -21,6 +21,7 @@ const appMainForm = useAppMainForm();
           label="Свидетельство о государственной регистрации"
           :invalid="appMainForm.$v?.certificateOfStateRegistration?.$error"
           :url="appMainForm.formObj.certificateOfStateRegistration"
+          :warning="appMainForm.isRejected('certificateOfStateRegistration')"
           @update="(file) => appMainForm.saveFile('certificateOfStateRegistration', file)"
         />
       </FormField>
@@ -33,6 +34,7 @@ const appMainForm = useAppMainForm();
           label="Устав организации"
           :invalid="appMainForm.$v?.organizationCharter?.$error"
           :url="appMainForm.formObj.organizationCharter"
+          :warning="appMainForm.isRejected('organizationCharter')"
           @update="(file) => appMainForm.saveFile('organizationCharter', file)"
         />
       </FormField>
@@ -45,6 +47,7 @@ const appMainForm = useAppMainForm();
           label="Учредительный договор"
           :invalid="appMainForm.$v?.foundingAgreement?.$error"
           :url="appMainForm.formObj.foundingAgreement"
+          :warning="appMainForm.isRejected('foundingAgreement')"
           @update="(file) => appMainForm.saveFile('foundingAgreement', file)"
         />
       </FormField>
@@ -57,6 +60,7 @@ const appMainForm = useAppMainForm();
           label="Решения учредителей на открытие организации"
           :invalid="appMainForm.$v?.foundersDecisionToOpenOrganization?.$error"
           :url="appMainForm.formObj.foundersDecisionToOpenOrganization"
+          :warning="appMainForm.isRejected('foundersDecisionToOpenOrganization')"
           @update="(file) => appMainForm.saveFile('foundersDecisionToOpenOrganization', file)"
         />
       </FormField>
@@ -69,6 +73,7 @@ const appMainForm = useAppMainForm();
           label="Решение учредителей на выделение целевого займа (сумма займа, цель, срок, процентная ставка, обеспечение);"
           :invalid="appMainForm.$v?.foundersDecisionOnTargetLoan?.$error"
           :url="appMainForm.formObj.foundersDecisionOnTargetLoan"
+          :warning="appMainForm.isRejected('foundersDecisionOnTargetLoan')"
           @update="(file) => appMainForm.saveFile('foundersDecisionOnTargetLoan', file)"
         />
       </FormField>
@@ -81,6 +86,7 @@ const appMainForm = useAppMainForm();
           label="Приказ на выделение целевого займа (сумма займа, цель, срок, процентная ставка, обеспечение)"
           :invalid="appMainForm.$v?.orderOnTargetLoan?.$error"
           :url="appMainForm.formObj.orderOnTargetLoan"
+          :warning="appMainForm.isRejected('orderOnTargetLoan')"
           @update="(file) => appMainForm.saveFile('orderOnTargetLoan', file)"
         />
       </FormField>
@@ -93,6 +99,7 @@ const appMainForm = useAppMainForm();
           label="Документы, подтверждающие полномочия руководителя"
           :invalid="appMainForm.$v?.ceoAuthorityConfirmation?.$error"
           :url="appMainForm.formObj.ceoAuthorityConfirmation"
+          :warning="appMainForm.isRejected('ceoAuthorityConfirmation')"
           @update="(file) => appMainForm.saveFile('ceoAuthorityConfirmation', file)"
         />
       </FormField>
@@ -105,6 +112,7 @@ const appMainForm = useAppMainForm();
           label="Документы, подтверждающие полномочия главного бухгалтера"
           :invalid="appMainForm.$v?.chiefAccountantAuthorityConfirmation?.$error"
           :url="appMainForm.formObj.chiefAccountantAuthorityConfirmation"
+          :warning="appMainForm.isRejected('chiefAccountantAuthorityConfirmation')"
           @update="(file) => appMainForm.saveFile('chiefAccountantAuthorityConfirmation', file)"
         />
       </FormField>
@@ -117,6 +125,7 @@ const appMainForm = useAppMainForm();
           label="Паспорт руководителя организации;"
           :invalid="appMainForm.$v?.ceoPassport?.$error"
           :url="appMainForm.formObj.ceoPassport"
+          :warning="appMainForm.isRejected('ceoPassport')"
           @update="(file) => appMainForm.saveFile('ceoPassport', file)"
         />
       </FormField>
@@ -129,6 +138,7 @@ const appMainForm = useAppMainForm();
           label="Паспорт главного бухгалтера организации;"
           :invalid="appMainForm.$v?.chiefAccountantPassport?.$error"
           :url="appMainForm.formObj.chiefAccountantPassport"
+          :warning="appMainForm.isRejected('chiefAccountantPassport')"
           @update="(file) => appMainForm.saveFile('chiefAccountantPassport', file)"
         />
       </FormField>
@@ -141,6 +151,7 @@ const appMainForm = useAppMainForm();
           label="Сертификат резидентства ООО 'дирекция технологического парка программных продуктов и информационных технологий' (IT Park);"
           :invalid="appMainForm.$v?.itParkResidencyCertificate?.$error"
           :url="appMainForm.formObj.itParkResidencyCertificate"
+          :warning="appMainForm.isRejected('itParkResidencyCertificate')"
           @update="(file) => appMainForm.saveFile('itParkResidencyCertificate', file)"
         />
       </FormField>
@@ -153,6 +164,7 @@ const appMainForm = useAppMainForm();
           label="Документ, подтверждающий право на осуществление деятельности образования (лицензия/подтверждение/разрешение);"
           :invalid="appMainForm.$v?.educationActivityPermission?.$error"
           :url="appMainForm.formObj.educationActivityPermission"
+          :warning="appMainForm.isRejected('educationActivityPermission')"
           @update="(file) => appMainForm.saveFile('educationActivityPermission', file)"
         />
       </FormField>

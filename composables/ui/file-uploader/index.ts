@@ -1,10 +1,11 @@
 import type { IEmitsFileUploader, IPropsFileUploader } from '@composables/ui/file-uploader/types';
+import { useToastStore } from '@store/toast';
 
 export const useFileUploader = (props: IPropsFileUploader, emit: IEmitsFileUploader) => {
   function getFileNameFromUrl(url: string) {
     return url.substring(url.lastIndexOf('/') + 1);
   }
-
+  const $toast = useToastStore();
   const inputRef = ref<HTMLInputElement | null>(null);
   const isDragOver = ref(false);
   const file = ref<File | null>(null);
@@ -57,6 +58,7 @@ export const useFileUploader = (props: IPropsFileUploader, emit: IEmitsFileUploa
   function processIncomingFile(selectedFile: File) {
     if (!isAllowedFileType(selectedFile)) {
       errorMessage.value = 'Можно загружать только PDF, Word или текстовые файлы.';
+      $toast.error('Ошибка', errorMessage.value);
       return;
     }
 

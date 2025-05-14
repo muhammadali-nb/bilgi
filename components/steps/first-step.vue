@@ -28,6 +28,7 @@ const appMainForm = useAppMainForm();
           v-model="appMainForm.formObj.targetCreditAmount"
           :invalid="appMainForm.$v?.targetCreditAmount?.$error"
           placeholder="Введите сумму"
+          :class="{ warning: appMainForm.isRejected('targetCreditAmount') }"
           name="targetCreditAmount"
           @blur="appMainForm.handleBlurSave('targetCreditAmount')"
         />
@@ -42,6 +43,7 @@ const appMainForm = useAppMainForm();
           v-model="appMainForm.formObj.youngSpecialistsCount"
           :invalid="appMainForm.$v?.youngSpecialistsCount?.$error"
           placeholder="Введите количество"
+          :class="{ warning: appMainForm.isRejected('youngSpecialistsCount') }"
           name="youngSpecialistsCount"
           @blur="appMainForm.handleBlurSave('youngSpecialistsCount')"
         />
@@ -75,6 +77,7 @@ const appMainForm = useAppMainForm();
           placeholder="Выберите срок"
           option-label="name"
           option-value="value"
+          :class="{ warning: appMainForm.isRejected('creditReturnPeriodYears') }"
           @change="appMainForm.saveField('creditReturnPeriodYears', appMainForm.formObj.creditReturnPeriodYears)"
         />
       </FormField>
@@ -91,6 +94,7 @@ const appMainForm = useAppMainForm();
           option-label="name"
           option-value="value"
           placeholder="Выберите"
+          :class="{ warning: appMainForm.isRejected('creditSecurityTypeOptions') }"
           @change="appMainForm.saveField('creditSecurityType', appMainForm.formObj.creditSecurityType)"
         />
       </FormField>
@@ -112,6 +116,7 @@ const appMainForm = useAppMainForm();
               option-label="name"
               option-value="value"
               placeholder="Выберите"
+              :class="{ warning: appMainForm.isRejected('plannedCreditReturnSchedule') }"
               @change="appMainForm.saveField('plannedCreditReturnSchedule', appMainForm.formObj.plannedCreditReturnSchedule)"
             />
           </FormField>
@@ -128,6 +133,7 @@ const appMainForm = useAppMainForm();
               option-label="name"
               option-value="value"
               placeholder="Выберите"
+              :class="{ warning: appMainForm.isRejected('creditReturnFrequency') }"
               @change="appMainForm.saveField('creditReturnFrequency', appMainForm.formObj.creditReturnFrequency)"
             />
           </FormField>
@@ -148,6 +154,7 @@ const appMainForm = useAppMainForm();
           v-model="appMainForm.formObj.projectDescription"
           style="resize: none;"
           rows="7"
+          :class="{ warning: appMainForm.isRejected('projectDescription') }"
           :invalid="appMainForm.$v?.projectDescription?.$error"
           @blur="appMainForm.handleBlurSave('projectDescription')"
         />
@@ -162,6 +169,7 @@ const appMainForm = useAppMainForm();
           v-model="appMainForm.formObj.ownFundsAmount"
           :invalid="appMainForm.$v?.ownFundsAmount?.$error"
           placeholder="Введите сумму"
+          :class="{ warning: appMainForm.isRejected('ownFundsAmount') }"
           name="ownFundsAmount"
           @blur="appMainForm.handleBlurSave('ownFundsAmount')"
         />
@@ -176,6 +184,7 @@ const appMainForm = useAppMainForm();
           v-model="appMainForm.formObj.organizationSocialIndicators"
           style="resize: none;"
           rows="7"
+          :class="{ warning: appMainForm.isRejected('organizationSocialIndicators') }"
           :invalid="appMainForm.$v?.organizationSocialIndicators?.$error"
           @blur="appMainForm.handleBlurSave('organizationSocialIndicators')"
         />
@@ -197,6 +206,7 @@ const appMainForm = useAppMainForm();
           v-model="appMainForm.formObj.contactPersonFullName"
           :invalid="appMainForm.$v?.contactPersonFullName?.$error"
           placeholder="Ф.И.О"
+          :class="{ warning: appMainForm.isRejected('contactPersonFullName') }"
           name="contactPersonFullName"
           @blur="appMainForm.handleBlurSave('contactPersonFullName')"
         />
@@ -211,6 +221,7 @@ const appMainForm = useAppMainForm();
           v-model="appMainForm.formObj.mobilePhone"
           :invalid="appMainForm.$v?.mobilePhone?.$error"
           name="mobilePhone"
+          :class="{ warning: appMainForm.isRejected('mobilePhone') }"
           @complete="appMainForm.handleBlurSave('mobilePhone')"
         />
       </FormField>
@@ -224,6 +235,7 @@ const appMainForm = useAppMainForm();
           v-model="appMainForm.formObj.workPhone"
           :invalid="appMainForm.$v?.workPhone?.$error"
           name="workPhone"
+          :class="{ warning: appMainForm.isRejected('workPhone') }"
           @complete="appMainForm.saveField('workPhone', appMainForm.formObj.workPhone)"
         />
       </FormField>
@@ -236,6 +248,7 @@ const appMainForm = useAppMainForm();
         <PhoneInput
           v-model="appMainForm.formObj.homePhone"
           :invalid="appMainForm.$v?.homePhone?.$error"
+          :class="{ warning: appMainForm.isRejected('homePhone') }"
           name="homePhone"
           @complete="appMainForm.saveField('homePhone', appMainForm.formObj.homePhone)"
         />
@@ -250,6 +263,7 @@ const appMainForm = useAppMainForm();
           v-model="appMainForm.formObj.email"
           :invalid="appMainForm.$v?.email?.$error"
           placeholder="ali@wuwu"
+          :class="{ warning: appMainForm.isRejected('email') }"
           name="email"
           @blur="appMainForm.handleBlurSave('email')"
         />
@@ -266,6 +280,7 @@ const appMainForm = useAppMainForm();
           :invalid="appMainForm.$v?.directorFullName?.$error"
           placeholder="Ф.И.О"
           name="directorFullName"
+          :class="{ warning: appMainForm.isRejected('directorFullName') }"
           @blur="appMainForm.handleBlurSave('directorFullName')"
         />
       </FormField>
@@ -279,6 +294,7 @@ const appMainForm = useAppMainForm();
           label="Документ, подтверждающий право на осуществление деятельности образования (лицензия/подтверждение/разрешение);"
           :invalid="appMainForm.$v?.applicantQuestionnaireDocumentUrl?.$error"
           :url="appMainForm.formObj.applicantQuestionnaireDocumentUrl"
+          :warning="appMainForm.isRejected('applicantQuestionnaireDocumentUrl')"
           @update="(file) => appMainForm.saveFile('applicantQuestionnaireDocumentUrl', file)"
         />
       </FormField>

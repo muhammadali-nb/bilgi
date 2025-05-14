@@ -3,6 +3,7 @@ export interface IPropsFileUploader {
   label: string
   url?: string
   invalid?: boolean
+  warning?: boolean
 }
 
 export interface IEmitsFileUploader {

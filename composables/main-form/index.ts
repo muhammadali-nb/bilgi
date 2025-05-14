@@ -184,14 +184,10 @@ export const useMainForm = () => {
   }
 
   return {
-    $v, rules,
-    formObj,
-    gracePeriodOptions,
-    creditSecurityTypeOptions,
-    saveField, saveFile, activeStep, formStatuses,
-    applicationId, currentRules, generateFieldToStepMap, fieldToStepMap,
-    getRejectedFields,
-    getFirstInvalidStep,
-    getStepByRejectedField,
+    $v, rules, formObj, gracePeriodOptions,
+    creditSecurityTypeOptions, saveField, saveFile,
+    activeStep, formStatuses, applicationId, currentRules,
+    generateFieldToStepMap, fieldToStepMap, getRejectedFields,
+    getFirstInvalidStep, getStepByRejectedField,
   };
 };

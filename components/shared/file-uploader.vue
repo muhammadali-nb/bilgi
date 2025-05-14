@@ -10,7 +10,7 @@ const emit = defineEmits<IEmitsFileUploader>();
 const {
   getFileNameFromUrl, preview, onFileChange,
   openFileDialog, onDrop, status, onDragOver,
-  onDragLeave, isDragOver, errorMessage, inputRef,
+  onDragLeave, isDragOver, inputRef,
 } = useFileUploader(props, emit);
 
 onMounted(() => {
@@ -34,7 +34,8 @@ onBeforeUnmount(() => {
   <div class="uploader-container">
     <div
       class="uploader"
-      :class="{ 'is-dragover': isDragOver }"
+      :class="{ 'is-dragover': isDragOver, 'warning': props.warning }"
+      tabindex="0"
       @dragover.prevent="onDragOver"
       @dragleave.prevent="onDragLeave"
       @drop.prevent="onDrop"
@@ -60,7 +61,6 @@ onBeforeUnmount(() => {
             {{ preview.name }}
           </p>
         </template>
-        {{ errorMessage }}
       </div>
     </div>
     <VIcon :icon="document" no-fill />
@@ -113,5 +113,15 @@ onBeforeUnmount(() => {
 .uploader.is-dragover {
   border-color: #007bff;
   background: #f0f8ff;
+}
+
+.uploader.warning {
+  border: 2px dashed var(--warning);
+  background-color: var(--warning-background);
+
+  &:hover,
+  &:focus-within {
+    border: 2px dashed var(--warning);
+  }
 }
 </style>

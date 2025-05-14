@@ -8,6 +8,7 @@ export const useAdminHeader = defineStore('admin-header', () => {
 
   const setBidNumber = (value: string = '') => {
     bidNumber.value = value;
+    console.log('bid number = ', bidNumber.value);
   };
 
   return {
