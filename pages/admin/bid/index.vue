@@ -1,15 +1,13 @@
 <script lang="ts" setup>
 import StatisticCard from '@components/admin/statistic-card.vue';
 import { useBid } from '@composables/bid';
-import { bidData } from '@composables/mock/admin';
 
-const { getBids } = useBid();
+const { getBids, bidsData } = useBid();
 definePageMeta({
   layout: 'admin',
 });
 const localePath = useLocalePath();
 await getBids();
-const dataList = computed(() => bidData);
 </script>
 
 <template>
@@ -27,18 +25,32 @@ const dataList = computed(() => bidData);
       <Select placeholder="Статус ______" />
     </div>
 
-    <DataTable :value="dataList" :rows="5" :rows-per-page-options="[5, 20, 50]" paginator paginator-template="PrevPageLink PageLinks NextPageLink RowsPerPageDropdown">
+    <DataTable :value="bidsData" :rows="5" :rows-per-page-options="[5, 20, 50]" paginator paginator-template="PrevPageLink PageLinks NextPageLink RowsPerPageDropdown">
       <Column field="id" header="№" />
-      <Column field="bid_id" header="ID заявки" />
-      <Column field="bid_id" header="ID заявки" />
-      <Column field="legal_person" header="Юр лицо" />
-      <Column field="person" header="Ф.И.О" />
-      <Column field="phone" header="Номер телефона" />
-      <Column field="date" header="Дата подачи" />
+      <Column field="bid_id" header="Юр лицо">
+        <template #body="slotProps">
+          {{ `${slotProps.data.properties.directorFullName}` }}
+        </template>
+      </Column>
+      <Column field="bid_id" header="Ф.И.О">
+        <template #body="slotProps">
+          {{ `${slotProps.data.properties.contactPersonFullName}` }}
+        </template>
+      </Column>
+      <Column field="legal_person" header="Номер телефона">
+        <template #body="slotProps">
+          {{ `${slotProps.data.properties.mobilePhone}` }}
+        </template>
+      </Column>
+      <Column field="person" header="Дата подачи ">
+        <template #body>
+          {{ new Date().toLocaleString() }}
+        </template>
+      </Column>
       <Column field="status" header="Статус" />
       <Column header="Действие">
         <template #body="slotProps">
-          <NuxtLink :to="localePath(`/admin/bid/${slotProps.data.bid_id}`)">
+          <NuxtLink :to="localePath(`/admin/bid/${slotProps.data.id}`)">
             <Button label="Просмотреть" severity="primary" size="small" />
           </NuxtLink>
         </template>

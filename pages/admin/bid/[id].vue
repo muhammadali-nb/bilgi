@@ -1,18 +1,23 @@
 <script lang="ts" setup>
 import FieldStatus from '@components/admin/field-status.vue';
+import { useBid } from '@composables/bid';
+import { bidOptions } from '@composables/bid/data';
+import { useAppMainForm } from '@store/main-form';
 
-const value = ref('Заявка');
-const options = ref(['Заявка', 'Учредительные', 'Финансовые', 'Обеспечение']);
-
+const value = ref(1);
+const { bidGroupedBySteps, getBid } = useBid();
+const appMainForm = useAppMainForm();
 definePageMeta({
   layout: 'admin',
 });
+getBid();
+appMainForm.generateFieldToStepMap();
 </script>
 
 <template>
   <div class="bid-detail">
     <div>
-      <SelectButton v-model="value" :options="options" />
+      <SelectButton v-model="value" :options="bidOptions" option-value="id" option-label="name" />
     </div>
 
     <div class="bid-detail__content">
@@ -40,6 +45,7 @@ definePageMeta({
             Виктор Викторович Викторов
           </p>
         </FieldStatus>
+
         <FieldStatus status="success" label="Контактное лицо">
           <p class="font-14-b">
             Виктор Викторович Викторов

@@ -133,7 +133,7 @@ export const useMainForm = () => {
     });
 
     if (status.value === 'success' && fileData.value) {
-      (formObj.value as Record<string, any>)[field] = fileData.value;
+      (formObj.value as Record<string, any>)[field] = fileData.value; //  мы с typescript Друг друга не поняли
       await saveField(field, fileData.value);
     }
   };
@@ -142,7 +142,7 @@ export const useMainForm = () => {
 
   const generateFieldToStepMap = () => {
     const map: Record<string, number> = {};
-
+    // нам эта функция помогает разделять поля по rules
     rules.forEach((stepRules, stepIndex) => {
       Object.keys(stepRules).forEach((fieldName) => {
         map[fieldName] = stepIndex + 1;

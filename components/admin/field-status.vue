@@ -28,7 +28,8 @@ defineProps<{
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin: 0 0 .7rem ;
+      margin: 0 0 .7rem;
+
       label {
         color: var(--site-label-text);
       }

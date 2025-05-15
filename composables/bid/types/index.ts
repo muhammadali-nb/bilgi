@@ -1,9 +1,9 @@
 import type { IMainForm } from '@composables/main-form/types';
 
 export interface IBid {
-  id: 0
-  status: 0
-  number: 0
+  id: number
+  status: number
+  number: number
   properties: IMainForm
 }
 

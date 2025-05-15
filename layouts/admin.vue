@@ -21,7 +21,7 @@ const bidId = computed(() => $route.params.id);
     </aside>
     <div class="admin-layout__content">
       <div class="admin-layout__header font-16-n">
-        <Button v-if="adminHeaderStore.isBackButtonEnabled" variant="text" @click="$router.back()">
+        <Button v-if="adminHeaderStore.isBackButtonEnabled" variant="text" @click="$router.push('/admin/bid')">
           <VIcon :icon="backIcon" />
         </Button>
 
