@@ -1,4 +1,4 @@
-export interface IMainForm {
+export interface IFirstStep {
   targetCreditAmount: number
   youngSpecialistsCount: number
   gracePeriod: MainFormPeriod
@@ -16,7 +16,8 @@ export interface IMainForm {
   email: string
   directorFullName: string
   applicantQuestionnaireDocumentUrl: string
-
+}
+export interface ISecondStep {
   certificateOfStateRegistration: string
   organizationCharter: string
   foundingAgreement: string
@@ -29,14 +30,18 @@ export interface IMainForm {
   chiefAccountantPassport: string
   itParkResidencyCertificate: string
   educationActivityPermission: string
+}
 
+export interface IThirdStep {
   financialStatements: string
   taxDebtAbsenceCertificate: string
   bankAccountCertificate: string
   projectBusinessPlan: string
   targetFundSpendingEstimate: string
   leaseAgreement: string
+}
 
+export interface IFourthStep {
   landCadastrePassport: string
   ownershipDocuments: string
   realEstateValuationReport: string
@@ -48,6 +53,8 @@ export interface IMainForm {
   guarantorLetter: string
   insuranceCompanyLetter: string
 }
+
+export interface IMainForm extends IFirstStep, ISecondStep, IThirdStep, IFourthStep {}
 
 export enum PropertyStatus {
   Pending = 0,

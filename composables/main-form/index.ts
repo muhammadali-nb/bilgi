@@ -21,6 +21,7 @@ export const useMainForm = () => {
 
   const { requiredField } = useValidationRules();
   const formObj = ref<IMainForm>(setFormModel());
+
   const formStatuses = ref<StatusField[]>([]);
   const focusedField = ref<IFocusedField>();
   const applicationId = useCookie('applicationId');

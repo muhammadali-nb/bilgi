@@ -5,14 +5,13 @@ import VIcon from '@components/shared/v-icon.vue';
 defineProps<{
   status: 'success' | 'error'
   label: string
-
 }>();
 </script>
 
 <template>
   <div class="filed-status">
     <div class="filed-status__header">
-      <VIcon :icon="rejectedIcon" no-fill />
+      <VIcon :icon="rejectedIcon" no-fill class="filed-status__icon" />
       <label class="font-14-r">
         {{ label }}
       </label>
@@ -25,14 +24,19 @@ defineProps<{
 .filed-status {
 
   &__header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 0 0 .7rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0 0 .7rem;
 
       label {
         color: var(--site-label-text);
       }
-    }
   }
+
+  &__icon {
+    flex-shrink: 0;
+  }
+
+}
 </style>
