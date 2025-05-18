@@ -1,8 +1,5 @@
 <script lang="ts" setup>
-import BidFinancial from '@components/admin/bid/bid-financial.vue';
-import BidFounding from '@components/admin/bid/bid-founding.vue';
-import BidMain from '@components/admin/bid/bid-main.vue';
-import BidSecurity from '@components/admin/bid/bid-security.vue';
+import BidTab from '@components/admin/bid/bid-tab.vue';
 import { useBid } from '@composables/bid';
 import { bidOptions } from '@composables/bid/data';
 
@@ -33,22 +30,7 @@ getBid();
         <SelectButton v-model="tab" :allow-empty="false" :options="bidOptions" option-value="id" option-label="name" />
       </div>
 
-      <BidMain
-        v-if="tab === 1 && bid"
-        :fields="bid.main"
-      />
-      <BidFounding
-        v-if="tab === 2 && bid"
-        :fields="bid.collateralDocuments"
-      />
-      <BidFinancial
-        v-if="tab === 3 && bid"
-        :fields="bid.financial"
-      />
-      <BidSecurity
-        v-if="tab === 4 && bid"
-        :fields="bid.security"
-      />
+      <BidTab v-if="bid" :tab-key="bidOptions[tab - 1].key" :fields="bid[bidOptions[tab - 1].key]" />
 
       <div class="bid-detail__footer">
         <Button label="Отклонить" severity="danger" />
