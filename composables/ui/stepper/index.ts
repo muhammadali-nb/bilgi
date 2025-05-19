@@ -28,12 +28,12 @@ export const useStepper = () => {
       });
     }
     else {
-      if (appMainForm.applicationStatus === ApplicationStatus.New || appMainForm.applicationStatus === ApplicationStatus.Correction) {
-        await $router.push({
-          name: $route.name as string,
-          query: { ...$route.query, step: 'done' },
-        });
-      }
+      // if (appMainForm.applicationStatus === ApplicationStatus.New || appMainForm.applicationStatus === ApplicationStatus.Correction) {
+      await $router.push({
+        name: $route.name as string,
+        query: { ...$route.query, step: 'done' },
+      });
+      // }
     }
 
     window.scrollTo(0, 0);

@@ -19,7 +19,7 @@ const warning = computed(() => props.isNotConfirmed ? 'var(--secondary-600)' : '
       <label class="font-16-r">{{ label }}</label>
     </div>
     <slot />
-    <div class="error-container">
+    <div v-if="errors?.length" class="error-container">
       <Message v-for="(error, idx) in errors" :key="idx" severity="error" variant="simple">
         {{ error.$message }}
       </Message>
@@ -32,7 +32,10 @@ const warning = computed(() => props.isNotConfirmed ? 'var(--secondary-600)' : '
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-
+  //&:has(input[type="checkbox"]) {
+  //  flex-direction: row-reverse;
+  //  justify-content: flex-end;
+  //}
   .input__label {
     padding-bottom: 8px;
     margin-bottom: auto;

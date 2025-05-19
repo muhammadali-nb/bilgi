@@ -5,7 +5,16 @@ import FieldStatus from '../field-status.vue';
 
 defineProps<{
   fields: BidTabData['security']
+  selectedFields: string[]
 }>();
+
+const emit = defineEmits<{
+  (e: 'update:selected', fieldId: string): void
+}>();
+
+const handleFieldSelect = (fieldId: string) => {
+  emit('update:selected', fieldId);
+};
 </script>
 
 <template>
@@ -15,23 +24,54 @@ defineProps<{
       <h3 class="font-20-sb">
         Недвижимое имущество
       </h3>
-      <FieldStatus status="success" label="Кадастровый паспорт земельного участка">
-        <FileReader :url="fields.landCadastrePassport" />
+      <FieldStatus
+        field-id="landCadastrePassport"
+        :status="fields.landCadastrePassport.status"
+        label="Кадастровый паспорт земельного участка"
+        :is-selected="selectedFields.includes('landCadastrePassport')"
+        @update:selected="handleFieldSelect('landCadastrePassport')"
+      >
+        <FileReader :url="fields.landCadastrePassport.value" />
       </FieldStatus>
-      <FieldStatus status="success" label="Правоустанавливающие документы на недвижимость">
-        <FileReader :url="fields.ownershipDocuments" />
+      <FieldStatus
+        field-id="ownershipDocuments"
+        :status="fields.ownershipDocuments.status"
+        label="Правоустанавливающие документы на недвижимость"
+        :is-selected="selectedFields.includes('ownershipDocuments')"
+        @update:selected="handleFieldSelect('ownershipDocuments')"
+      >
+        <FileReader :url="fields.ownershipDocuments.value" />
       </FieldStatus>
-      <FieldStatus status="success" label="Отчет об оценке недвижимости">
-        <FileReader :url="fields.realEstateValuationReport" />
+      <FieldStatus
+        field-id="realEstateValuationReport"
+        :status="fields.realEstateValuationReport.status"
+        label="Отчет об оценке недвижимости"
+        :is-selected="selectedFields.includes('realEstateValuationReport')"
+        @update:selected="handleFieldSelect('realEstateValuationReport')"
+      >
+        <FileReader :url="fields.realEstateValuationReport.value" />
       </FieldStatus>
+
       <h3 class="font-20-sb">
         Автотранспорт
       </h3>
-      <FieldStatus status="success" label="Свидетельство о регистрации автотранспорта">
-        <FileReader :url="fields.vehicleRegistrationCertificate" />
+      <FieldStatus
+        field-id="vehicleRegistrationCertificate"
+        :status="fields.vehicleRegistrationCertificate.status"
+        label="Свидетельство о регистрации автотранспорта"
+        :is-selected="selectedFields.includes('vehicleRegistrationCertificate')"
+        @update:selected="handleFieldSelect('vehicleRegistrationCertificate')"
+      >
+        <FileReader :url="fields.vehicleRegistrationCertificate.value" />
       </FieldStatus>
-      <FieldStatus status="success" label="Отчет об оценке автотранспорта">
-        <FileReader name="vehicleValuationReport" :url="fields.vehicleValuationReport" />
+      <FieldStatus
+        field-id="vehicleValuationReport"
+        :status="fields.vehicleValuationReport.status"
+        label="Отчет об оценке автотранспорта"
+        :is-selected="selectedFields.includes('vehicleValuationReport')"
+        @update:selected="handleFieldSelect('vehicleValuationReport')"
+      >
+        <FileReader :url="fields.vehicleValuationReport.value" />
       </FieldStatus>
     </div>
 
@@ -40,17 +80,41 @@ defineProps<{
       <h3 class="font-20-sb">
         Поручительство
       </h3>
-      <FieldStatus status="success" label="Протокол общего собрания акционеров / учредителей">
-        <FileReader :url="fields.shareholderResolution" />
+      <FieldStatus
+        field-id="shareholderResolution"
+        :status="fields.shareholderResolution.status"
+        label="Протокол общего собрания акционеров / учредителей"
+        :is-selected="selectedFields.includes('shareholderResolution')"
+        @update:selected="handleFieldSelect('shareholderResolution')"
+      >
+        <FileReader :url="fields.shareholderResolution.value" />
       </FieldStatus>
-      <FieldStatus status="success" label="Финансовые и учредительные документы поручителя">
-        <FileReader :url="fields.guarantorFinancialAndFoundingDocs" />
+      <FieldStatus
+        field-id="guarantorFinancialAndFoundingDocs"
+        :status="fields.guarantorFinancialAndFoundingDocs.status"
+        label="Финансовые и учредительные документы поручителя"
+        :is-selected="selectedFields.includes('guarantorFinancialAndFoundingDocs')"
+        @update:selected="handleFieldSelect('guarantorFinancialAndFoundingDocs')"
+      >
+        <FileReader :url="fields.guarantorFinancialAndFoundingDocs.value" />
       </FieldStatus>
-      <FieldStatus status="success" label="Аудиторское заключение">
-        <FileReader :url="fields.auditorOpinion" />
+      <FieldStatus
+        field-id="auditorOpinion"
+        :status="fields.auditorOpinion.status"
+        label="Аудиторское заключение"
+        :is-selected="selectedFields.includes('auditorOpinion')"
+        @update:selected="handleFieldSelect('auditorOpinion')"
+      >
+        <FileReader :url="fields.auditorOpinion.value" />
       </FieldStatus>
-      <FieldStatus status="success" label="Гарантийное письмо поручителя">
-        <FileReader :url="fields.guarantorLetter" />
+      <FieldStatus
+        field-id="guarantorLetter"
+        :status="fields.guarantorLetter.status"
+        label="Гарантийное письмо поручителя"
+        :is-selected="selectedFields.includes('guarantorLetter')"
+        @update:selected="handleFieldSelect('guarantorLetter')"
+      >
+        <FileReader :url="fields.guarantorLetter.value" />
       </FieldStatus>
     </div>
 
@@ -59,8 +123,14 @@ defineProps<{
       <h3 class="font-20-sb">
         Страховой полис
       </h3>
-      <FieldStatus status="success" label="Письмо от страховой компании">
-        <FileReader :url="fields.insuranceCompanyLetter" />
+      <FieldStatus
+        field-id="insuranceCompanyLetter"
+        :status="fields.insuranceCompanyLetter.status"
+        label="Письмо от страховой компании"
+        :is-selected="selectedFields.includes('insuranceCompanyLetter')"
+        @update:selected="handleFieldSelect('insuranceCompanyLetter')"
+      >
+        <FileReader :url="fields.insuranceCompanyLetter.value" />
       </FieldStatus>
     </div>
   </div>

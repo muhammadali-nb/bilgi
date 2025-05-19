@@ -2,7 +2,7 @@
 import StatisticCard from '@components/admin/statistic-card.vue';
 import { useBid } from '@composables/bid';
 
-const { getBids, bidsData } = useBid();
+const { getBids, bids } = useBid();
 definePageMeta({
   layout: 'admin',
 });
@@ -25,7 +25,7 @@ await getBids();
       <Select placeholder="Статус ______" />
     </div>
 
-    <DataTable :value="bidsData" :rows="5" :rows-per-page-options="[5, 20, 50]" paginator paginator-template="PrevPageLink PageLinks NextPageLink RowsPerPageDropdown">
+    <DataTable :value="bids" :rows="5" :rows-per-page-options="[5, 20, 50]" paginator paginator-template="PrevPageLink PageLinks NextPageLink RowsPerPageDropdown">
       <Column field="id" header="№" />
       <Column field="bid_id" header="Юр лицо">
         <template #body="slotProps">

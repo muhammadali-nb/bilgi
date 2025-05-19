@@ -5,7 +5,16 @@ import FieldStatus from '../field-status.vue';
 
 defineProps<{
   fields: BidTabData['main']
+  selectedFields: string[]
 }>();
+
+const emit = defineEmits<{
+  (e: 'update:selected', fieldId: string): void
+}>();
+
+const handleFieldSelect = (fieldId: string) => {
+  emit('update:selected', fieldId);
+};
 </script>
 
 <template>
@@ -14,82 +23,179 @@ defineProps<{
       <h3 class="font-20-sb">
         Контактная информация
       </h3>
-      <FieldStatus status="success" label="Контактное лицо">
+
+      <FieldStatus
+        field-id="contactPersonFullName"
+        :status="fields.contactPersonFullName.status"
+        label="Контактное лицо"
+        :is-selected="selectedFields.includes('contactPersonFullName')"
+        @update:selected="handleFieldSelect('contactPersonFullName')"
+      >
         <p class="font-14-b">
-          {{ fields?.contactPersonFullName }}
+          {{ fields.contactPersonFullName.value }}
         </p>
       </FieldStatus>
-      <FieldStatus status="success" label="Руководитель">
+
+      <!--      <div> -->
+      <!--        <FormField label="Контактное лицо"> -->
+      <!--          <Checkbox /> -->
+      <!--        </FormField> -->
+      <!--        <p class="font-14-b"> -->
+      <!--          {{ fields.contactPersonFullName.value }} -->
+      <!--        </p> -->
+      <!--      </div> -->
+
+      <FieldStatus
+        field-id="directorFullName"
+        :status="fields.directorFullName.status"
+        label="Руководитель"
+        :is-selected="selectedFields.includes('directorFullName')"
+        @update:selected="handleFieldSelect('directorFullName')"
+      >
         <p class="font-14-b">
-          {{ fields?.directorFullName }}
+          {{ fields.directorFullName.value }}
         </p>
       </FieldStatus>
-      <FieldStatus status="success" label="Домашний">
+
+      <FieldStatus
+        field-id="homePhone"
+        :status="fields.homePhone.status"
+        label="Домашний"
+        :is-selected="selectedFields.includes('homePhone')"
+        @update:selected="handleFieldSelect('homePhone')"
+      >
         <p class="font-14-b">
-          {{ fields?.homePhone }}
+          {{ fields.homePhone.value }}
         </p>
       </FieldStatus>
-      <FieldStatus status="success" label="Мобильный телефон">
+
+      <FieldStatus
+        field-id="mobilePhone"
+        :status="fields.mobilePhone.status"
+        label="Мобильный телефон"
+        :is-selected="selectedFields.includes('mobilePhone')"
+        @update:selected="handleFieldSelect('mobilePhone')"
+      >
         <p class="font-14-b">
-          {{ fields?.mobilePhone }}
+          {{ fields.mobilePhone.value }}
         </p>
       </FieldStatus>
-      <FieldStatus status="success" label="Рабочий">
+
+      <FieldStatus
+        field-id="workPhone"
+        :status="fields.workPhone.status"
+        label="Рабочий"
+        :is-selected="selectedFields.includes('workPhone')"
+        @update:selected="handleFieldSelect('workPhone')"
+      >
         <p class="font-14-b">
-          {{ fields?.workPhone }}
+          {{ fields.workPhone.value }}
         </p>
       </FieldStatus>
-      <FieldStatus status="success" label="Анкета Заявителя">
-        <FileReader :url="fields.applicantQuestionnaireDocumentUrl" />
+
+      <FieldStatus
+        field-id="applicantQuestionnaireDocumentUrl"
+        :status="fields.applicantQuestionnaireDocumentUrl.status"
+        label="Анкета Заявителя"
+        :is-selected="selectedFields.includes('applicantQuestionnaireDocumentUrl')"
+        @update:selected="handleFieldSelect('applicantQuestionnaireDocumentUrl')"
+      >
+        <FileReader :url="fields.applicantQuestionnaireDocumentUrl.value" />
       </FieldStatus>
     </div>
+
     <div class="bid-detail__content-column">
       <h3 class="font-20-sb">
         Основные сведения
       </h3>
-      <FieldStatus status="success" label="Необходимая сумма целевого кредита (сум): ">
+
+      <FieldStatus
+        field-id="targetCreditAmount"
+        :status="fields.targetCreditAmount.status"
+        label="Необходимая сумма целевого кредита (сум):"
+        :is-selected="selectedFields.includes('targetCreditAmount')"
+        @update:selected="handleFieldSelect('targetCreditAmount')"
+      >
         <p class="font-14-b">
-          {{ fields?.targetCreditAmount }}
+          {{ fields.targetCreditAmount.value }}
         </p>
       </FieldStatus>
-      <FieldStatus status="success" label="Количество молодых специалистов, которые будут обучены и трудоустроены:">
+
+      <FieldStatus
+        field-id="youngSpecialistsCount"
+        :status="fields.youngSpecialistsCount.status"
+        label="Количество молодых специалистов, которые будут обучены и трудоустроены:"
+        :is-selected="selectedFields.includes('youngSpecialistsCount')"
+        @update:selected="handleFieldSelect('youngSpecialistsCount')"
+      >
         <p class="font-14-b">
-          {{ fields?.youngSpecialistsCount }}
+          {{ fields.youngSpecialistsCount.value }}
         </p>
       </FieldStatus>
-      <FieldStatus status="success" label="Срок возврата целевого кредита (лет):">
+
+      <FieldStatus
+        field-id="creditReturnPeriodYears"
+        :status="fields.creditReturnPeriodYears.status"
+        label="Срок возврата целевого кредита (лет):"
+        :is-selected="selectedFields.includes('creditReturnPeriodYears')"
+        @update:selected="handleFieldSelect('creditReturnPeriodYears')"
+      >
         <p class="font-14-b">
-          {{ fields?.creditReturnPeriodYears }}
+          {{ fields.creditReturnPeriodYears.value }}
         </p>
       </FieldStatus>
-      <FieldStatus status="success" label="Обеспечение кредита">
+
+      <FieldStatus
+        field-id="creditSecurityType"
+        :status="fields.creditSecurityType.status"
+        label="Обеспечение кредита"
+        :is-selected="selectedFields.includes('creditSecurityType')"
+        @update:selected="handleFieldSelect('creditSecurityType')"
+      >
         <p class="font-14-b">
-          {{ fields?.creditSecurityType }}
+          {{ fields.creditSecurityType.value }}
         </p>
       </FieldStatus>
-      <!-- <FieldStatus status="success" label="Срок возврата целевого кредита (лет):">
-        <p class="font-14-b">
-          {{ fields?.creditReturnPeriodYears }}
-        </p>
-      </FieldStatus> -->
     </div>
+
     <div class="bid-detail__content-column">
       <h3 class="font-20-sb">
         Экономическое обоснование целевого кредита
       </h3>
-      <FieldStatus status="success" label="Собственные средства, привлеченные для реализации проекта (сум):">
+
+      <FieldStatus
+        field-id="ownFundsAmount"
+        :status="fields.ownFundsAmount.status"
+        label="Собственные средства, привлеченные для реализации проекта (сум):"
+        :is-selected="selectedFields.includes('ownFundsAmount')"
+        @update:selected="handleFieldSelect('ownFundsAmount')"
+      >
         <p class="font-14-r">
-          <span class="font-14-b">{{ fields.ownFundsAmount }}</span> сум
+          <span class="font-14-b">{{ fields.ownFundsAmount.value }}</span> сум
         </p>
       </FieldStatus>
-      <FieldStatus status="success" label="Содержание проекта:">
+
+      <FieldStatus
+        field-id="projectDescription"
+        :status="fields.projectDescription.status"
+        label="Содержание проекта:"
+        :is-selected="selectedFields.includes('projectDescription')"
+        @update:selected="handleFieldSelect('projectDescription')"
+      >
         <p class="font-14-r">
-          {{ fields.projectDescription }}
+          {{ fields.projectDescription.value }}
         </p>
       </FieldStatus>
-      <FieldStatus status="success" label="Информация о социальных показателях деятельности организации:">
+
+      <FieldStatus
+        field-id="organizationSocialIndicators"
+        :status="fields.organizationSocialIndicators.status"
+        label="Информация о социальных показателях деятельности организации:"
+        :is-selected="selectedFields.includes('organizationSocialIndicators')"
+        @update:selected="handleFieldSelect('organizationSocialIndicators')"
+      >
         <p class="font-14-r">
-          {{ fields.organizationSocialIndicators }}
+          {{ fields.organizationSocialIndicators.value }}
         </p>
       </FieldStatus>
     </div>

@@ -7,7 +7,13 @@ import { useBid } from '@composables/bid';
 import { bidOptions } from '@composables/bid/data';
 
 const tab = ref(1);
-const { bid, getBid, bidStatus, error } = useBid();
+const { bid, getBid, bidStatus, error, selectedFields, toggleField } = useBid();
+
+const handleFieldSelect = (fieldId: string) => {
+  toggleField(fieldId);
+
+  console.log(selectedFields.value);
+};
 
 definePageMeta({
   layout: 'admin',
@@ -29,25 +35,33 @@ getBid();
     </div>
 
     <template v-else>
-      <div class="bid-detail__header">
+      <div>
         <SelectButton v-model="tab" :allow-empty="false" :options="bidOptions" option-value="id" option-label="name" />
       </div>
 
       <BidMain
         v-if="tab === 1 && bid"
         :fields="bid.main"
+        :selected-fields="selectedFields"
+        @update:selected="handleFieldSelect"
       />
       <BidFounding
         v-if="tab === 2 && bid"
         :fields="bid.collateralDocuments"
+        :selected-fields="selectedFields"
+        @update:selected="handleFieldSelect"
       />
       <BidFinancial
         v-if="tab === 3 && bid"
         :fields="bid.financial"
+        :selected-fields="selectedFields"
+        @update:selected="handleFieldSelect"
       />
       <BidSecurity
         v-if="tab === 4 && bid"
         :fields="bid.security"
+        :selected-fields="selectedFields"
+        @update:selected="handleFieldSelect"
       />
 
       <div class="bid-detail__footer">

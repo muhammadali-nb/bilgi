@@ -1,11 +1,13 @@
 import type { BidTabData, IBid, IBidResponse } from './types';
 import { useApi } from '@composables/use-api';
+import { useSelectedFields } from '@composables/use-selected-fields';
 import { useBidFields } from './models';
 
 export const useBid = () => {
   const bids = ref<IBid[]>();
   const bid = ref<BidTabData>();
   const $route = useRoute();
+  const { selectedFields, toggleField, isFieldSelected, clearSelected } = useSelectedFields();
 
   const {
     refresh: getBidsFn,
@@ -30,7 +32,7 @@ export const useBid = () => {
   const getBid = async () => {
     await getBidFn();
     if (!bidError.value && bidData.value) {
-      bid.value = useBidFields(bidData.value.properties);
+      bid.value = useBidFields(bidData.value);
     }
   };
 
@@ -42,5 +44,9 @@ export const useBid = () => {
     bidStatus,
     loading: bidStatus,
     error: bidError,
+    selectedFields,
+    toggleField,
+    isFieldSelected,
+    clearSelected,
   };
 };

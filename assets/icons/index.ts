@@ -1,3 +1,4 @@
+import approveIcon from './approve.svg?raw';
 import backIcon from './back.svg?raw';
 import bilgiLogo from './bilgi-logo.svg?raw';
 import chekedIcon from './cheked.svg?raw';
@@ -21,6 +22,7 @@ import usersIcon from './users.svg?raw';
 import warningIcon from './warning.svg?raw';
 
 export {
+  approveIcon,
   backIcon,
   bilgiLogo,
   chekedIcon,

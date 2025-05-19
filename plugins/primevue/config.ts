@@ -174,6 +174,10 @@ export const options: PrimeVueConfiguration = {
     password: passwordPt(),
 
     paginator: paginatorPt(),
+
+    // checkbox: (props) => {
+    //   console.log(props);
+    // },
   },
 
   theme: {
