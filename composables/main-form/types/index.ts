@@ -54,7 +54,7 @@ export interface IFourthStep {
   insuranceCompanyLetter: string
 }
 
-export interface IMainForm extends IFirstStep, ISecondStep, IThirdStep, IFourthStep {}
+export interface IMainForm extends IFirstStep, ISecondStep, IThirdStep, IFourthStep { }
 
 export enum PropertyStatus {
   Pending = 0,

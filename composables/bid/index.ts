@@ -2,11 +2,16 @@ import type { BidTabData, IBid, IBidResponse } from './types';
 import { useApi } from '@composables/use-api';
 import { useSelectedFields } from '@composables/use-selected-fields';
 import { useBidFields } from './models';
+import { PropertyStatus } from '@composables/main-form/types';
+import { useToastStore } from '@store/toast';
+
 
 export const useBid = () => {
   const bids = ref<IBid[]>();
   const bid = ref<BidTabData>();
   const $route = useRoute();
+  const $toast = useToastStore()
+  const moderateBidStatus = ref<PropertyStatus>(PropertyStatus.Pending);
   const { selectedFields, toggleField, isFieldSelected, clearSelected } = useSelectedFields();
 
   const {
@@ -36,6 +41,27 @@ export const useBid = () => {
     }
   };
 
+  const { refresh: moderateBidFn, error: moderateBidError } = useApi('/api/moderator', {
+    method: 'post',
+    body: {
+      id: $route.params?.id,
+      properties: selectedFields,
+      status: moderateBidStatus,
+    },
+  });
+
+  const moderateBid = async (status: PropertyStatus) => {
+    moderateBidStatus.value = status;
+    await moderateBidFn();
+    if (!moderateBidError.value) {
+      getBid();
+      $toast.success('Успешно!', 'Заявка успешно отправлена на клиенту');
+      clearSelected()
+    } else {
+      $toast.error('Ошибка!', 'Не удалось отправить заявку на клиента');
+    }
+  };
+
   return {
     bids,
     bid,
@@ -48,5 +74,6 @@ export const useBid = () => {
     toggleField,
     isFieldSelected,
     clearSelected,
+    moderateBid,
   };
 };

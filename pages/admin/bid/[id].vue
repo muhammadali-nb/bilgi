@@ -5,14 +5,13 @@ import BidMain from '@components/admin/bid/bid-main.vue';
 import BidSecurity from '@components/admin/bid/bid-security.vue';
 import { useBid } from '@composables/bid';
 import { bidOptions } from '@composables/bid/data';
+import { PropertyStatus } from '@composables/main-form/types';
 
 const tab = ref(1);
-const { bid, getBid, bidStatus, error, selectedFields, toggleField } = useBid();
+const { bid, getBid, bidStatus, error, selectedFields, toggleField, moderateBid } = useBid();
 
 const handleFieldSelect = (fieldId: string) => {
   toggleField(fieldId);
-
-  console.log(selectedFields.value);
 };
 
 definePageMeta({
@@ -65,8 +64,8 @@ getBid();
       />
 
       <div class="bid-detail__footer">
-        <Button label="Отклонить" severity="danger" />
-        <Button label="Подтвердить" severity="success" />
+        <Button label="Отклонить" severity="danger" @click="moderateBid(PropertyStatus.Rejected)" />
+        <Button label="Подтвердить" severity="success" @click="moderateBid(PropertyStatus.Approved)" />
       </div>
     </template>
   </div>
