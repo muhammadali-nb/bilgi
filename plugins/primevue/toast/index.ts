@@ -1,6 +1,6 @@
 export const toastConfig = () => {
   return {
-    width: '28rem',
+    width: '32rem',
     summaryFontSize: '1.6rem',
     summaryFontWeight: '700',
     detailFontSize: '1.4rem',

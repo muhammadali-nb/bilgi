@@ -1,6 +1,6 @@
 import type { BidTabData, IBid, IBidResponse } from './types';
 import { useApi } from '@composables/use-api';
-import { useSelectedFields } from '@composables/use-selected-fields';
+import { useSelectedFields } from '@composables/ui/selected-fields';
 import { useBidFields } from './models';
 import { PropertyStatus } from '@composables/main-form/types';
 import { useToastStore } from '@store/toast';
@@ -11,6 +11,8 @@ export const useBid = () => {
   const bid = ref<BidTabData>();
   const $route = useRoute();
   const $toast = useToastStore()
+  const rejectMessage = ref<string>()
+  const isRejectDialogVisible = ref(false);
   const moderateBidStatus = ref<PropertyStatus>(PropertyStatus.Pending);
   const { selectedFields, toggleField, isFieldSelected, clearSelected } = useSelectedFields();
 
@@ -47,16 +49,22 @@ export const useBid = () => {
       id: $route.params?.id,
       properties: selectedFields,
       status: moderateBidStatus,
+      message: rejectMessage,
     },
   });
 
   const moderateBid = async (status: PropertyStatus) => {
+    if (!selectedFields.value.length) {
+      return;
+    }
+
     moderateBidStatus.value = status;
     await moderateBidFn();
     if (!moderateBidError.value) {
       getBid();
       $toast.success('Успешно!', 'Заявка успешно отправлена на клиенту');
-      clearSelected()
+      clearSelected();
+      isRejectDialogVisible.value = false;
     } else {
       $toast.error('Ошибка!', 'Не удалось отправить заявку на клиента');
     }
@@ -75,5 +83,7 @@ export const useBid = () => {
     isFieldSelected,
     clearSelected,
     moderateBid,
+    rejectMessage,
+    isRejectDialogVisible,
   };
 };
