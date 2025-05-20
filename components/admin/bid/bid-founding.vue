@@ -79,7 +79,7 @@ const handleFieldSelect = (fieldId: string) => {
       <FieldStatus
         field-id="ceoAuthorityConfirmation"
         :status="fields.ceoAuthorityConfirmation.status"
-        label="Свидетельство о государственной регистрации"
+        label="Документы, подтверждающие полномочия главного бухгалтера"
         :is-selected="selectedFields.includes('ceoAuthorityConfirmation')"
         @update:selected="handleFieldSelect('ceoAuthorityConfirmation')"
       >
@@ -88,7 +88,7 @@ const handleFieldSelect = (fieldId: string) => {
       <FieldStatus
         field-id="chiefAccountantAuthorityConfirmation"
         :status="fields.chiefAccountantAuthorityConfirmation.status"
-        label="Руководитель"
+        label="Паспорт руководителя организации;"
         :is-selected="selectedFields.includes('chiefAccountantAuthorityConfirmation')"
         @update:selected="handleFieldSelect('chiefAccountantAuthorityConfirmation')"
       >
@@ -97,7 +97,7 @@ const handleFieldSelect = (fieldId: string) => {
       <FieldStatus
         field-id="ceoPassport"
         :status="fields.ceoPassport.status"
-        label="Учредительный договор"
+        label="Паспорт главного бухгалтера организации;"
         :is-selected="selectedFields.includes('ceoPassport')"
         @update:selected="handleFieldSelect('ceoPassport')"
       >
@@ -106,7 +106,7 @@ const handleFieldSelect = (fieldId: string) => {
       <FieldStatus
         field-id="itParkResidencyCertificate"
         :status="fields.itParkResidencyCertificate.status"
-        label="Решение учредителей на выделение целевого займа"
+        label="Сертификат резидентства ООО 'дирекция технологического парка программных продуктов и информационных технологий' (IT Park);"
         :is-selected="selectedFields.includes('itParkResidencyCertificate')"
         @update:selected="handleFieldSelect('itParkResidencyCertificate')"
       >
@@ -120,6 +120,15 @@ const handleFieldSelect = (fieldId: string) => {
         @update:selected="handleFieldSelect('educationActivityPermission')"
       >
         <FileReader :url="fields.educationActivityPermission.value" />
+      </FieldStatus>
+      <FieldStatus
+        field-id="chiefAccountantPassport"
+        :status="fields.chiefAccountantPassport.status"
+        label="Паспорт главного бухгалтера организации;"
+        :is-selected="selectedFields.includes('chiefAccountantPassport')"
+        @update:selected="handleFieldSelect('chiefAccountantPassport')"
+      >
+        <FileReader :url="fields.chiefAccountantPassport.value" />
       </FieldStatus>
     </div>
   </div>

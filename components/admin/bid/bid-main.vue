@@ -36,15 +36,6 @@ const handleFieldSelect = (fieldId: string) => {
         </p>
       </FieldStatus>
 
-      <!--      <div> -->
-      <!--        <FormField label="Контактное лицо"> -->
-      <!--          <Checkbox /> -->
-      <!--        </FormField> -->
-      <!--        <p class="font-14-b"> -->
-      <!--          {{ fields.contactPersonFullName.value }} -->
-      <!--        </p> -->
-      <!--      </div> -->
-
       <FieldStatus
         field-id="directorFullName"
         :status="fields.directorFullName.status"
@@ -90,6 +81,18 @@ const handleFieldSelect = (fieldId: string) => {
       >
         <p class="font-14-b">
           {{ fields.workPhone.value }}
+        </p>
+      </FieldStatus>
+
+      <FieldStatus
+        field-id="email"
+        :status="fields.email.status"
+        label="Почта"
+        :is-selected="selectedFields.includes('email')"
+        @update:selected="handleFieldSelect('email')"
+      >
+        <p class="font-14-b">
+          {{ fields.email.value }}
         </p>
       </FieldStatus>
 
@@ -154,6 +157,40 @@ const handleFieldSelect = (fieldId: string) => {
       >
         <p class="font-14-b">
           {{ fields.creditSecurityType.value }}
+        </p>
+      </FieldStatus>
+
+      <FieldStatus
+        field-id="gracePeriod"
+        :status="fields.gracePeriod.status"
+        label="Льготный период:"
+        :is-selected="selectedFields.includes('gracePeriod')"
+        @update:selected="handleFieldSelect('gracePeriod')"
+      >
+        <p class="font-14-b">
+          {{ fields.gracePeriod.value }}
+        </p>
+      </FieldStatus>
+      <FieldStatus
+        field-id="plannedCreditReturnSchedule"
+        :status="fields.plannedCreditReturnSchedule.status"
+        label="Cумма долга, проценты"
+        :is-selected="selectedFields.includes('plannedCreditReturnSchedule')"
+        @update:selected="handleFieldSelect('plannedCreditReturnSchedule')"
+      >
+        <p class="font-14-b">
+          {{ fields.plannedCreditReturnSchedule.value }}
+        </p>
+      </FieldStatus>
+      <FieldStatus
+        field-id="creditReturnFrequency"
+        :status="fields.creditReturnFrequency.status"
+        label="Ежемесячный, квартальный, другой"
+        :is-selected="selectedFields.includes('creditReturnFrequency')"
+        @update:selected="handleFieldSelect('creditReturnFrequency')"
+      >
+        <p class="font-14-b">
+          {{ fields.creditReturnFrequency.value }}
         </p>
       </FieldStatus>
     </div>

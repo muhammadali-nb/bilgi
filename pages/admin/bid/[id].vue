@@ -10,7 +10,6 @@ import { PropertyStatus } from '@composables/main-form/types';
 const tab = ref(1);
 const { bid, getBid, bidStatus, error, selectedFields, toggleField, moderateBid, rejectMessage, isRejectDialogVisible } = useBid();
 
-
 const handleFieldSelect = (fieldId: string) => {
   toggleField(fieldId);
 };
@@ -38,7 +37,6 @@ getBid();
       <div>
         <SelectButton v-model="tab" :allow-empty="false" :options="bidOptions" option-value="id" option-label="name" />
       </div>
-
       <BidMain
         v-if="tab === 1 && bid"
         :fields="bid.main"
@@ -69,8 +67,8 @@ getBid();
         <Button label="Подтвердить" severity="success" :disabled="!selectedFields.length" @click="moderateBid(PropertyStatus.Approved)" />
       </div>
     </template>
-    <Dialog v-model:visible="isRejectDialogVisible" style="width: 600px;" :header="`Отклонить заявку`" :modal="true" :draggable="false" :resizable="false">
-      <Textarea fluid v-model="rejectMessage" placeholder="Введите причину отклонения" :rows="10" />
+    <Dialog v-model:visible="isRejectDialogVisible" style="width: 600px;" header="Отклонить заявку" :modal="true" :draggable="false" :resizable="false">
+      <Textarea v-model="rejectMessage" fluid placeholder="Введите причину отклонения" :rows="10" />
       <template #footer>
         <div class="bid-detail__footer">
           <Button label="Отменить" severity="danger" :disabled="!rejectMessage && !selectedFields.length" @click="moderateBid(PropertyStatus.Rejected)" />
@@ -112,7 +110,6 @@ getBid();
     :deep(.p-button) {
       padding: 2rem 5rem;
     }
-
   }
 }
 </style>
