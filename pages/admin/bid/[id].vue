@@ -8,7 +8,11 @@ import { bidOptions } from '@composables/bid/data';
 import { PropertyStatus } from '@composables/main-form/types';
 
 const tab = ref(1);
-const { bid, getBid, bidStatus, error, selectedFields, toggleField, moderateBid, rejectMessage, isRejectDialogVisible } = useBid();
+const {
+  bid, getBid, bidStatus,
+  error, selectedFields, toggleField,
+  moderateBid, rejectMessage, isRejectDialogVisible,
+} = useBid();
 
 const handleFieldSelect = (fieldId: string) => {
   toggleField(fieldId);

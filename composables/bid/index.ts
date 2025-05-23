@@ -10,6 +10,8 @@ export const useBid = () => {
   const bid = ref<BidTabData>();
   const $route = useRoute();
   const $toast = useToastStore();
+  const selectedStatus = ref();
+  const dateSort = ref();
   const rejectMessage = ref<string>();
   const isRejectDialogVisible = ref(false);
   const moderateBidStatus = ref<PropertyStatus>(PropertyStatus.Pending);
@@ -19,7 +21,12 @@ export const useBid = () => {
     refresh: getBidsFn,
     error: bidsError,
     data: bidsData,
-  } = useApi<IBidResponse>('/api/moderator/applications');
+  } = useApi<IBidResponse>('/api/moderator/applications', {
+    params: {
+      status: selectedStatus,
+      dateSortAscending: dateSort,
+    },
+  });
 
   const {
     refresh: getBidFn,
@@ -85,5 +92,7 @@ export const useBid = () => {
     moderateBid,
     rejectMessage,
     isRejectDialogVisible,
+    selectedStatus,
+    dateSort,
   };
 };

@@ -247,7 +247,7 @@ const handleFieldSelect = (fieldId: string) => {
     border-radius: var(--radius-l);
 
     display: grid;
-    grid-template-columns: 1fr 1fr 50%;
+    grid-template-columns: 20% 1fr 45%;
     gap: 8rem;
 
     &-column {

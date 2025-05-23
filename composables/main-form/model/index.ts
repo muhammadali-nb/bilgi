@@ -1,17 +1,16 @@
 import type { IMainForm } from '../types';
-import { MainFormCreditType, MainFormPeriod } from '../types';
 
-export const setFormModel = (value?: Partial<IMainForm>): Required<IMainForm> => {
+export const setFormModel = (value?: Partial<IMainForm>): IMainForm => {
   return {
-    targetCreditAmount: value?.targetCreditAmount ?? 0,
-    youngSpecialistsCount: value?.youngSpecialistsCount ?? 0,
-    gracePeriod: value?.gracePeriod ?? 12,
-    creditReturnPeriodYears: value?.creditReturnPeriodYears ?? MainFormPeriod.OneYear,
-    creditSecurityType: value?.creditSecurityType ?? MainFormCreditType.Pledge,
-    plannedCreditReturnSchedule: value?.plannedCreditReturnSchedule ?? 1,
-    creditReturnFrequency: value?.creditReturnFrequency ?? 1,
+    targetCreditAmount: value?.targetCreditAmount,
+    youngSpecialistsCount: value?.youngSpecialistsCount,
+    gracePeriod: value?.gracePeriod,
+    creditReturnPeriodYears: value?.creditReturnPeriodYears,
+    creditSecurityType: value?.creditSecurityType,
+    plannedCreditReturnSchedule: value?.plannedCreditReturnSchedule,
+    creditReturnFrequency: value?.creditReturnFrequency,
     projectDescription: value?.projectDescription ?? '',
-    ownFundsAmount: value?.ownFundsAmount ?? 0,
+    ownFundsAmount: value?.ownFundsAmount,
     organizationSocialIndicators: value?.organizationSocialIndicators ?? '',
     contactPersonFullName: value?.contactPersonFullName ?? '',
     mobilePhone: value?.mobilePhone ?? '',

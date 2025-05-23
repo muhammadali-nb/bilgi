@@ -19,7 +19,7 @@ const warning = computed(() => props.isNotConfirmed ? 'var(--secondary-600)' : '
       <label class="font-16-r">{{ label }}</label>
     </div>
     <slot />
-    <div v-if="errors?.length" class="error-container">
+    <div class="error-container">
       <Message v-for="(error, idx) in errors" :key="idx" severity="error" variant="simple">
         {{ error.$message }}
       </Message>
@@ -51,7 +51,7 @@ const warning = computed(() => props.isNotConfirmed ? 'var(--secondary-600)' : '
   }
 
   .error-container {
-    min-height: 1.65rem;
+    min-height: 1.7rem;
   }
 }
 </style>

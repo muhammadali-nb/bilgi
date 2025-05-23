@@ -1,13 +1,13 @@
 export interface IFirstStep {
-  targetCreditAmount: number
-  youngSpecialistsCount: number
-  gracePeriod: MainFormPeriod
-  creditReturnPeriodYears: MainFormPeriod // уточнить
-  creditSecurityType: MainFormCreditType
-  plannedCreditReturnSchedule: number
-  creditReturnFrequency: number
+  targetCreditAmount?: number
+  youngSpecialistsCount?: number
+  gracePeriod?: MainFormPeriod
+  creditReturnPeriodYears?: MainFormPeriod // уточнить
+  creditSecurityType?: MainFormCreditType
+  plannedCreditReturnSchedule?: number
+  creditReturnFrequency?: number
   projectDescription: string
-  ownFundsAmount: number
+  ownFundsAmount?: number
   organizationSocialIndicators: string
   contactPersonFullName: string
   mobilePhone: string

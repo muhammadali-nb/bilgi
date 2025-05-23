@@ -1,11 +1,13 @@
 <script lang="ts" setup>
 import StatisticCard from '@components/admin/statistic-card.vue';
 import { useBid } from '@composables/bid';
+import { dateOptions, statusOptions } from '@composables/bid/data';
 
-const { getBids, bids } = useBid();
+const { getBids, bids, selectedStatus, dateSort } = useBid();
 definePageMeta({
   layout: 'admin',
 });
+
 const localePath = useLocalePath();
 await getBids();
 </script>
@@ -21,30 +23,30 @@ await getBids();
       <StatisticCard value="100 000" title="Выдача" severity="success" />
     </div>
     <div class="bid__statistic-filters">
-      <Select placeholder="Дата  _ _  _ _  _ _ _ _" />
-      <Select placeholder="Статус ______" />
+      <Select v-model="dateSort" placeholder="Дата  _ _  _ _  _ _ _ _" option-label="name" option-value="value" :options="dateOptions" show-clear @update:model-value="getBids" />
+      <Select v-model="selectedStatus" placeholder="Статус ______" :options="statusOptions" option-value="value" option-label="name" show-clear @update:model-value="getBids" />
     </div>
 
     <DataTable :value="bids" :rows="5" :rows-per-page-options="[5, 20, 50]" paginator paginator-template="PrevPageLink PageLinks NextPageLink RowsPerPageDropdown">
       <Column field="id" header="№" />
       <Column field="bid_id" header="Юр лицо">
         <template #body="slotProps">
-          {{ `${slotProps.data.properties.directorFullName}` }}
+          {{ `${slotProps.data.properties.directorFullName ?? ''}` }}
         </template>
       </Column>
       <Column field="bid_id" header="Ф.И.О">
         <template #body="slotProps">
-          {{ `${slotProps.data.properties.contactPersonFullName}` }}
+          {{ `${slotProps.data.properties.contactPersonFullName ?? ''}` }}
         </template>
       </Column>
       <Column field="legal_person" header="Номер телефона">
         <template #body="slotProps">
-          {{ `${slotProps.data.properties.mobilePhone}` }}
+          {{ `${slotProps.data.properties.mobilePhone ?? ''}` }}
         </template>
       </Column>
       <Column field="person" header="Дата подачи ">
         <template #body>
-          {{ new Date().toLocaleString() }}
+          {{ '---' }}
         </template>
       </Column>
       <Column field="status" header="Статус" />
@@ -55,6 +57,9 @@ await getBids();
           </NuxtLink>
         </template>
       </Column>
+      <template #empty>
+        Нету заявок
+      </template>
     </DataTable>
   </div>
 </template>

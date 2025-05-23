@@ -123,6 +123,5 @@ const appMainForm = useAppMainForm();
     flex-direction: column;
     gap: 1.5rem;
   }
-
 }
 </style>

@@ -36,22 +36,20 @@ await applicationInit();
 
 <template>
   <div class="home">
-    <div class="container-xs">
-      <div class="home__content">
-        <h3 class="font-24-sb home__title">
-          {{ currentTitle }}
-        </h3>
+    <div class="container-xs home__content">
+      <h3 class="font-24-sb home__title">
+        {{ currentTitle }}
+      </h3>
 
-        <template v-if="!isFinished">
-          <Stepper v-model:active-step="activeStep" :steps="steps" class="home__steps" />
-          <FirstStep v-if="activeStep === 1" @submit="submitStep" />
-          <SecondStep v-if="activeStep === 2" @prev="prev" @submit="submitStep" />
-          <ThirdStep v-if="activeStep === 3" @prev="prev" @submit="submitStep" />
-          <FourthStep v-if="activeStep === 4" @prev="prev" @submit="submitStep" />
-        </template>
+      <template v-if="!isFinished">
+        <Stepper v-model:active-step="activeStep" :steps="steps" class="home__steps" />
+        <FirstStep v-if="activeStep === 1" @submit="submitStep" />
+        <SecondStep v-if="activeStep === 2" @prev="prev" @submit="submitStep" />
+        <ThirdStep v-if="activeStep === 3" @prev="prev" @submit="submitStep" />
+        <FourthStep v-if="activeStep === 4" @prev="prev" @submit="submitStep" />
+      </template>
 
-        <Status v-else />
-      </div>
+      <Status v-else />
     </div>
   </div>
 </template>

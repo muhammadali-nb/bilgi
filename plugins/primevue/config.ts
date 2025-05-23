@@ -93,7 +93,7 @@ const customPreset = definePreset(Aura, {
       paddingX: '.5rem',
       paddingY: '1rem',
     },
-    iconSize: '20px',
+    // iconSize: '20px',
   },
 
   components: {
