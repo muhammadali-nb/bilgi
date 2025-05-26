@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import DigitalSignature from '@components/auth/digital-signature.vue';
 import LangSwitcher from '@components/shared/lang-switcher.vue';
 import VIcon from '@components/shared/v-icon.vue';
 import { bilgiLogo, userIcon } from '../assets/icons';
@@ -60,8 +59,8 @@ const visible = ref(false);
 
     <Dialog v-model:visible="visible" header="Выберите ключ" :modal="true" :close-on-mask="false" style="width: 45rem;" class="digital-signature__dialog">
       <div class="digital-signature__dialog-content">
-        <DigitalSignature />
-        <DigitalSignature />
+        <!--        <DigitalSignature /> -->
+        <!--        <DigitalSignature /> -->
       </div>
 
       <template #footer>

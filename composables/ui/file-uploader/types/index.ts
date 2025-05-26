@@ -4,6 +4,7 @@ export interface IPropsFileUploader {
   url?: string
   invalid?: boolean
   warning?: boolean
+  hideDocumentIcon?: boolean
 }
 
 export interface IEmitsFileUploader {

@@ -1,16 +1,13 @@
 <script lang="ts" setup>
-import DigitalSignature from '@components/auth/digital-signature.vue';
-
 import FormField from '@components/shared/form-field.vue';
 import PhoneInput from '@components/shared/phone-Input.vue';
 import VIcon from '@components/shared/v-icon.vue';
+import { useUserAuth } from '@composables/auth';
 import { lockIcon, userIcon } from '../assets/icons';
 
+const { register, form } = useUserAuth();
+
 const visible = ref(false);
-const form = reactive({
-  phone: '',
-  login: '',
-});
 
 definePageMeta({
   layout: 'auth',
@@ -45,7 +42,7 @@ definePageMeta({
           <InputGroupAddon>
             <VIcon :icon="lockIcon" no-fill />
           </InputGroupAddon>
-          <Password placeholder="Введите пароль" toggle-mask :feedback="false" />
+          <Password v-model="form.password" placeholder="Введите пароль" toggle-mask :feedback="false" />
         </InputGroup>
       </FormField>
 
@@ -59,19 +56,20 @@ definePageMeta({
         type="submit"
         fluid
         class="register__form-submit"
+        @click="register"
       />
       <p class="font-14-n register__form-text">
         Уже есть аккаунт? <span class="font-14-b">Войти</span>
       </p>
     </form>
     <Dialog v-model:visible="visible" header="Выберите ключ" :draggable="false" modal :close-on-mask="false" style="width: 45rem;" class="digital-signature__dialog">
-      <div class="digital-signature__dialog-content">
-        <DigitalSignature />
-        <DigitalSignature />
-      </div>
+      <!--      <div class="digital-signature__dialog-content"> -->
+      <!--        <DigitalSignature /> -->
+      <!--        <DigitalSignature /> -->
+      <!--      </div> -->
 
       <template #footer>
-        <Button label="Аторизоваться" fluid />
+        <Button label="Аторизоваться" fluid @click="register" />
       </template>
     </Dialog>
   </div>

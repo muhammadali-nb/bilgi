@@ -108,13 +108,13 @@ export const useMainForm = () => {
     body: focusedField,
   });
 
-  const saveField = async (field: keyof IMainForm, value: string | number) => {
+  const saveField = async (field: keyof IMainForm, value?: string | number) => {
     if (applicationId && (!field || !value)) return;
 
     focusedField.value = {
       applicationId: applicationId.value ?? 0,
       type: field,
-      value: value.toString(),
+      value: value?.toString(),
     };
 
     await saveFieldFn();

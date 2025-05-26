@@ -79,9 +79,9 @@ export const useAppMainForm = defineStore('main-form', () => {
 
   const handleBlurSave = async (fieldName: keyof IMainForm) => {
     await nextTick();
-    const model = $v.value?.[fieldName]?.$model;
+    const model = $v.value?.[fieldName]?.$model as number | string;
 
-    if (model !== undefined) {
+    if (model) {
       await saveField(fieldName, model);
     }
   };

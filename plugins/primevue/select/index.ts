@@ -3,7 +3,10 @@ export const selectConfig = () => {
     dropdownWidth: '4rem',
     paddingX: '1.8rem',
     paddingY: '1.5rem',
-
+    // clearIcon: {
+    //   width: '1rem',
+    //   height: '1rem',
+    // },
     // light: {
     //   optionColor: 'var(--site-text)',
     //   optionFocusColor: 'var(--site-text)',

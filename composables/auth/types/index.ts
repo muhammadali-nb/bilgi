@@ -8,7 +8,7 @@ export interface AuthResponse {
 export interface IFocusedField {
   applicationId: number | string
   type: string
-  value: string | number
+  value?: string | number
 }
 
 export interface ISelectedFile {

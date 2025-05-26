@@ -8,7 +8,7 @@ import { useEcpKey } from '@composables/ecp-key';
 import { parseCertificateInfo } from '@composables/ecp-key/model';
 import { lockIcon, userIcon } from '../assets/icons';
 
-const { login, loginForm } = useUserAuth();
+const { login, form } = useUserAuth();
 const { connect, getKeys, keyList, isConnected } = useEcpKey();
 const visible = ref(false);
 
@@ -41,7 +41,7 @@ definePageMeta({
           <InputGroupAddon>
             <VIcon :icon="userIcon" no-fill />
           </InputGroupAddon>
-          <InputText v-model="loginForm.email" placeholder="Введите логин" />
+          <InputText v-model="form.login" placeholder="Введите логин" />
         </InputGroup>
       </FormField>
 
@@ -50,7 +50,7 @@ definePageMeta({
           <InputGroupAddon>
             <VIcon :icon="lockIcon" no-fill />
           </InputGroupAddon>
-          <Password v-model="loginForm.password" placeholder="Введите пароль" toggle-mask :feedback="false" />
+          <Password v-model="form.password" placeholder="Введите пароль" toggle-mask :feedback="false" />
         </InputGroup>
       </FormField>
 

@@ -3,6 +3,8 @@ import BidFinancial from '@components/admin/bid/bid-financial.vue';
 import BidFounding from '@components/admin/bid/bid-founding.vue';
 import BidMain from '@components/admin/bid/bid-main.vue';
 import BidSecurity from '@components/admin/bid/bid-security.vue';
+import FileUploader from '@components/shared/file-uploader.vue';
+import FormField from '@components/shared/form-field.vue';
 import { useBid } from '@composables/bid';
 import { bidOptions } from '@composables/bid/data';
 import { PropertyStatus } from '@composables/main-form/types';
@@ -65,7 +67,17 @@ getBid();
         :selected-fields="selectedFields"
         @update:selected="handleFieldSelect"
       />
-
+      <div class="bid-detail__application-password">
+        <FormField label="Паспорт проекта">
+          <FileUploader :hide-document-icon="true" />
+        </FormField>
+        <FormField label="Заключение Экспертного совета">
+          <FileUploader :hide-document-icon="true" />
+        </FormField>
+        <FormField label="Договор">
+          <FileUploader :hide-document-icon="true" />
+        </FormField>
+      </div>
       <div class="bid-detail__footer">
         <Button label="Отклонить" severity="danger" :disabled="!selectedFields.length" @click="isRejectDialogVisible = true" />
         <Button label="Подтвердить" severity="success" :disabled="!selectedFields.length" @click="moderateBid(PropertyStatus.Approved)" />
@@ -94,6 +106,16 @@ getBid();
     justify-content: center;
     align-items: center;
     height: 100%;
+  }
+
+  &__application-password {
+    margin: 1rem 0 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    box-shadow: var(--box-shadow-card);
+    padding: 1.4rem 2rem .2rem 2rem;
+    border-radius: var(--radius-l);
+    gap: 1rem;
   }
 
   &__error {

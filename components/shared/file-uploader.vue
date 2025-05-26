@@ -63,7 +63,7 @@ onBeforeUnmount(() => {
         </template>
       </div>
     </div>
-    <VIcon :icon="document" no-fill />
+    <VIcon v-if="!hideDocumentIcon" :icon="document" no-fill />
   </div>
 </template>
 

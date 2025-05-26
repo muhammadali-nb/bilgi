@@ -21,8 +21,9 @@ export const useUserAuth = () => {
     refreshToken.value = '';
   };
 
-  const loginForm = reactive({
-    email: '',
+  const form = reactive({
+    login: '',
+    phone: '',
     password: '',
   });
 
@@ -31,9 +32,9 @@ export const useUserAuth = () => {
     status: loginStatus,
     refresh: loginFn,
     error: loginError,
-  } = useApi<AuthResponse>('/api/Users/login', {
+  } = useApi<AuthResponse>('/api/users/login', {
     method: 'POST',
-    body: loginForm,
+    body: form,
   });
 
   const login = async () => {
@@ -46,6 +47,19 @@ export const useUserAuth = () => {
     }
     else if (loginError.value) {
       $toast.error(loginError.value.message ?? 'Ошибка входа. Пожалуйста, проверьте данные.');
+    }
+  };
+
+  const { status: registerStatus, refresh: registerFn } = useApi('/api/Users/register', {
+    method: 'POST',
+    body: form,
+  });
+
+  const register = async () => {
+    await registerFn();
+
+    if (registerStatus.value === 'success') {
+      navigateTo('/login');
     }
   };
 
@@ -78,7 +92,7 @@ export const useUserAuth = () => {
   };
 
   return {
-    loginForm,
+    form,
     login,
     refresh,
     logout,
@@ -87,5 +101,6 @@ export const useUserAuth = () => {
     setRefreshToken,
     accessToken,
     refreshToken,
+    register,
   };
 };

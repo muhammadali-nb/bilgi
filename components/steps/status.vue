@@ -35,6 +35,8 @@ function handleActionClick() {
         <VIcon :icon="statusMeta.icon" class="p-message-icon" />
       </template>
       {{ statusMeta.message }}
+
+      <!--      {{ appMainForm.applicationStatus === ApplicationStatus.Correction ? 'new' : 'wen' }} -->
     </Message>
 
     <p v-if="statusMeta.description" class="font-16-r">
