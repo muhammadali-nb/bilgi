@@ -67,6 +67,7 @@ export const useStepper = () => {
         name: $route.name as string,
         query: { ...$route.query, step: 'done' },
       });
+
       guardLoading.value = false;
       return;
     }
