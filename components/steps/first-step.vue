@@ -14,12 +14,12 @@ const appMainForm = useAppMainForm();
 <template>
   <form class="step-form">
     <h4 class="step-form__title font-24-sb">
-      ЗАЯВЛЕНИЕ
+      {{ $t('application-form.first-step.title') }}
     </h4>
 
     <div class="step-form__grid">
       <FormField
-        label="Необходимая сумма целевого кредита (сум):"
+        :label="$t('application-form.first-step.targetCreditAmount')"
         class="colspan-2"
         :errors="appMainForm.$v?.targetCreditAmount?.$errors"
         :is-not-confirmed="appMainForm.isRejected('targetCreditAmount')"
@@ -27,7 +27,7 @@ const appMainForm = useAppMainForm();
         <InputNumber
           v-model="appMainForm.formObj.targetCreditAmount"
           :invalid="appMainForm.$v?.targetCreditAmount?.$error"
-          placeholder="Введите сумму"
+          :placeholder="$t('application-form.placeholder.enter-amount')"
           :class="{ warning: appMainForm.isRejected('targetCreditAmount') }"
           name="targetCreditAmount"
           @blur="appMainForm.handleBlurSave('targetCreditAmount')"
@@ -35,14 +35,14 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
+        :label="$t('application-form.first-step.youngSpecialistsCount')"
         :errors="appMainForm.$v?.youngSpecialistsCount?.$errors"
-        label="Кол-во молодых специалистов, которых обучат и трудоустроят:"
         :is-not-confirmed="appMainForm.isRejected('youngSpecialistsCount')"
       >
         <InputNumber
           v-model="appMainForm.formObj.youngSpecialistsCount"
           :invalid="appMainForm.$v?.youngSpecialistsCount?.$error"
-          placeholder="Введите количество"
+          :placeholder="$t('application-form.placeholder.enter-count')"
           :class="{ warning: appMainForm.isRejected('youngSpecialistsCount') }"
           name="youngSpecialistsCount"
           @blur="appMainForm.handleBlurSave('youngSpecialistsCount')"
@@ -50,7 +50,7 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Льготный период:"
+        :label="$t('application-form.first-step.gracePeriod')"
         :errors="appMainForm.$v?.gracePeriod?.$errors"
         :is-not-confirmed="appMainForm.isRejected('gracePeriod')"
       >
@@ -58,7 +58,7 @@ const appMainForm = useAppMainForm();
           v-model="appMainForm.formObj.gracePeriod"
           :invalid="appMainForm.$v?.gracePeriod?.$error"
           :options="appMainForm.gracePeriodOptions"
-          placeholder="Выберите период"
+          :placeholder="$t('application-form.placeholder.choise')"
           option-label="name"
           option-value="value"
           @change="appMainForm.saveField('gracePeriod', appMainForm.formObj.gracePeriod)"
@@ -66,7 +66,7 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Срок возврата целевого кредита (лет):"
+        :label="$t('application-form.first-step.creditReturnPeriodYears')"
         :errors="appMainForm.$v?.creditReturnPeriodYears?.$errors"
         :is-not-confirmed="appMainForm.isRejected('creditReturnPeriodYears')"
       >
@@ -74,7 +74,7 @@ const appMainForm = useAppMainForm();
           v-model="appMainForm.formObj.creditReturnPeriodYears"
           :invalid="appMainForm.$v?.creditReturnPeriodYears?.$error"
           :options="appMainForm.gracePeriodOptions"
-          placeholder="Выберите срок"
+          :placeholder="$t('application-form.placeholder.choise')"
           option-label="name"
           option-value="value"
           :class="{ warning: appMainForm.isRejected('creditReturnPeriodYears') }"
@@ -83,8 +83,8 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
+        :label="$t('application-form.first-step.creditSecurityType')"
         :errors="appMainForm.$v?.creditSecurityType?.$errors"
-        label="Обеспечение кредита"
         :is-not-confirmed="appMainForm.isRejected('creditSecurityType')"
       >
         <Select
@@ -93,7 +93,7 @@ const appMainForm = useAppMainForm();
           :options="appMainForm.creditSecurityTypeOptions"
           option-label="name"
           option-value="value"
-          placeholder="Выберите"
+          :placeholder="$t('application-form.placeholder.choise')"
           :class="{ warning: appMainForm.isRejected('creditSecurityTypeOptions') }"
           @change="appMainForm.saveField('creditSecurityType', appMainForm.formObj.creditSecurityType)"
         />
@@ -101,12 +101,12 @@ const appMainForm = useAppMainForm();
 
       <div class="colspan-2">
         <p class="font-16-r">
-          Предполагаемый график возврата целевого кредита
+          {{ $t('application-form.first-step.creditReturnPlanTitle') }}
         </p>
         <div class="step-form__grid">
           <FormField
+            :label="$t('application-form.first-step.plannedCreditReturnSchedule')"
             :errors="appMainForm.$v?.plannedCreditReturnSchedule?.$errors"
-            label="(сумма долга, проценты)"
             :is-not-confirmed="appMainForm.isRejected('plannedCreditReturnSchedule')"
           >
             <Select
@@ -115,15 +115,15 @@ const appMainForm = useAppMainForm();
               :options="repaymentScheduleTypeOptions"
               option-label="name"
               option-value="value"
-              placeholder="Выберите"
+              :placeholder="$t('application-form.placeholder.choise')"
               :class="{ warning: appMainForm.isRejected('plannedCreditReturnSchedule') }"
               @change="appMainForm.saveField('plannedCreditReturnSchedule', appMainForm.formObj.plannedCreditReturnSchedule)"
             />
           </FormField>
 
           <FormField
+            :label="$t('application-form.first-step.creditReturnFrequency')"
             :errors="appMainForm.$v?.creditReturnFrequency?.$errors"
-            label="(ежемесячный, квартальный, другой)"
             :is-not-confirmed="appMainForm.isRejected('creditReturnFrequency')"
           >
             <Select
@@ -132,7 +132,7 @@ const appMainForm = useAppMainForm();
               :options="paymentComponentOptions"
               option-label="name"
               option-value="value"
-              placeholder="Выберите"
+              :placeholder="$t('application-form.placeholder.choise')"
               :class="{ warning: appMainForm.isRejected('creditReturnFrequency') }"
               @change="appMainForm.saveField('creditReturnFrequency', appMainForm.formObj.creditReturnFrequency)"
             />
@@ -142,12 +142,12 @@ const appMainForm = useAppMainForm();
     </div>
 
     <h3 class="font-20-sb step-form__subtitle">
-      Экономическое обоснование целевого кредита
+      {{ $t('application-form.first-step.economicJustificationTitle') }}
     </h3>
     <div class="step-form__target">
       <FormField
+        :label="$t('application-form.first-step.projectDescription')"
         :errors="appMainForm.$v?.projectDescription?.$errors"
-        label="Содержание проекта:"
         :is-not-confirmed="appMainForm.isRejected('projectDescription')"
       >
         <Textarea
@@ -161,14 +161,14 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
+        :label="$t('application-form.first-step.ownFundsAmount')"
         :errors="appMainForm.$v?.ownFundsAmount?.$errors"
-        label="Собственные средства, привлеченные для реализации проекта (сум):"
         :is-not-confirmed="appMainForm.isRejected('ownFundsAmount')"
       >
         <InputNumber
           v-model="appMainForm.formObj.ownFundsAmount"
           :invalid="appMainForm.$v?.ownFundsAmount?.$error"
-          placeholder="Введите сумму"
+          :placeholder="$t('application-form.placeholder.enter-amount')"
           :class="{ warning: appMainForm.isRejected('ownFundsAmount') }"
           name="ownFundsAmount"
           @blur="appMainForm.handleBlurSave('ownFundsAmount')"
@@ -176,8 +176,8 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
+        :label="$t('application-form.first-step.organizationSocialIndicators')"
         :errors="appMainForm.$v?.organizationSocialIndicators?.$errors"
-        label="Информация о социальных показателях деятельности организации:"
         :is-not-confirmed="appMainForm.isRejected('organizationSocialIndicators')"
       >
         <Textarea
@@ -192,20 +192,20 @@ const appMainForm = useAppMainForm();
     </div>
 
     <h3 class="font-20-sb step-form__subtitle">
-      Контактная информация
+      {{ $t('application-form.first-step.contactsTitle') }}
     </h3>
 
     <div class="step-form__grid">
       <FormField
-        :errors="appMainForm.$v?.contactPersonFullName?.$errors"
-        label="Контактное лицо"
+        :label="$t('application-form.first-step.contactPersonFullName')"
         class="colspan-2"
+        :errors="appMainForm.$v?.contactPersonFullName?.$errors"
         :is-not-confirmed="appMainForm.isRejected('contactPersonFullName')"
       >
         <InputText
           v-model="appMainForm.formObj.contactPersonFullName"
           :invalid="appMainForm.$v?.contactPersonFullName?.$error"
-          placeholder="Ф.И.О"
+          :placeholder="$t('application-form.first-step.contactPersonFullName')"
           :class="{ warning: appMainForm.isRejected('contactPersonFullName') }"
           name="contactPersonFullName"
           @blur="appMainForm.handleBlurSave('contactPersonFullName')"
@@ -213,8 +213,8 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
+        :label="$t('application-form.first-step.mobilePhone')"
         :errors="appMainForm.$v?.mobilePhone?.$errors"
-        label="Мобильный"
         :is-not-confirmed="appMainForm.isRejected('mobilePhone')"
       >
         <PhoneInput
@@ -227,8 +227,8 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
+        :label="$t('application-form.first-step.workPhone')"
         :errors="appMainForm.$v?.workPhone?.$errors"
-        label="Рабочий"
         :is-not-confirmed="appMainForm.isRejected('workPhone')"
       >
         <PhoneInput
@@ -241,8 +241,8 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
+        :label="$t('application-form.first-step.homePhone')"
         :errors="appMainForm.$v?.homePhone?.$errors"
-        label="Домашний"
         :is-not-confirmed="appMainForm.isRejected('homePhone')"
       >
         <PhoneInput
@@ -255,14 +255,14 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
+        :label="$t('application-form.first-step.email')"
         :errors="appMainForm.$v?.email?.$errors"
-        label="E-mail"
         :is-not-confirmed="appMainForm.isRejected('email')"
       >
         <InputText
           v-model="appMainForm.formObj.email"
           :invalid="appMainForm.$v?.email?.$error"
-          placeholder="ali@wuwu"
+          :placeholder="$t('application-form.first-step.email')"
           :class="{ warning: appMainForm.isRejected('email') }"
           name="email"
           @blur="appMainForm.handleBlurSave('email')"
@@ -270,15 +270,15 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        :errors="appMainForm.$v?.directorFullName?.$errors"
-        label="Руководитель (Ф.И.О.)"
+        :label="$t('application-form.first-step.directorFullName')"
         class="colspan-2"
+        :errors="appMainForm.$v?.directorFullName?.$errors"
         :is-not-confirmed="appMainForm.isRejected('directorFullName')"
       >
         <InputText
           v-model="appMainForm.formObj.directorFullName"
           :invalid="appMainForm.$v?.directorFullName?.$error"
-          placeholder="Ф.И.О"
+          :placeholder="$t('application-form.placeholder.person-contact')"
           name="directorFullName"
           :class="{ warning: appMainForm.isRejected('directorFullName') }"
           @blur="appMainForm.handleBlurSave('directorFullName')"
@@ -286,12 +286,12 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Анкета Заявителя"
+        :label="$t('application-form.first-step.applicantQuestionnaireDocumentUrl')"
         class="colspan-2"
         :is-not-confirmed="appMainForm.isRejected('applicantQuestionnaireDocumentUrl')"
       >
         <FileUploader
-          label="Документ, подтверждающий право на осуществление деятельности образования (лицензия/подтверждение/разрешение);"
+          :label="$t('application-form.first-step.applicantQuestionnaireLabel')"
           :invalid="appMainForm.$v?.applicantQuestionnaireDocumentUrl?.$error"
           :url="appMainForm.formObj.applicantQuestionnaireDocumentUrl"
           :warning="appMainForm.isRejected('applicantQuestionnaireDocumentUrl')"
@@ -302,7 +302,7 @@ const appMainForm = useAppMainForm();
 
     <Button
       class="step-form__submit"
-      label="Далее"
+      :label="$t('application-form.buttons.next')"
       fluid
       @click="emits('submit')"
     />

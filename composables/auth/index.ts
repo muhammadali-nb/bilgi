@@ -1,11 +1,14 @@
 import type { AuthResponse } from '@composables/auth/types';
+import { useValidationRules } from '@composables/ui/validation-rules';
 import { useApi } from '@composables/use-api';
 import { useToastStore } from '@store/toast';
+import useVuelidate from '@vuelidate/core';
 
 export const useUserAuth = () => {
   const accessToken = useCookie<string>('accessToken', { default: () => '', sameSite: 'lax' });
   const refreshToken = useCookie<string>('refreshToken', { default: () => '', sameSite: 'lax' });
-
+  const type = ref<'login' | 'registration'>();
+  const { requiredField, requiredIf } = useValidationRules();
   const bearerToken = computed(() => `Bearer ${accessToken.value}`);
   const $toast = useToastStore();
 
@@ -21,11 +24,19 @@ export const useUserAuth = () => {
     refreshToken.value = '';
   };
 
-  const form = reactive({
+  const form = ref({
     login: '',
     phone: '',
     password: '',
   });
+
+  const rules = {
+    login: { ...requiredField() },
+    phone: { ...requiredIf(() => type.value === 'registration') },
+    password: { ...requiredField() },
+  };
+
+  const $v = useVuelidate(rules, form);
 
   const {
     data: loginData,
@@ -38,8 +49,10 @@ export const useUserAuth = () => {
   });
 
   const login = async () => {
+    type.value = 'login';
+    const validation = await $v.value.$validate();
+    if (!validation) return;
     await loginFn();
-
     if (loginStatus.value === 'success' && loginData.value?.accessToken) {
       setAccessToken(loginData.value.accessToken);
       setRefreshToken(loginData.value.refreshToken);
@@ -56,6 +69,9 @@ export const useUserAuth = () => {
   });
 
   const register = async () => {
+    type.value = 'registration';
+    const validation = await $v.value.$validate();
+    if (!validation) return;
     await registerFn();
 
     if (registerStatus.value === 'success') {
@@ -102,5 +118,6 @@ export const useUserAuth = () => {
     accessToken,
     refreshToken,
     register,
+    $v,
   };
 };

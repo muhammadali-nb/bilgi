@@ -23,7 +23,7 @@ const cardSeverity = computed(() => props.severity === 'success' ? 'var(--p-gree
 .card {
   padding: 1rem 1.5rem;
   background-color: var(--card-bg-05);
-  width: 100%;
+  min-width: 240px;
   border-radius: var(--radius-l);
   box-shadow: var(--box-shadow-card);
 

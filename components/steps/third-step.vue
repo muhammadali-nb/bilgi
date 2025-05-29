@@ -14,11 +14,11 @@ const appMainForm = useAppMainForm();
   <form class="step-form">
     <div class="step-form__documents">
       <FormField
-        label="Копии финансовой отчетности организации за последний год (за последний год – по кварталам), в объеме, установленном действующим законодательством РУз для квартальных, полугодовых и годовых отчетов, с подтверждением сдачи в налоговый орган; Ф-1, Ф-2, оборот счетов"
+        :label="$t('application-form.third-step.financialStatements')"
         :is-not-confirmed="appMainForm.isRejected('financialStatements')"
       >
         <FileUploader
-          label="Копии финансовой отчетности организации за последний год..."
+          :label="$t('application-form.third-step.financialStatements')"
           :invalid="appMainForm.$v?.financialStatements?.$error"
           :url="appMainForm.formObj.financialStatements"
           :warning="appMainForm.isRejected('financialStatements')"
@@ -27,11 +27,11 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Справка из налогового органа об отсутствии задолженности перед бюджетом;"
+        :label="$t('application-form.third-step.taxDebtAbsenceCertificate')"
         :is-not-confirmed="appMainForm.isRejected('taxDebtAbsenceCertificate')"
       >
         <FileUploader
-          label="Справка из налогового органа об отсутствии задолженности перед бюджетом;"
+          :label="$t('application-form.third-step.taxDebtAbsenceCertificate')"
           :invalid="appMainForm.$v?.taxDebtAbsenceCertificate?.$error"
           :url="appMainForm.formObj.taxDebtAbsenceCertificate"
           :warning="appMainForm.isRejected('taxDebtAbsenceCertificate')"
@@ -40,11 +40,11 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Справка из банков о наличии расчетных счетов, с указанием отсутствия картотеки №2 (оригинал с датой выдачи – не более 30 дней);"
+        :label="$t('application-form.third-step.bankAccountCertificate')"
         :is-not-confirmed="appMainForm.isRejected('bankAccountCertificate')"
       >
         <FileUploader
-          label="Справка из банков о наличии расчетных счетов..."
+          :label="$t('application-form.third-step.bankAccountCertificate')"
           :invalid="appMainForm.$v?.bankAccountCertificate?.$error"
           :url="appMainForm.formObj.bankAccountCertificate"
           :warning="appMainForm.isRejected('bankAccountCertificate')"
@@ -53,11 +53,11 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Бизнес-план проекта"
+        :label="$t('application-form.third-step.projectBusinessPlan')"
         :is-not-confirmed="appMainForm.isRejected('projectBusinessPlan')"
       >
         <FileUploader
-          label="Бизнес-план проекта"
+          :label="$t('application-form.third-step.projectBusinessPlan')"
           :invalid="appMainForm.$v?.projectBusinessPlan?.$error"
           :url="appMainForm.formObj.projectBusinessPlan"
           :warning="appMainForm.isRejected('projectBusinessPlan')"
@@ -66,11 +66,11 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Смета целевого расходования денежных средств"
+        :label="$t('application-form.third-step.targetFundSpendingEstimate')"
         :is-not-confirmed="appMainForm.isRejected('targetFundSpendingEstimate')"
       >
         <FileUploader
-          label="Смета целевого расходования денежных средств"
+          :label="$t('application-form.third-step.targetFundSpendingEstimate')"
           :invalid="appMainForm.$v?.targetFundSpendingEstimate?.$error"
           :url="appMainForm.formObj.targetFundSpendingEstimate"
           :warning="appMainForm.isRejected('targetFundSpendingEstimate')"
@@ -79,11 +79,11 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Договор аренды (если организация арендует помещение);"
+        :label="$t('application-form.third-step.leaseAgreement')"
         :is-not-confirmed="appMainForm.isRejected('leaseAgreement')"
       >
         <FileUploader
-          label="Договор аренды (если организация арендует помещение);"
+          :label="$t('application-form.third-step.leaseAgreement')"
           :invalid="appMainForm.$v?.leaseAgreement?.$error"
           :url="appMainForm.formObj.leaseAgreement"
           :warning="appMainForm.isRejected('leaseAgreement')"
@@ -92,11 +92,11 @@ const appMainForm = useAppMainForm();
       </FormField>
     </div>
 
-    <div class="step-form__controls">
+    <div class="step-form__controls   ">
       <Button class="step-form__prev" @click="emits('prev')">
         <VIcon :icon="prevIcon" />
       </Button>
-      <Button class="step-form__submit" label="Далее" fluid @click="emits('submit')" />
+      <Button class="step-form__submit" :label="$t('application-form.buttons.next')" fluid @click="emits('submit')" />
     </div>
   </form>
 </template>

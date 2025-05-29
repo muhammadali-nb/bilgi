@@ -57,6 +57,7 @@ export const useStepper = () => {
     const isValidStep = !Number.isNaN(routeStep) && routeStep >= 1 && routeStep <= totalSteps;
 
     const status = appMainForm.applicationStatus;
+
     const firstInvalidStep = await appMainForm.getFirstInvalidStep();
 
     // Если статус Correction и в адресной строке step невалидный или стоит 'done',

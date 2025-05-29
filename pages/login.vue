@@ -8,7 +8,7 @@ import { useEcpKey } from '@composables/ecp-key';
 import { parseCertificateInfo } from '@composables/ecp-key/model';
 import { lockIcon, userIcon } from '../assets/icons';
 
-const { login, form } = useUserAuth();
+const { login, $v } = useUserAuth();
 const { connect, getKeys, keyList, isConnected } = useEcpKey();
 const visible = ref(false);
 
@@ -39,18 +39,18 @@ definePageMeta({
       <FormField label="Логин" class="form__field">
         <InputGroup>
           <InputGroupAddon>
-            <VIcon :icon="userIcon" no-fill />
+            <VIcon :icon="userIcon" />
           </InputGroupAddon>
-          <InputText v-model="form.login" placeholder="Введите логин" />
+          <InputText v-model="$v.login.$model" :invalid="$v.login?.$error" placeholder="Введите логин" />
         </InputGroup>
       </FormField>
 
       <FormField label="Пароль">
         <InputGroup>
           <InputGroupAddon>
-            <VIcon :icon="lockIcon" no-fill />
+            <VIcon :icon="lockIcon" />
           </InputGroupAddon>
-          <Password v-model="form.password" placeholder="Введите пароль" toggle-mask :feedback="false" />
+          <Password v-model="$v.password.$model" :invalid="$v.password?.$error" placeholder="Введите пароль" toggle-mask :feedback="false" />
         </InputGroup>
       </FormField>
 
@@ -67,7 +67,12 @@ definePageMeta({
         @click="login"
       />
       <p class="font-14-n register__form-text">
-        Уже есть аккаунт? <span class="font-14-b">Войти</span>
+        Нет аккаунта?
+        <Button as-child>
+          <RouterLink to="/registration" class="font-14-b register__form-link">
+            Регистрация
+          </RouterLink>
+        </Button>
       </p>
     </form>
     <Dialog v-model:visible="visible" header="Выберите ключ" :draggable="false" modal :close-on-mask="false" style="width: 45rem;" class="digital-signature__dialog">
@@ -119,6 +124,10 @@ definePageMeta({
         color: var(--site-secondary-text);
         text-align: center;
         margin: 4rem 0 0 0;
+
+        :deep(a) {
+          color: var(--site-secondary-text);
+        }
       }
     }
   }

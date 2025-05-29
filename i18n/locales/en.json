@@ -4,13 +4,113 @@
     "test-text": "Advantage text"
   },
 
-  "admin-auth": "Auth",
-  "admin-bid": "bid",
-  "admin-bid-id": "bid id",
-  "admin-clients": "clients",
-  "years": "{n} Years | {n} Years | {n} Years | {n} Years",
-  "months": "{n} Months | {n} Months | {n} Months | {n} Months",
-  "pledge": "Pledge",
+  "admin-auth": "Authorization",
+  "admin-bid": "Applications",
+  "admin-bid-id": "Application",
+  "admin-clients": "Clients",
+  "years": "0 years | {n} year | {n} years | {n} years",
+  "months": "0 months | {n} month | {n} months | {n} months",
+  "pledge": "Collateral",
   "guarantee": "Guarantee",
-  "insurance": "Insurance"
+  "insurance": "Insurance",
+  "application-form": {
+    "application": "Application",
+    "first-step": {
+      "title": "APPLICATION",
+      "targetCreditAmount": "Required target credit amount (UZS):",
+      "youngSpecialistsCount": "Number of young specialists to be trained and employed:",
+      "gracePeriod": "Grace period:",
+      "creditReturnPeriodYears": "Target credit repayment term (years):",
+      "creditSecurityType": "Loan security",
+      "creditReturnPlanTitle": "Proposed target credit repayment schedule",
+      "plannedCreditReturnSchedule": "(loan amount, interest)",
+      "creditReturnFrequency": "(monthly, quarterly, other)",
+      "economicJustificationTitle": "Economic justification of the target loan",
+      "projectDescription": "Project description:",
+      "ownFundsAmount": "Own funds raised for project implementation (UZS):",
+      "organizationSocialIndicators": "Information on the organization’s social performance indicators:",
+      "contactsTitle": "Contact information",
+      "contactPersonFullName": "Contact person",
+      "mobilePhone": "Mobile",
+      "workPhone": "Work",
+      "homePhone": "Home",
+      "email": "E-mail",
+      "directorFullName": "Director (Full Name)",
+      "applicantQuestionnaireDocumentUrl": "Applicant Questionnaire",
+      "applicantQuestionnaireLabel": "Document confirming the right to carry out educational activities (license/confirmation/permit);"
+    },
+    "second-step": {
+      "title": "Founding Documents",
+      "certificateOfStateRegistration": "Certificate of State Registration",
+      "organizationCharter": "Organization Charter",
+      "foundingAgreement": "Founding Agreement",
+      "foundersDecisionToOpenOrganization": "Founders’ decision to open the organization",
+      "foundersDecisionOnTargetLoan": "Founders’ decision on providing a target loan (loan amount, purpose, term, interest rate, collateral);",
+      "orderOnTargetLoan": "Order on allocation of target loan (loan amount, purpose, term, interest rate, collateral)",
+      "ceoAuthorityConfirmation": "Documents confirming the authority of the director",
+      "chiefAccountantAuthorityConfirmation": "Documents confirming the authority of the chief accountant",
+      "ceoPassport": "Director’s passport;",
+      "chiefAccountantPassport": "Chief accountant’s passport;",
+      "itParkResidencyCertificate": "Residency certificate of LLC 'Technological Park of Software Products and IT' (IT Park);",
+      "educationActivityPermission": "Document confirming the right to carry out educational activities (license/confirmation/permit);"
+    },
+    "third-step": {
+      "title": "Financial Documents",
+      "financialStatements": "Copies of the organization’s financial statements for the last year (by quarters), as required by current legislation of the Republic of Uzbekistan for quarterly, semi-annual and annual reports, with confirmation of submission to the tax authority; Form-1, Form-2, account turnover",
+      "taxDebtAbsenceCertificate": "Certificate from the tax authority on the absence of tax arrears;",
+      "bankAccountCertificate": "Certificate from banks about the availability of accounts, indicating the absence of file No.2 (original dated no more than 30 days);",
+      "projectBusinessPlan": "Project business plan",
+      "targetFundSpendingEstimate": "Estimate of targeted spending of funds",
+      "leaseAgreement": "Lease agreement (if the organization rents premises);"
+    },
+    "fourth-step": {
+      "title": "Real Estate",
+      "landCadastrePassport": "Cadastral passport for land plot (buildings and structures) provided as collateral",
+      "ownershipDocuments": "Documents confirming ownership",
+      "realEstateValuationReport": "Report of an independent valuation organization",
+      "vehicleSectionTitle": "Vehicles",
+      "vehicleRegistrationCertificate": "Vehicle registration certificate",
+      "vehicleValuationReport": "Report of an independent valuation organization",
+      "resolutionsSectionTitle": "Resolutions and Guarantees",
+      "shareholderResolution": "Resolution of the general meeting of participants/shareholders",
+      "guarantorFinancialAndFoundingDocs": "Financial and founding documents",
+      "auditorOpinion": "Auditor’s opinion",
+      "guarantorLetter": "Guarantor's letter of guarantee",
+      "insuranceSectionTitle": "Insurance policy",
+      "insuranceCompanyLetter": "Letter from the insurance company regarding the obligation under the loan."
+    },
+    "placeholder": {
+      "enter-amount": "Enter amount",
+      "enter-count": "Enter quantity",
+      "choise": "Choose",
+      "person-contact": "Contact person"
+    },
+    "buttons": {
+      "next": "Next",
+      "prev": "Back",
+      "save": "Save"
+    }
+  },
+  "application-status": {
+    "consideration": {
+      "message": "Your application has been successfully created and is under review. Please wait for verification."
+    },
+    "rejected": {
+      "message": "Your application has been reviewed, but unfortunately, we have to reject it.",
+      "description": "Your application was rejected due to existing debts. To proceed, you must pay off all debts and provide supporting documents.",
+      "action": "Create a new application"
+    },
+    "correction": {
+      "message": "Your application has been reviewed, but corrections are required. Please clarify the following data.",
+      "description": "Discrepancies were found in the submitted data during the review. To proceed, you must resubmit a copy of the director's passport (photo page) and the current organization charter.",
+      "action": "Make corrections"
+    },
+    "approved": {
+      "message": "The application has been fully approved and is ready for issuance.",
+      "description": "Please review the contract before receiving it."
+    },
+    "unknown": {
+      "message": "Unknown application status"
+    }
+  }
 }

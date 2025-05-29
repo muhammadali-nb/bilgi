@@ -5,7 +5,7 @@ import VIcon from '@components/shared/v-icon.vue';
 import { useUserAuth } from '@composables/auth';
 import { lockIcon, userIcon } from '../assets/icons';
 
-const { register, form } = useUserAuth();
+const { register, $v } = useUserAuth();
 
 const visible = ref(false);
 
@@ -18,14 +18,14 @@ definePageMeta({
   <div class="register">
     <form class="register__form" @submit.prevent>
       <h4 class="register__title font-32-b">
-        Вход
+        Регистрация
       </h4>
       <p class="register__description font-16-r">
-        Для входа в кабинет введите ваш логин и авторизуйтесь с помощью ЭЦП ключа.
+        Для регистрации в кабинет введите ваш логин и авторизуйтесь с помощью ЭЦП ключа.
       </p>
 
       <FormField label="Номер телефона" class="form__field">
-        <PhoneInput v-model="form.phone" :icon="true" />
+        <PhoneInput v-model="$v.phone.$model" :invalid="$v.phone?.$error" :icon="true" />
       </FormField>
 
       <FormField label="Логин" class="form__field">
@@ -33,7 +33,7 @@ definePageMeta({
           <InputGroupAddon>
             <VIcon :icon="userIcon" no-fill />
           </InputGroupAddon>
-          <InputText v-model="form.login" placeholder="Введите логин" />
+          <InputText v-model="$v.login.$model" :invalid="$v.login?.$error" placeholder="Введите логин" />
         </InputGroup>
       </FormField>
 
@@ -42,7 +42,7 @@ definePageMeta({
           <InputGroupAddon>
             <VIcon :icon="lockIcon" no-fill />
           </InputGroupAddon>
-          <Password v-model="form.password" placeholder="Введите пароль" toggle-mask :feedback="false" />
+          <Password v-model="$v.password.$model" :invalid="$v.password?.$error" placeholder="Введите пароль" toggle-mask :feedback="false" />
         </InputGroup>
       </FormField>
 
@@ -51,7 +51,7 @@ definePageMeta({
       </FormField>
 
       <Button
-        label="Войти"
+        label="Регистрироваться"
         severity="primary"
         type="submit"
         fluid
@@ -59,7 +59,12 @@ definePageMeta({
         @click="register"
       />
       <p class="font-14-n register__form-text">
-        Уже есть аккаунт? <span class="font-14-b">Войти</span>
+        Уже есть аккаунт?
+        <Button as-child>
+          <RouterLink to="/login" class="font-14-b register__form-link">
+            Войти
+          </RouterLink>
+        </Button>
       </p>
     </form>
     <Dialog v-model:visible="visible" header="Выберите ключ" :draggable="false" modal :close-on-mask="false" style="width: 45rem;" class="digital-signature__dialog">
@@ -106,6 +111,10 @@ definePageMeta({
         color: var(--site-secondary-text);
         text-align: center;
         margin: 4rem 0 0 0;
+
+        :deep(a) {
+          color: var(--site-secondary-text);
+        }
       }
     }
   }

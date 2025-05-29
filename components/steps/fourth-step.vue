@@ -13,16 +13,16 @@ const appMainForm = useAppMainForm();
 <template>
   <form class="step-form">
     <h4 class="step-form__title font-24-sb">
-      Недвижимое имущество
+      {{ $t('application-form.fourth-step.title') }}
     </h4>
 
     <div class="step-form__documents">
       <FormField
-        label="Кадастровый паспорт на земельный участок (здания и сооружения), предоставляемый в залог"
+        :label="$t('application-form.fourth-step.landCadastrePassport')"
         :is-not-confirmed="appMainForm.isRejected('landCadastrePassport')"
       >
         <FileUploader
-          label="Кадастровый паспорт на земельный участок..."
+          :label="$t('application-form.fourth-step.landCadastrePassport')"
           :invalid="appMainForm.$v?.landCadastrePassport?.$error"
           :url="appMainForm.formObj.landCadastrePassport"
           :warning="appMainForm.isRejected('landCadastrePassport')"
@@ -31,11 +31,11 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Документы, подтверждающие право собственности"
+        :label="$t('application-form.fourth-step.ownershipDocuments')"
         :is-not-confirmed="appMainForm.isRejected('ownershipDocuments')"
       >
         <FileUploader
-          label="Документы, подтверждающие право собственности"
+          :label="$t('application-form.fourth-step.ownershipDocuments')"
           :invalid="appMainForm.$v?.ownershipDocuments?.$error"
           :url="appMainForm.formObj.ownershipDocuments"
           :warning="appMainForm.isRejected('ownershipDocuments')"
@@ -44,11 +44,11 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Отчет независимой оценочной организации"
+        :label="$t('application-form.fourth-step.realEstateValuationReport')"
         :is-not-confirmed="appMainForm.isRejected('realEstateValuationReport')"
       >
         <FileUploader
-          label="Отчет независимой оценочной организации"
+          :label="$t('application-form.fourth-step.realEstateValuationReport')"
           :invalid="appMainForm.$v?.realEstateValuationReport?.$error"
           :url="appMainForm.formObj.realEstateValuationReport"
           :warning="appMainForm.isRejected('realEstateValuationReport')"
@@ -57,15 +57,15 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <h5 class="font-20-sb">
-        Автотранспорт
+        {{ $t('application-form.fourth-step.vehicleSectionTitle') }}
       </h5>
 
       <FormField
-        label="Свидетельство о регистрации автомототранспортного средства"
+        :label="$t('application-form.fourth-step.vehicleRegistrationCertificate')"
         :is-not-confirmed="appMainForm.isRejected('vehicleRegistrationCertificate')"
       >
         <FileUploader
-          label="Свидетельство о регистрации автомототранспортного средства"
+          :label="$t('application-form.fourth-step.vehicleRegistrationCertificate')"
           :invalid="appMainForm.$v?.vehicleRegistrationCertificate?.$error"
           :url="appMainForm.formObj.vehicleRegistrationCertificate"
           :warning="appMainForm.isRejected('vehicleRegistrationCertificate')"
@@ -74,11 +74,11 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Отчет независимой оценочной организации"
+        :label="$t('application-form.fourth-step.vehicleValuationReport')"
         :is-not-confirmed="appMainForm.isRejected('vehicleValuationReport')"
       >
         <FileUploader
-          label="Отчет независимой оценочной организации"
+          :label="$t('application-form.fourth-step.vehicleValuationReport')"
           :invalid="appMainForm.$v?.vehicleValuationReport?.$error"
           :url="appMainForm.formObj.vehicleValuationReport"
           :warning="appMainForm.isRejected('vehicleValuationReport')"
@@ -87,15 +87,15 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <h5 class="font-20-sb">
-        Решения и гарантии
+        {{ $t('application-form.fourth-step.resolutionsSectionTitle') }}
       </h5>
 
       <FormField
-        label="Решение общего собрания участников/акционеров"
+        :label="$t('application-form.fourth-step.shareholderResolution')"
         :is-not-confirmed="appMainForm.isRejected('shareholderResolution')"
       >
         <FileUploader
-          label="Решение общего собрания участников/акционеров"
+          :label="$t('application-form.fourth-step.shareholderResolution')"
           :invalid="appMainForm.$v?.shareholderResolution?.$error"
           :url="appMainForm.formObj.shareholderResolution"
           :warning="appMainForm.isRejected('shareholderResolution')"
@@ -104,11 +104,11 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Финансовая отчетность и учредительные документы"
+        :label="$t('application-form.fourth-step.guarantorFinancialAndFoundingDocs')"
         :is-not-confirmed="appMainForm.isRejected('guarantorFinancialAndFoundingDocs')"
       >
         <FileUploader
-          label="Финансовая отчетность и учредительные документы"
+          :label="$t('application-form.fourth-step.guarantorFinancialAndFoundingDocs')"
           :invalid="appMainForm.$v?.guarantorFinancialAndFoundingDocs?.$error"
           :url="appMainForm.formObj.guarantorFinancialAndFoundingDocs"
           :warning="appMainForm.isRejected('guarantorFinancialAndFoundingDocs')"
@@ -117,11 +117,11 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Аудиторское заключение"
+        :label="$t('application-form.fourth-step.auditorOpinion')"
         :is-not-confirmed="appMainForm.isRejected('auditorOpinion')"
       >
         <FileUploader
-          label="Аудиторское заключение"
+          :label="$t('application-form.fourth-step.auditorOpinion')"
           :invalid="appMainForm.$v?.auditorOpinion?.$error"
           :url="appMainForm.formObj.auditorOpinion"
           :warning="appMainForm.isRejected('auditorOpinion')"
@@ -130,11 +130,11 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <FormField
-        label="Гарантийное письмо поручителя"
+        :label="$t('application-form.fourth-step.guarantorLetter')"
         :is-not-confirmed="appMainForm.isRejected('guarantorLetter')"
       >
         <FileUploader
-          label="Гарантийное письмо поручителя"
+          :label="$t('application-form.fourth-step.guarantorLetter')"
           :invalid="appMainForm.$v?.guarantorLetter?.$error"
           :url="appMainForm.formObj.guarantorLetter"
           :warning="appMainForm.isRejected('guarantorLetter')"
@@ -143,15 +143,15 @@ const appMainForm = useAppMainForm();
       </FormField>
 
       <h5 class="font-20-sb">
-        Страховой полис
+        {{ $t('application-form.fourth-step.insuranceSectionTitle') }}
       </h5>
 
       <FormField
-        label="Письмо Страховой компании о получении обязательства перед займом."
+        :label="$t('application-form.fourth-step.insuranceCompanyLetter')"
         :is-not-confirmed="appMainForm.isRejected('insuranceCompanyLetter')"
       >
         <FileUploader
-          label="Письмо Страховой компании о получении обязательства перед займом."
+          :label="$t('application-form.fourth-step.insuranceCompanyLetter')"
           :invalid="appMainForm.$v?.insuranceCompanyLetter?.$error"
           :url="appMainForm.formObj.insuranceCompanyLetter"
           :warning="appMainForm.isRejected('insuranceCompanyLetter')"
@@ -164,7 +164,7 @@ const appMainForm = useAppMainForm();
       <Button class="step-form__prev" @click="emits('prev')">
         <VIcon :icon="prevIcon" />
       </Button>
-      <Button class="step-form__submit" label="Сохранить" fluid @click="emits('submit')" />
+      <Button class="step-form__submit" :label="$t('application-form.buttons.save')" fluid @click="emits('submit')" />
     </div>
   </form>
 </template>

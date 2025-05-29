@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import VIcon from '@components/shared/v-icon.vue';
-import { getApplicationStatusMeta } from '@composables/main-form/data';
+import { getApplicationStatusMeta } from '@composables/ui/status';
 import { useAppMainForm } from '@store/main-form';
 
 const appMainForm = useAppMainForm();
 const $router = useRouter();
 const $route = useRoute();
 const statusMeta = computed(() => getApplicationStatusMeta(appMainForm.applicationStatus ?? 1));
+
+// const statusMeta = getApplicationStatusMeta(appMainForm.applicationStatus ?? 1);
 
 const goToRejectedFieldStep = () => {
   const step = appMainForm.getStepByRejectedField();
@@ -15,11 +17,11 @@ const goToRejectedFieldStep = () => {
 
 function handleActionClick() {
   switch (statusMeta.value.action?.type) {
-    case 'edit':
+  case 'edit':
 
-      break;
-    case 'resend':
-      break;
+    break;
+  case 'resend':
+    break;
   }
 }
 </script>
@@ -27,7 +29,7 @@ function handleActionClick() {
 <template>
   <div class="step-status">
     <h4 class="step-status__title font-24-sb">
-      Заявка №{{ appMainForm.applicationId }}
+      {{ $t('application-form.application') }} №{{ appMainForm.applicationId }}
     </h4>
 
     <Message :severity="statusMeta.severity">

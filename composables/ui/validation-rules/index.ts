@@ -1,4 +1,4 @@
-import { helpers, maxValue, minValue, required } from '@vuelidate/validators';
+import { helpers, maxValue, minValue, required, requiredIf as vRequiredIf } from '@vuelidate/validators';
 
 export const useValidationRules = () => {
   const requiredField = () => {
@@ -13,5 +13,11 @@ export const useValidationRules = () => {
     return { minValue: helpers.withMessage(`MaxLength is ${max}`, maxValue(max)) };
   };
 
-  return { requiredField, min, max };
+  const requiredIf = (condition: () => boolean) => {
+    return {
+      required: helpers.withMessage('Field is required!', vRequiredIf(condition)),
+    };
+  };
+
+  return { requiredField, min, max, requiredIf };
 };
