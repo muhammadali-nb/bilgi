@@ -1,6 +1,6 @@
 export interface IPropsFileUploader {
   accept?: string
-  label: string
+  label?: string
   url?: string
   invalid?: boolean
   warning?: boolean

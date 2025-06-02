@@ -52,7 +52,7 @@ export const useBid = () => {
   const { refresh: moderateBidFn, error: moderateBidError } = useApi('/api/moderator', {
     method: 'post',
     body: {
-      id: $route.params?.id,
+      applicationId: $route.params?.id,
       properties: selectedFields,
       status: moderateBidStatus,
       comment: rejectMessage,

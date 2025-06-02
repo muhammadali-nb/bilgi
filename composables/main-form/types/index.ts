@@ -60,6 +60,7 @@ export enum PropertyStatus {
   Pending = 0,
   Rejected,
   Approved,
+  Correction,
 }
 
 export interface IMainFormRequestBody {

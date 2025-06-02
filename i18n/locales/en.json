@@ -3,7 +3,6 @@
   "advantages": {
     "test-text": "Advantage text"
   },
-
   "admin-auth": "Authorization",
   "admin-bid": "Applications",
   "admin-bid-id": "Application",
@@ -16,6 +15,7 @@
   "application-form": {
     "application": "Application",
     "first-step": {
+      "header": "Filling out the application",
       "title": "APPLICATION",
       "targetCreditAmount": "Required target credit amount (UZS):",
       "youngSpecialistsCount": "Number of young specialists to be trained and employed:",
@@ -40,6 +40,7 @@
       "applicantQuestionnaireLabel": "Document confirming the right to carry out educational activities (license/confirmation/permit);"
     },
     "second-step": {
+      "header": "Founding Documents",
       "title": "Founding Documents",
       "certificateOfStateRegistration": "Certificate of State Registration",
       "organizationCharter": "Organization Charter",
@@ -55,6 +56,7 @@
       "educationActivityPermission": "Document confirming the right to carry out educational activities (license/confirmation/permit);"
     },
     "third-step": {
+      "header": "Financial Documents",
       "title": "Financial Documents",
       "financialStatements": "Copies of the organization’s financial statements for the last year (by quarters), as required by current legislation of the Republic of Uzbekistan for quarterly, semi-annual and annual reports, with confirmation of submission to the tax authority; Form-1, Form-2, account turnover",
       "taxDebtAbsenceCertificate": "Certificate from the tax authority on the absence of tax arrears;",
@@ -64,6 +66,7 @@
       "leaseAgreement": "Lease agreement (if the organization rents premises);"
     },
     "fourth-step": {
+      "header": "Documents ensuring contract obligations",
       "title": "Real Estate",
       "landCadastrePassport": "Cadastral passport for land plot (buildings and structures) provided as collateral",
       "ownershipDocuments": "Documents confirming ownership",
@@ -92,24 +95,45 @@
     }
   },
   "application-status": {
+    "new": {
+      "header": "New",
+      "message": "Your application has not yet been submitted for review."
+    },
     "consideration": {
+      "header": "Done! Your application has been successfully submitted",
       "message": "Your application has been successfully created and is under review. Please wait for verification."
     },
     "rejected": {
-      "message": "Your application has been reviewed, but unfortunately, we have to reject it.",
-      "description": "Your application was rejected due to existing debts. To proceed, you must pay off all debts and provide supporting documents.",
+      "header": "Your application has been rejected",
+      "message": "Your application has been reviewed, but unfortunately we have to reject it.",
+      "description": "Your application was rejected due to existing debts. To proceed, you must settle all debts and provide supporting documents.",
       "action": "Create a new application"
     },
     "correction": {
-      "message": "Your application has been reviewed, but corrections are required. Please clarify the following data.",
-      "description": "Discrepancies were found in the submitted data during the review. To proceed, you must resubmit a copy of the director's passport (photo page) and the current organization charter.",
+      "header": "Your application requires corrections",
+      "message": "Your application has been reviewed, but some corrections are needed. Please clarify the following information.",
+      "description": "During the review, inconsistencies were found in the submitted data. To proceed, please resubmit a copy of the director’s passport (photo page) and the organization’s charter with up-to-date information.",
       "action": "Make corrections"
     },
+    "final-consideration": {
+      "header": "Final review",
+      "message": "Your application is under final review. Please wait for the decision."
+    },
+    "final-rejected": {
+      "header": "Final rejection",
+      "message": "Unfortunately, your application has been finally rejected after review."
+    },
+    "final-correction": {
+      "header": "Your application has been reviewed",
+      "message": "Final corrections are required. Please review the specified information."
+    },
     "approved": {
+      "header": "Your application has been approved",
       "message": "The application has been fully approved and is ready for issuance.",
-      "description": "Please review the contract before receiving it."
+      "description": "Please review the agreement before receiving the funds."
     },
     "unknown": {
+      "header": "Unknown",
       "message": "Unknown application status"
     }
   }

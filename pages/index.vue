@@ -10,6 +10,7 @@ import { getApplicationStatusHeader, stepTitles } from '@composables/main-form/d
 import { useStepper } from '@composables/ui/stepper';
 import { useAppMainForm } from '@store/main-form';
 
+const { t } = useI18n();
 const appMainForm = useAppMainForm();
 const { activeStep, next, steps, prev, isFinished, stepGuard } = useStepper();
 
@@ -27,8 +28,8 @@ const submitStep = async () => {
 };
 
 const currentTitle = computed(() => {
-  if (isFinished.value) return getApplicationStatusHeader(1);
-  return stepTitles[activeStep.value] ?? `Шаг ${activeStep.value}`;
+  if (isFinished.value) return t(getApplicationStatusHeader(appMainForm.applicationStatus ?? 0));
+  return t(stepTitles[activeStep.value]) ?? `Шаг ${activeStep.value}`;
 });
 
 await applicationInit();
@@ -40,7 +41,6 @@ await applicationInit();
       <h3 class="font-24-sb home__title">
         {{ currentTitle }}
       </h3>
-
       <template v-if="!isFinished">
         <Stepper v-model:active-step="activeStep" :steps="steps" class="home__steps" />
         <FirstStep v-if="activeStep === 1" @submit="submitStep" />

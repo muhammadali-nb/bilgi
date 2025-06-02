@@ -17,11 +17,10 @@ const goToRejectedFieldStep = () => {
 
 function handleActionClick() {
   switch (statusMeta.value.action?.type) {
-  case 'edit':
-
-    break;
-  case 'resend':
-    break;
+    case 'edit':
+      break;
+    case 'resend':
+      break;
   }
 }
 </script>

@@ -1,8 +1,8 @@
 import type { AuthResponse } from '@composables/auth/types';
 import { useValidationRules } from '@composables/ui/validation-rules';
-import { useApi } from '@composables/use-api';
 import { useToastStore } from '@store/toast';
 import useVuelidate from '@vuelidate/core';
+import { useLocalePath } from '../../.nuxt/imports';
 
 export const useUserAuth = () => {
   const accessToken = useCookie<string>('accessToken', { default: () => '', sameSite: 'lax' });
@@ -11,6 +11,9 @@ export const useUserAuth = () => {
   const { requiredField, requiredIf } = useValidationRules();
   const bearerToken = computed(() => `Bearer ${accessToken.value}`);
   const $toast = useToastStore();
+
+  const $router = useRouter();
+  const localePath = useLocalePath();
 
   const setAccessToken = (value: string) => {
     accessToken.value = value;
@@ -43,9 +46,12 @@ export const useUserAuth = () => {
     status: loginStatus,
     refresh: loginFn,
     error: loginError,
-  } = useApi<AuthResponse>('/api/users/login', {
+  } = useFetch<AuthResponse>('/api/users/login', {
     method: 'POST',
     body: form,
+    watch: false,
+    immediate: false,
+    retry: false,
   });
 
   const login = async () => {
@@ -56,16 +62,19 @@ export const useUserAuth = () => {
     if (loginStatus.value === 'success' && loginData.value?.accessToken) {
       setAccessToken(loginData.value.accessToken);
       setRefreshToken(loginData.value.refreshToken);
-      navigateTo('/');
+      $router.push(localePath('/'));
     }
     else if (loginError.value) {
       $toast.error(loginError.value.message ?? 'Ошибка входа. Пожалуйста, проверьте данные.');
     }
   };
 
-  const { status: registerStatus, refresh: registerFn } = useApi('/api/Users/register', {
+  const { status: registerStatus, refresh: registerFn } = useFetch('/api/Users/register', {
     method: 'POST',
     body: form,
+    watch: false,
+    immediate: false,
+    retry: false,
   });
 
   const register = async () => {
@@ -75,36 +84,28 @@ export const useUserAuth = () => {
     await registerFn();
 
     if (registerStatus.value === 'success') {
-      navigateTo('/login');
+      $router.push(localePath('/login'));
     }
   };
 
-  const {
-    data: refreshData,
-    status: refreshStatus,
-    refresh: refreshFn,
-  } = useApi<AuthResponse>('/api/Users/refresh', {
-    method: 'POST',
-    body: {
-      refreshToken: refreshToken.value,
-    },
-  });
-
-  const refresh = async (): Promise<AuthResponse | null> => {
-    await refreshFn();
-
-    if (refreshStatus.value === 'success' && refreshData.value?.accessToken) {
-      setAccessToken(refreshData.value.accessToken);
-      setRefreshToken(refreshData.value.refreshToken);
-      return refreshData.value;
-    }
-
-    return null;
-  };
-
-  const logout = () => {
+  const logout = async () => {
     clearTokens();
-    navigateTo('/login');
+    // $router.push(localePath('/login'));
+  };
+
+  const refresh = async () => {
+    try {
+      const result = await $fetch<AuthResponse>('/api/Users/refresh', {
+        method: 'post',
+        body: { refreshToken: refreshToken.value },
+      });
+      setAccessToken(result.accessToken);
+      setRefreshToken(result.refreshToken);
+    }
+    catch (error) {
+      clearTokens();
+      $toast.error('Ошибка авторизации. Пожалуйста, попробуйте снова.');
+    }
   };
 
   return {

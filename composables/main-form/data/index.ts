@@ -60,21 +60,21 @@ export const paymentComponentOptions = [ // уточнить у Проект м�
 ];
 
 export const stepTitles: Record<number, string> = {
-  1: 'Заполнение заявки',
-  2: 'Учредительные документы',
-  3: 'Финансовые документы',
-  4: 'Документы по обеспечению обязательств по договору',
+  1: 'application-form.first-step.header',
+  2: 'application-form.second-step.header',
+  3: 'application-form.third-step.header',
+  4: 'application-form.fourth-step.header',
 };
 
 export const getApplicationStatusHeader = (status: ApplicationStatus) => {
   return {
-    [ApplicationStatus.New]: 'Новая',
-    [ApplicationStatus.Consideration]: 'Готово! Ваша заявка успешно отправлена',
-    [ApplicationStatus.Rejected]: 'Ваша заявка отклонена',
-    [ApplicationStatus.Correction]: 'Ваша заявка отправлена на доработку',
-    [ApplicationStatus.FinalConsideration]: 'Повторное рассмотрение',
-    [ApplicationStatus.FinalRejected]: 'Окончательно отклонена',
-    [ApplicationStatus.FinalCorrection]: 'Ваша заявка рассмотрена',
-    [ApplicationStatus.Approved]: 'Ваша заявка одобрена',
-  }[status] ?? 'Неизвестно';
+    [ApplicationStatus.New]: 'application-status.new.header',
+    [ApplicationStatus.Consideration]: 'application-status.consideration.header',
+    [ApplicationStatus.Rejected]: 'application-status.rejected.header',
+    [ApplicationStatus.Correction]: 'application-status.correction.header',
+    [ApplicationStatus.FinalConsideration]: 'application-status.final-consideration.header',
+    [ApplicationStatus.FinalRejected]: 'application-status.final-rejected.header',
+    [ApplicationStatus.FinalCorrection]: 'application-status.final-correction.header',
+    [ApplicationStatus.Approved]: 'application-status.approved.header',
+  }[status] ?? 'application-status.unknown.header';
 };

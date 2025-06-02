@@ -88,7 +88,7 @@ getBid();
       <template #footer>
         <div class="bid-detail__footer">
           <Button label="Отменить" severity="danger" :disabled="!rejectMessage && !selectedFields.length" @click="moderateBid(PropertyStatus.Rejected)" />
-          <Button label="На доработку" severity="warn" :disabled="!rejectMessage && !selectedFields.length" @click="moderateBid(PropertyStatus.Rejected)" />
+          <Button label="На доработку" severity="warn" :disabled="!rejectMessage && !selectedFields.length" @click="moderateBid(PropertyStatus.Correction)" />
         </div>
       </template>
     </Dialog>

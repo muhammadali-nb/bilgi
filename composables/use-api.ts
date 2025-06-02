@@ -1,32 +1,32 @@
 import type { UseFetchOptions } from 'nuxt/app';
+import { useUserAuth } from '@composables/auth';
+import { useToastStore } from '@store/toast';
+import { navigateTo } from 'nuxt/app';
 
 export function useApi<T>(url: string | (() => string), options: UseFetchOptions<T> = {}) {
   const headers = useRequestHeaders(['cookie']);
+  const nuxtApp = useNuxtApp();
+  const { refresh, accessToken, refreshToken } = useUserAuth();
+  const $toast = useToastStore();
 
   return useFetch(url,
     {
       $fetch,
-
       async onResponseError({ response, request, options, error }) {
-        // if (import.meta.server || !response || response.status !== 401) return;
-        // $toast.error(error?.message ?? 'Не удалось выполнить авторизацию. Пожалуйста, попробуйте снова.');
-        // if (response.status === 401) {
-        //   try {
-        //     // const result = await $fetch('/api/refresh-token', { method: 'post', body: { token: 'asdasd' } });
-        //     const refreshToken = await refresh();
-        //     if (result.token) {
-        //       // await $fetch(request, options);
-        //       return request;
-        //     }
-        //     else {
-        //       // go to login page
-        //     }
-        //   }
-        //   catch (e) {
-        //     // go to login page
-        //   }
-        // }
-        // return event.request;
+        if (import.meta.server || !response || response.status !== 401) return;
+        $toast.error('Не удалось выполнить авторизацию. Пожалуйста, попробуйте снова.');
+        if (response.status === 401) {
+          try {
+            await refresh();
+            if (!accessToken.value || !refreshToken.value) {
+              await nuxtApp.runWithContext(() => navigateTo('/login'));
+              if (document) document.location.reload();
+            }
+          }
+          catch (e) {
+            await nuxtApp.runWithContext(() => navigateTo('/login'));
+          }
+        }
       },
 
       onResponse(event) {
@@ -40,7 +40,8 @@ export function useApi<T>(url: string | (() => string), options: UseFetchOptions
       headers,
       watch: false,
       immediate: false,
-      retry: false,
+      retry: 1,
+      retryStatusCodes: [401],
     },
   );
 }

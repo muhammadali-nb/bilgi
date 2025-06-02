@@ -1,12 +1,12 @@
 import type { ToastMessageOptions } from 'primevue/toast';
+// import { useI18n } from 'vue-i18n';
 import { useToast } from 'primevue/usetoast';
-import { useI18n } from 'vue-i18n';
 
 type ToastsSeverity = Exclude<ToastMessageOptions['severity'], undefined>;
 
 export const useToastStore = defineStore('toasts', () => {
-  const { t } = useI18n();
-
+  // const { t } = useI18n();
+  const { $i18n } = useNuxtApp();
   const $toast = useToast();
   const duration = 3500;
 
@@ -23,8 +23,8 @@ export const useToastStore = defineStore('toasts', () => {
 
     $toast.add({
       severity,
-      summary: t(summary || ''),
-      detail: t(detail),
+      summary: $i18n.t(summary || ''),
+      detail: $i18n.t(detail), // t(detail),
       life: duration,
     });
   };

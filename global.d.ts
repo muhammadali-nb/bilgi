@@ -1,3 +1,4 @@
+
 declare module '*.svg?raw' {
   const content: any
   export default content
@@ -13,4 +14,3 @@ declare global {
     CAPIWS: any;
   }
 }
-

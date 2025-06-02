@@ -1,16 +1,140 @@
 {
-  "hello-world": "Hello world!",
+  "hello-world": "Salom, dunyo!",
   "advantages": {
-    "test-text": "Advantage text"
+    "test-text": "Afzallik matni"
   },
-
-  "admin-auth": "Auth",
-  "admin-bid": "bid",
-  "admin-bid-id": "bid id",
-  "admin-clients": "clients",
-  "years": "{n} Years | {n} Years | {n} Years | {n} Years",
-  "months": "{n} Months | {n} Months | {n} Months | {n} Months",
-  "pledge": "Pledge",
-  "guarantee": "Guarantee",
-  "insurance": "Insurance"
+  "admin-auth": "Avtorizatsiya",
+  "admin-bid": "Arizalar",
+  "admin-bid-id": "Ariza",
+  "admin-clients": "Mijozlar",
+  "years": "0 yil | {n} yil | {n} yil | {n} yil",
+  "months": "0 oy | {n} oy | {n} oy | {n} oy",
+  "pledge": "Garov",
+  "guarantee": "Kafolat",
+  "insurance": "Sug'urta",
+  "application-form": {
+    "application": "Ariza",
+    "first-step": {
+      "header": "Arizani to'ldirish",
+      "title": "ARIZA",
+      "targetCreditAmount": "Kerakli maqsadli kredit miqdori (so'm):",
+      "youngSpecialistsCount": "Tayyorlanadigan va ishga joylashtiriladigan yosh mutaxassislar soni:",
+      "gracePeriod": "Imtiyozli davr:",
+      "creditReturnPeriodYears": "Kreditni qaytarish muddati (yil):",
+      "creditSecurityType": "Kredit ta'minoti",
+      "creditReturnPlanTitle": "Maqsadli kreditni qaytarish rejasi",
+      "plannedCreditReturnSchedule": "(kredit miqdori, foizlar)",
+      "creditReturnFrequency": "(oylik, choraklik, boshqa)",
+      "economicJustificationTitle": "Maqsadli kreditning iqtisodiy asoslanmasi",
+      "projectDescription": "Loyiha tavsifi:",
+      "ownFundsAmount": "Loyihani amalga oshirish uchun jalb qilingan shaxsiy mablag'lar (so'm):",
+      "organizationSocialIndicators": "Tashkilotning ijtimoiy ko'rsatkichlari haqida ma'lumot:",
+      "contactsTitle": "Aloqa ma'lumotlari",
+      "contactPersonFullName": "Aloqa uchun shaxs",
+      "mobilePhone": "Mobil",
+      "workPhone": "Ish",
+      "homePhone": "Uy",
+      "email": "Elektron pochta",
+      "directorFullName": "Direktor (to‘liq ismi)",
+      "applicantQuestionnaireDocumentUrl": "Arizachi anketasi",
+      "applicantQuestionnaireLabel": "Ta'lim faoliyatini amalga oshirish huquqini tasdiqlovchi hujjat (litsenziya/tasdiq/ruxsatnoma);"
+    },
+    "second-step": {
+      "header": "Tashkiliy hujjatlar",
+      "title": "Tashkiliy hujjatlar",
+      "certificateOfStateRegistration": "Davlat ro‘yxatidan o‘tganlik guvohnomasi",
+      "organizationCharter": "Ustav",
+      "foundingAgreement": "Tashkil etuvchi shartnoma",
+      "foundersDecisionToOpenOrganization": "Tashkilotni ochish bo‘yicha ta'sischilar qarori",
+      "foundersDecisionOnTargetLoan": "Maqsadli kredit ajratish bo‘yicha ta'sischilar qarori (miqdori, maqsadi, muddati, foiz stavkasi, ta'minoti);",
+      "orderOnTargetLoan": "Maqsadli kredit ajratish to‘g‘risidagi buyruq (miqdori, maqsadi, muddati, foiz stavkasi, ta'minoti)",
+      "ceoAuthorityConfirmation": "Direktor vakolatlarini tasdiqlovchi hujjatlar",
+      "chiefAccountantAuthorityConfirmation": "Bosh buxgalter vakolatlarini tasdiqlovchi hujjatlar",
+      "ceoPassport": "Direktor pasporti;",
+      "chiefAccountantPassport": "Bosh buxgalter pasporti;",
+      "itParkResidencyCertificate": "“AKT Mahsulotlari Texnologik Parki” MChJ rezidenti guvohnomasi;",
+      "educationActivityPermission": "Ta'lim faoliyatini amalga oshirish huquqini tasdiqlovchi hujjat (litsenziya/tasdiq/ruxsatnoma);"
+    },
+    "third-step": {
+      "header": "Moliyaviy hujjatlar",
+      "title": "Moliyaviy hujjatlar",
+      "financialStatements": "Tashkilotning o‘tgan yildagi (choraklar bo‘yicha) moliyaviy hisobotlari nusxalari, O‘zbekiston Respublikasi qonunchiligida nazarda tutilgan choraklik, yarim yillik va yillik hisobotlar, soliq organiga topshirilganligini tasdiqlovchi holda; 1-shakl, 2-shakl, hisob varaqalari aylanishi",
+      "taxDebtAbsenceCertificate": "Soliq organidan soliq qarzi yo‘qligi haqida guvohnoma;",
+      "bankAccountCertificate": "Bank hisobvaraqlari mavjudligi va №2 ish ishi yo‘qligi to‘g‘risidagi ma'lumotnoma (asli, 30 kundan oshmagan bo‘lishi kerak);",
+      "projectBusinessPlan": "Loyiha biznes-rejasi",
+      "targetFundSpendingEstimate": "Maqsadli mablag‘larni sarflash smetasi",
+      "leaseAgreement": "Ijara shartnomasi (agar tashkilot binolarni ijaraga olgan bo‘lsa);"
+    },
+    "fourth-step": {
+      "header": "Shartnoma bo‘yicha majburiyatlarni ta'minlash hujjatlari",
+      "title": "Ko‘chmas mulk",
+      "landCadastrePassport": "Garov sifatida taqdim etilgan yer uchastkalarining (binolar va inshootlar) kadastr pasporti",
+      "ownershipDocuments": "Mulk huquqini tasdiqlovchi hujjatlar",
+      "realEstateValuationReport": "Mustaqil baholovchi tashkilotning hisobotlari",
+      "vehicleSectionTitle": "Transport vositalari",
+      "vehicleRegistrationCertificate": "Transport vositasini ro‘yxatdan o‘tkazish guvohnomasi",
+      "vehicleValuationReport": "Mustaqil baholovchi tashkilotning hisobotlari",
+      "resolutionsSectionTitle": "Qarorlar va kafolatlar",
+      "shareholderResolution": "Ishtirokchilar/aksiyadorlar umumiy yig‘ilishi qarori",
+      "guarantorFinancialAndFoundingDocs": "Kafilning moliyaviy va tashkiliy hujjatlari",
+      "auditorOpinion": "Auditor xulosasi",
+      "guarantorLetter": "Kafil xat kafolati",
+      "insuranceSectionTitle": "Sug'urta polisi",
+      "insuranceCompanyLetter": "Sug'urta tashkilotidan kredit bo‘yicha majburiyatlarni bajarish haqida xat."
+    },
+    "placeholder": {
+      "enter-amount": "Miqdorni kiriting",
+      "enter-count": "Sonini kiriting",
+      "choise": "Tanlang",
+      "person-contact": "Aloqa uchun shaxs"
+    },
+    "buttons": {
+      "next": "Keyingi",
+      "prev": "Oldingi",
+      "save": "Saqlash"
+    }
+  },
+  "application-status": {
+    "new": {
+      "header": "Yangi",
+      "message": "Sizning arizangiz hali ko‘rib chiqish uchun topshirilmagan."
+    },
+    "consideration": {
+      "header": "Tayyor! Arizangiz muvaffaqiyatli yuborildi",
+      "message": "Arizangiz muvaffaqiyatli yaratildi va ko‘rib chiqilmoqda. Iltimos, tekshiruvni kuting."
+    },
+    "rejected": {
+      "header": "Arizangiz rad etildi",
+      "message": "Arizangiz ko‘rib chiqildi, ammo afsuski, uni rad etishga majburmiz.",
+      "description": "Arizangiz mavjud qarzlar tufayli rad etildi. Davom etish uchun, barcha qarzlarni to‘lang va tasdiqlovchi hujjatlarni taqdim eting.",
+      "action": "Yangi ariza yaratish"
+    },
+    "correction": {
+      "header": "Arizangiz tuzatishlarni talab qiladi",
+      "message": "Arizangiz ko‘rib chiqildi, lekin ba'zi tuzatishlar talab qilinadi. Iltimos, quyidagi ma'lumotlarni aniqlang.",
+      "description": "Ko‘rib chiqish paytida taqdim etilgan ma'lumotlarda nomutanosibliklar aniqlandi. Davom etish uchun, direktor pasporti (rasmli sahifa) va tashkilot ustavining yangilangan nusxasini qayta taqdim eting.",
+      "action": "Tuzatish kiritish"
+    },
+    "final-consideration": {
+      "header": "Yakuniy ko‘rib chiqish",
+      "message": "Arizangiz yakuniy ko‘rib chiqilayotgan bosqichda. Iltimos, qarorni kuting."
+    },
+    "final-rejected": {
+      "header": "Yakuniy rad etish",
+      "message": "Afsuski, arizangiz yakuniy ko‘rib chiqishdan so‘ng rad etildi."
+    },
+    "final-correction": {
+      "header": "Arizangiz ko‘rib chiqildi",
+      "message": "Yakuniy tuzatishlar talab qilinadi. Iltimos, ko‘rsatilgan ma'lumotlarni ko‘rib chiqing."
+    },
+    "approved": {
+      "header": "Arizangiz tasdiqlandi",
+      "message": "Ariza to‘liq tasdiqlandi va mablag‘ ajratishga tayyor.",
+      "description": "Mablag‘ni olishdan oldin shartnomani ko‘rib chiqing."
+    },
+    "unknown": {
+      "header": "Noma'lum",
+      "message": "Ariza holati noma'lum"
+    }
+  }
 }
