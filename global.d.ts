@@ -9,8 +9,3 @@ declare module '*.svg' {
   export default content
 }
 
-declare global {
-  interface Window {
-    CAPIWS: any;
-  }
-}

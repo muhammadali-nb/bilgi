@@ -8,20 +8,20 @@ export const localeItems: LocaleItemType[] = [
     code: 'ru',
     language: 'ru-RU',
     name: 'Русский',
-    file: { path: 'ru.json' },
+    file: 'ru.json',
   },
 
   {
     code: 'en',
     language: 'en-US',
     name: 'English',
-    file: { path: 'en.json' },
+    file: 'en.json',
   },
 
   {
     code: 'uz',
     language: 'uz-UZ',
     name: 'O\'zbekcha',
-    file: { path: 'uz.json' },
+    file: 'uz.json',
   },
 ];

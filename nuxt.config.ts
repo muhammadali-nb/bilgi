@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { createResolver } from '@nuxt/kit';
-import {COOKIE_LOCALE_KEY, DEFAULT_LANGUAGE, localeItems} from './i18n/constants';
+import { COOKIE_LOCALE_KEY, DEFAULT_LANGUAGE, localeItems } from './i18n/constants';
 import { options } from './plugins/primevue/config';
 
 const { resolve } = createResolver(import.meta.url);
@@ -24,11 +24,6 @@ export default defineNuxtConfig({
           api: 'modern-compiler',
           additionalData: '@use "~/assets/styles/responsive.scss" as *;',
         },
-      },
-    },
-    resolve: {
-      alias: {
-        '@assets/*': resolve('./assets/'),
       },
     },
   },
@@ -71,10 +66,11 @@ export default defineNuxtConfig({
 
   i18n: {
     lazy: true,
-    vueI18n: './i18n/config.ts',
+    vueI18n: './config.ts',
     defaultLocale: DEFAULT_LANGUAGE,
     strategy: 'prefix_except_default',
     locales: localeItems,
+    langDir: 'locales/',
     bundle: {
       optimizeTranslationDirective: false,
     },

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useI18n } from '#imports';
 import Stepper from '@components/shared/stepper.vue';
 import FirstStep from '@components/steps/first-step.vue';
 import FourthStep from '@components/steps/fourth-step.vue';
@@ -10,7 +11,7 @@ import { getApplicationStatusHeader, stepTitles } from '@composables/main-form/d
 import { useStepper } from '@composables/ui/stepper';
 import { useAppMainForm } from '@store/main-form';
 
-const { t } = useI18n();
+const { t } = useI18n({ useScope: 'global' });
 const appMainForm = useAppMainForm();
 const { activeStep, next, steps, prev, isFinished, stepGuard } = useStepper();
 

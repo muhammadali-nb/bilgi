@@ -11,7 +11,7 @@ import { useRoute } from 'nuxt/app';
 
 // const { $i18n } = useNuxtApp();
 export const useMainForm = () => {
-  const { t } = useI18n();
+  const { $i18n } = useNuxtApp();
   const $route = useRoute();
 
   const activeStep = computed<number>(() => {
@@ -28,7 +28,7 @@ export const useMainForm = () => {
 
   const creditSecurityTypeOptions = computed(() =>
     creditSecurityTypeOptionsData.map(type => ({
-      name: `${t(type.name)}`,
+      name: `${$i18n.t(type.name)}`,
       value: type.value,
     })),
   );
@@ -37,7 +37,7 @@ export const useMainForm = () => {
     monthsForm.map((month) => {
       const monthValue = getYearFromMonthLength(month);
       return {
-        name: `${t(monthValue.type, monthValue.value)}`,
+        name: `${$i18n.t(monthValue.type, monthValue.value)}`,
         value: month,
       };
     }),
