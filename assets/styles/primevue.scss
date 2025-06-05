@@ -82,19 +82,21 @@ html body {
     // }
   }
 
-  .p-inputtext.warning, .p-textarea.warning, .p-inputgroup.warning, .p-select.warning {
-    border: .12rem solid var(--warning);
+  .p-inputtext.warning,
+  .p-textarea.warning,
+  .p-inputgroup.warning,
+  .p-select.warning {
+    border: 0.12rem solid var(--warning);
     background-color: var(--warning-background);
 
     &:enabled:focus {
-      border: .12rem solid var(--warning);
+      border: 0.12rem solid var(--warning);
     }
 
     &:hover {
-      border: .12rem solid var(--warning);
+      border: 0.12rem solid var(--warning);
     }
   }
-
 
   .p-password-toggle-mask-icon {
     inset-inline-end: unset;

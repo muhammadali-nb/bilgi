@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { LanguagesTypes } from '~/i18n/types';
 import { useI18n } from '#imports';
 import { uzFlagIcon } from '../../assets/icons';
 import VIcon from './v-icon.vue';
@@ -7,14 +8,19 @@ const { locales, locale, setLocale } = useI18n({ useScope: 'global' });
 
 const regionName = computed(() => locales.value.find(option => option.code === locale.value)?.name);
 
-const setNewLocale = async (newLocale: 'ru' | 'uz' | 'en') => {
-  console.log(newLocale);
-  await setLocale(newLocale);
-};
+const lang = computed({
+  get() {
+    return locale.value;
+  },
+
+  set: async (value: LanguagesTypes) => {
+    await setLocale(value);
+  },
+});
 </script>
 
 <template>
-  <Select v-model="locale" class="lang-switcher" :options="locales" placeholder="Выберите язык" option-value="code" option-label="name" @update:model-value="setNewLocale">
+  <Select v-model="lang" class="lang-switcher" :options="locales" placeholder="Выберите язык" option-value="code" option-label="name">
     <template #option="slotProps">
       <div class="lang-switcher__option">
         <VIcon
@@ -60,3 +66,29 @@ const setNewLocale = async (newLocale: 'ru' | 'uz' | 'en') => {
   }
 }
 </style>
+
+<!-- <script setup lang="ts">
+const { locales, locale, setLocale } = useI18n();
+</script>
+
+<template>
+  <div class="switcher">
+    <button
+      v-for="lang in locales"
+      :key="lang.code"
+      :class="[lang.code === locale && 'active']"
+      @click="setLocale(lang.code)"
+    >
+      {{ lang.name }}
+    </button>
+    <hr>
+    {{ locale }}
+  </div>
+</template>
+
+<style scoped lang="scss">
+.active {
+  background: var(--black);
+  color: #fff;
+}
+</style> -->

@@ -7,6 +7,7 @@ export const inputTextPt = () => {
 };
 
 export const inputTextConfig = () => {
+  console.log('inputTextConfig');
   return {
     colorScheme: {
       light: {
@@ -17,7 +18,7 @@ export const inputTextConfig = () => {
         shadow: 'none',
       },
     },
-    paddingX: '1.8rem',
+    paddingX: '3rem',
     paddingY: '1.4rem',
   };
 };
