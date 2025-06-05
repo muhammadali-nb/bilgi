@@ -12,6 +12,12 @@
   "pledge": "Залог",
   "guarantee": "Гарантия",
   "insurance": "Страховка",
+  "toast": {
+    "success": "Успешно",
+    "error": "Ошибка",
+    "warning": "Предупреждение",
+    "info": "Информация"
+  },
   "application-form": {
     "application": "Заявка",
     "first-step": {

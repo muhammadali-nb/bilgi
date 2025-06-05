@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useI18n } from '#imports';
 import Stepper from '@components/shared/stepper.vue';
 import FirstStep from '@components/steps/first-step.vue';
 import FourthStep from '@components/steps/fourth-step.vue';
@@ -10,6 +9,9 @@ import ThirdStep from '@components/steps/third-step.vue';
 import { getApplicationStatusHeader, stepTitles } from '@composables/main-form/data';
 import { useStepper } from '@composables/ui/stepper';
 import { useAppMainForm } from '@store/main-form';
+import { useToastStore } from '@store/toast';
+
+const $toast = useToastStore();
 
 const { t } = useI18n({ useScope: 'global' });
 const appMainForm = useAppMainForm();
@@ -39,6 +41,7 @@ await applicationInit();
 <template>
   <div class="home">
     <div class="container-xs home__content">
+      <!-- <Button label="click me" @click="$toast.success('click me')" /> -->
       <h3 class="font-24-sb home__title">
         {{ currentTitle }}
       </h3>

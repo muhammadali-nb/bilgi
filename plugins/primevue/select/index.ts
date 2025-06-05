@@ -1,8 +1,10 @@
 export const selectConfig = () => {
   return {
-    dropdownWidth: '4rem',
-    paddingX: '1.8rem',
-    paddingY: '1.5rem',
+    root: {
+      dropdownWidth: '4rem',
+      paddingX: '1.8rem',
+      paddingY: '1.5rem',
+    },
     // clearIcon: {
     //   width: '1rem',
     //   height: '1rem',

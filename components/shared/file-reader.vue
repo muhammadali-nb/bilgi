@@ -14,6 +14,7 @@ const handleIframeLoad = () => {
 };
 
 function getFileNameFromUrl(url: string) {
+  if (!url) return '---';
   return url.substring(url.lastIndexOf('/') + 1);
 }
 </script>

@@ -1,13 +1,14 @@
 export const paginatorConfig = () => {
   return {
-    background: 'transparent',
-    padding: '10px',
-    navButtonSelectedBackground: '{primary.500}',
-    navButtonSelectedColor: 'var(--white)',
-    root: {
-      padding: '0',
-    },
 
+    root: {
+      background: 'transparent',
+      padding: '10px',
+    },
+    navButton: {
+      selectedBackground: '{primary.500}',
+      selectedColor: 'var(--white)',
+    },
   };
 };
 

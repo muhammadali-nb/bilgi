@@ -7,18 +7,12 @@ export const inputTextPt = () => {
 };
 
 export const inputTextConfig = () => {
-  console.log('inputTextConfig');
   return {
-    colorScheme: {
-      light: {
-        shadow: 'var(--input-field-shadow)',
-        // borderColor: 'transparent',
-      },
-      dark: {
-        shadow: 'none',
-      },
+    root: {
+      shadow: 'var(--input-field-shadow)',
+      // borderColor: 'transparent',
+      paddingX: '1.8rem',
+      paddingY: '1.5rem',
     },
-    paddingX: '3rem',
-    paddingY: '1.4rem',
   };
 };

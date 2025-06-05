@@ -1,7 +1,6 @@
 import { badgeConfig } from '../badge';
 
 export const buttonsConfig = () => {
-  console.log(123);
   return {
     primary: {
       color: 'var(--site-btn-text)',

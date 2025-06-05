@@ -1,17 +1,12 @@
 export const toggleButtonConfig = () => {
   return {
-    padding: '.4rem',
-    contentPadding: '.9rem',
-    colorScheme: {
-      light: {
-        color: 'var(--text-color)',
+    root: {
+      padding: '.4rem',
+      contentPadding: '.9rem',
+      color: 'var(--text-color)',
+      background: 'var(--element-light)',
+      checked: {
         background: 'var(--element-light)',
-        checked: {
-          background: 'var(--element-light)',
-        },
-      },
-      dark: {
-        color: 'var(--text-color)',
       },
     },
   };

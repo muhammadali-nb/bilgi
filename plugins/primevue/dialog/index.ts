@@ -19,8 +19,14 @@ export const dialogPt = () => {
 
 export const dialogConfig = () => {
   return {
-    headerPadding: '2rem',
-    contentPadding: '0 2rem 2rem',
-    footerPadding: '0 2rem 2rem',
+    content: {
+      padding: '0 2rem 2rem',
+    },
+    header: {
+      padding: '2rem',
+    },
+    footer: {
+      padding: '0 2rem 2rem',
+    },
   };
 };

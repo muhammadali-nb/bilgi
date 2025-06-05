@@ -12,6 +12,13 @@
   "pledge": "Garov",
   "guarantee": "Kafolat",
   "insurance": "Sug'urta",
+  "toast": {
+    "success": "Muvaffaqiyatli",
+    "error": "Xatolik",
+    "warning": "Ogohlantirish",
+    "info": "Ma'lumot"
+  },
+
   "application-form": {
     "application": "Ariza",
     "first-step": {

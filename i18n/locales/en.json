@@ -12,6 +12,13 @@
   "pledge": "Collateral",
   "guarantee": "Guarantee",
   "insurance": "Insurance",
+  "toast": {
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information"
+  },
+
   "application-form": {
     "application": "Application",
     "first-step": {

@@ -8,8 +8,10 @@ export const inputGroupPt = () => {
 
 export const inputGroupConfig = () => {
   return {
-    addonColor: 'var(--p-inputtext-color)',
-    // addonPadding: 'var(--p-inputtext-padding-y) 0 var(--p-inputtext-padding-y) var(--p-inputtext-padding-x)',
-    addonPadding: '0 1.6rem',
+    addon: {
+      color: 'var(--p-inputtext-color)',
+      // addonPadding: 'var(--p-inputtext-padding-y) 0 var(--p-inputtext-padding-y) var(--p-inputtext-padding-x)',
+      padding: '0 1.6rem',
+    },
   };
 };
