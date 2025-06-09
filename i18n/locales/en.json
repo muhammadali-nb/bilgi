@@ -1,5 +1,6 @@
 {
   "hello-world": "Hello world!",
+  "step": "Step",
   "advantages": {
     "test-text": "Advantage text"
   },
@@ -18,7 +19,6 @@
     "warning": "Warning",
     "info": "Information"
   },
-
   "application-form": {
     "application": "Application",
     "first-step": {
@@ -143,5 +143,65 @@
       "header": "Unknown",
       "message": "Unknown application status"
     }
+  },
+  "login": {
+    "title": "Login",
+    "description": "To access your account, enter your login and authenticate using your digital signature key.",
+    "label": {
+      "login": "Login",
+      "phone": "Phone number",
+      "password": "Password",
+      "ecp": "Digital Signature Key"
+    },
+    "placeholder": {
+      "login": "Enter your login",
+      "password": "Enter your password"
+    },
+    "no-account-question": "Don’t have an account?",
+    "no-account-action": "Register",
+    "ecp": {
+      "choose-key": "Choose a key",
+      "not-found": "No keys found",
+      "select-key": "Select key",
+      "authorize": "Authorize"
+    }
+  },
+  "registration": {
+    "title": "Registration",
+    "description": "To register your account, enter your login and authenticate using your digital signature key.",
+    "label": {
+      "phone": "Phone number",
+      "login": "Login",
+      "password": "Password",
+      "ecp": "Digital signature key"
+    },
+    "placeholder": {
+      "login": "Enter your login",
+      "password": "Enter your password"
+    },
+    "button": {
+      "register": "Register",
+      "select-key": "Select key",
+      "authorize": "Authorize"
+    },
+    "already-have-account": {
+      "text": "Already have an account?",
+      "action": "Login"
+    },
+    "ecp": {
+      "choose-key": "Choose a key",
+      "not-found": "Keys not found"
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "min-length": "Minimum length is {n} characters",
+    "max-length": "Maximum length is {n} characters",
+    "email": "Invalid email format",
+    "number": "Must be a number",
+    "min-value": "Minimum value is {n}",
+    "max-value": "Maximum value is {n}",
+    "pattern": "Invalid format",
+    "password_complexity": "The password must be at least 6 characters long and include uppercase and lowercase letters, numbers, and special characters."
   }
 }

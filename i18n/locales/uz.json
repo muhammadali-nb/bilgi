@@ -1,5 +1,6 @@
 {
   "hello-world": "Salom, dunyo!",
+  "step": "Qadam",
   "advantages": {
     "test-text": "Afzallik matni"
   },
@@ -143,5 +144,66 @@
       "header": "Noma'lum",
       "message": "Ariza holati noma'lum"
     }
+  },
+  "login": {
+    "title": "Kirish",
+    "description": "Kabinetga kirish uchun loginingizni kiriting va ERI kaliti orqali tasdiqlang.",
+    "label": {
+      "login": "Login",
+      "phone": "Telefon raqami",
+      "password": "Parol",
+      "ecp": "ERI kaliti"
+    },
+    "placeholder": {
+      "login": "Loginni kiriting",
+      "password": "Parolingizni kiriting"
+    },
+    "no-account-question": "Hisobingiz yo‘qmi?",
+    "no-account-action": "Ro‘yxatdan o‘ting",
+    "ecp": {
+      "choose-key": "Kalitni tanlang",
+      "not-found": "Kalitlar topilmadi",
+      "select-key": "Kalitni tanlash",
+      "authorize": "Tasdiqlash"
+
+    }
+  },
+  "registration": {
+    "title": "Ro‘yxatdan o‘tish",
+    "description": "Kabinetga ro‘yxatdan o‘tish uchun login va ERI kaliti orqali tasdiqlang.",
+    "label": {
+      "phone": "Telefon raqami",
+      "login": "Login",
+      "password": "Parol",
+      "ecp": "ERI kaliti"
+    },
+    "placeholder": {
+      "login": "Loginni kiriting",
+      "password": "Parolingizni kiriting"
+    },
+    "button": {
+      "register": "Ro‘yxatdan o‘tish",
+      "select-key": "Kalitni tanlash",
+      "authorize": "Tasdiqlash"
+    },
+    "already-have-account": {
+      "text": "Allaqachon hisobingiz bormi?",
+      "action": "Kirish"
+    },
+    "ecp": {
+      "choose-key": "Kalitni tanlang",
+      "not-found": "Kalitlar topilmadi"
+    }
+  },
+  "validation": {
+    "required": "Bu maydon to‘ldirilishi shart",
+    "min-length": "Minimal uzunlik {n} ta belgidan kam bo‘lmasligi kerak",
+    "max-length": "Maksimal uzunlik {n} ta belgidan oshmasligi kerak",
+    "email": "Noto‘g‘ri elektron pochta formati",
+    "number": "Raqam bo‘lishi kerak",
+    "min-value": "Minimal qiymat {n}",
+    "max-value": "Maksimal qiymat {n}",
+    "pattern": "Noto‘g‘ri format",
+    "password_complexity": "Parol kamida 6 ta belgidan iborat bo‘lishi kerak, unda katta va kichik harflar, raqamlar hamda maxsus belgilar bo‘lishi lozim."
   }
 }

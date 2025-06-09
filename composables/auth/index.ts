@@ -8,7 +8,7 @@ export const useUserAuth = () => {
   const accessToken = useCookie<string>('accessToken', { default: () => '', sameSite: 'lax' });
   const refreshToken = useCookie<string>('refreshToken', { default: () => '', sameSite: 'lax' });
   const type = ref<'login' | 'registration'>();
-  const { requiredField, requiredIf } = useValidationRules();
+  const { requiredField, requiredIf, passwordRules } = useValidationRules();
   const bearerToken = computed(() => `Bearer ${accessToken.value}`);
   const $toast = useToastStore();
 
@@ -33,11 +33,17 @@ export const useUserAuth = () => {
     password: '',
   });
 
-  const rules = {
+  // const rules = {
+  //   login: { ...requiredField() },
+  //   phone: { ...requiredIf(() => type.value === 'registration') },
+  //   password: { ...(type.value === 'login' ? { ...requiredField() } : { ...passwordRules() }) },
+  // };
+
+  const rules = computed(() => ({
     login: { ...requiredField() },
     phone: { ...requiredIf(() => type.value === 'registration') },
-    password: { ...requiredField() },
-  };
+    password: { ...(type.value === 'login' ? { ...requiredField() } : { ...passwordRules() }) },
+  }));
 
   const $v = useVuelidate(rules, form);
 

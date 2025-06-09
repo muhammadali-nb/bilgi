@@ -33,7 +33,7 @@ export const useAppMainForm = defineStore('main-form', () => {
 
   const isRejected = (field: string): boolean => {
     const item = formStatuses.value.find(s => s.name.toLowerCase() === field.toLowerCase()); // Приводим к нижнему регистру Otabek fix it
-    return item?.status === PropertyStatus.Rejected;
+    return item?.status === PropertyStatus.Correction;
   };
 
   const {
@@ -48,6 +48,7 @@ export const useAppMainForm = defineStore('main-form', () => {
 
   const submitApplication = async () => {
     const isFormCorrect = await $v.value.$validate();
+
     if (!isFormCorrect && applicationId) return false;
 
     stepBody.value = {

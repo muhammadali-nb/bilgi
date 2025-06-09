@@ -18,64 +18,118 @@ definePageMeta({
   <div class="register">
     <form class="register__form" @submit.prevent>
       <h4 class="register__title font-32-b">
-        Регистрация
+        {{ $t('registration.title') }}
       </h4>
       <p class="register__description font-16-r">
-        Для регистрации в кабинет введите ваш логин и авторизуйтесь с помощью ЭЦП ключа.
+        {{ $t('registration.description') }}
       </p>
 
-      <FormField label="Номер телефона" class="form__field">
+      <FormField :label="$t('registration.label.phone')" class="form__field">
         <PhoneInput v-model="$v.phone.$model" :invalid="$v.phone?.$error" :icon="true" />
       </FormField>
 
-      <FormField label="Логин" class="form__field">
+      <FormField :label="$t('registration.label.login')">
         <InputGroup>
           <InputGroupAddon>
             <VIcon :icon="userIcon" no-fill />
           </InputGroupAddon>
-          <InputText v-model="$v.login.$model" :invalid="$v.login?.$error" placeholder="Введите логин" />
+          <InputText
+            v-model="$v.login.$model"
+            :invalid="$v.login?.$error"
+            :placeholder="$t('registration.placeholder.login')"
+          />
         </InputGroup>
       </FormField>
-
-      <FormField label="Пароль">
+      <!--
+      <FormField :label="$t('registration.label.password')">
         <InputGroup>
           <InputGroupAddon>
             <VIcon :icon="lockIcon" no-fill />
           </InputGroupAddon>
-          <Password v-model="$v.password.$model" :invalid="$v.password?.$error" placeholder="Введите пароль" toggle-mask :feedback="false" />
+          <Password
+            v-model="$v.password.$model"
+            :invalid="$v.password?.$error"
+            :placeholder="$t('registration.placeholder.password')"
+            toggle-mask
+            :feedback="false"
+          />
+        </InputGroup>
+      </FormField> -->
+
+      <FormField :label="$t('registration.label.password')" :errors="$v.password.$errors">
+        <InputGroup>
+          <InputGroupAddon>
+            <VIcon :icon="lockIcon" />
+          </InputGroupAddon>
+          <Password
+            v-model="$v.password.$model"
+            :invalid="$v.password.$error"
+            :class="[$v.password.$error && 'p-invalid']"
+            :placeholder="$t('registration.placeholder.password')"
+            toggle-mask
+            :feedback="false"
+          />
         </InputGroup>
       </FormField>
 
-      <FormField label="ЭЦП ключ" class="register__form__digital-signature">
-        <Button severity="secondary" label="Выбрать ключ" @click="visible = true" />
+      <FormField :label="$t('registration.label.ecp')" class="register__form__digital-signature">
+        <Button
+          severity="secondary"
+          :label="$t('registration.button.select-key')"
+          @click="visible = true"
+        />
       </FormField>
 
       <Button
-        label="Регистрироваться"
+        :label="$t('registration.button.register')"
         severity="primary"
         type="submit"
         fluid
         class="register__form-submit"
         @click="register"
       />
+
       <p class="font-14-n register__form-text">
-        Уже есть аккаунт?
+        {{ $t('registration.already-have-account.text') }}
         <Button as-child>
           <RouterLink to="/login" class="font-14-b register__form-link">
-            Войти
+            {{ $t('registration.already-have-account.action') }}
           </RouterLink>
         </Button>
       </p>
     </form>
-    <Dialog v-model:visible="visible" header="Выберите ключ" :draggable="false" modal :close-on-mask="false" style="width: 45rem;" class="digital-signature__dialog">
-      <!--      <div class="digital-signature__dialog-content"> -->
-      <!--        <DigitalSignature /> -->
-      <!--        <DigitalSignature /> -->
-      <!--      </div> -->
+
+    <Dialog
+      v-model:visible="visible"
+      :header="$t('registration.ecp.choose-key')"
+      :draggable="false"
+      modal
+      :close-on-mask="false"
+      style="width: 45rem;"
+      class="digital-signature__dialog"
+    >
+      <!-- <div class="digital-signature__dialog-content">
+        <template v-if="keyList.length">
+          <DigitalSignature
+            v-for="item in keyList"
+            :key="item.name"
+            :item="parseCertificateInfo(item.alias)"
+          />
+        </template>
+
+        <p v-else class="digital-signature__dialog__empty font-16-n">
+          {{ $t('registration.ecp.not-found') }}
+        </p>
+      </div>
 
       <template #footer>
-        <Button label="Аторизоваться" fluid @click="register" />
-      </template>
+        <Button
+          :label="$t('registration.button.authorize')"
+          fluid
+          :disabled="!keyList.length"
+          @click="register"
+        />
+      </template> -->
     </Dialog>
   </div>
 </template>

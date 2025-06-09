@@ -24,7 +24,7 @@ const check = computed({
   <div class="filed-status">
     <div class="filed-status__header">
       <Checkbox v-if="status === PropertyStatus.Pending" v-model="check" binary />
-      <VIcon v-else :icon="status === PropertyStatus.Rejected ? rejectedIcon : approveIcon" no-fill class="filed-status__icon" />
+      <VIcon v-else :icon="status === PropertyStatus.Correction || status === PropertyStatus.Rejected ? rejectedIcon : approveIcon" no-fill class="filed-status__icon" />
       <label class="font-14-r">
         {{ label }}
       </label>

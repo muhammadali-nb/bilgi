@@ -48,6 +48,12 @@ html body {
 
     &:has(.p-invalid) {
       border-color: var(--p-inputtext-invalid-border-color);
+
+      [type="password"] {
+        &::placeholder {
+          color: var(--p-inputtext-invalid-placeholder-color);
+        }
+      }
     }
 
     .p-inputtext {

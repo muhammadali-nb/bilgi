@@ -15,14 +15,14 @@ const goToRejectedFieldStep = () => {
   $router.push({ name: $route.name as string, query: { ...$route.query, step: step ?? 1 } });
 };
 
-function handleActionClick() {
-  switch (statusMeta.value.action?.type) {
-    case 'edit':
-      break;
-    case 'resend':
-      break;
-  }
-}
+// function handleActionClick() {
+//   switch (statusMeta.value.action?.type) {
+//     case 'edit':
+//       break;
+//     case 'resend':
+//       break;
+//   }
+// }
 </script>
 
 <template>

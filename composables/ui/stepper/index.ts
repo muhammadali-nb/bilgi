@@ -7,8 +7,9 @@ export const useStepper = () => {
   const $router = useRouter();
   const $route = useRoute();
   const appMainForm = useAppMainForm();
+  const { $i18n } = useNuxtApp();
 
-  const steps = ['Шаг №1', 'Шаг №2', 'Шаг №3', 'Шаг №4'];
+  const steps = [`${$i18n.t('step')} №1`, `${$i18n.t('step')} №2`, `${$i18n.t('step')} №3`, `${$i18n.t('step')} №4`];
   const totalSteps = steps.length;
 
   const guardLoading = ref(false);
