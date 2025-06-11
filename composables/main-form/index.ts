@@ -13,7 +13,7 @@ import { useRoute } from 'nuxt/app';
 export const useMainForm = () => {
   const { $i18n } = useNuxtApp();
   const $route = useRoute();
-
+  const invalidSteps = ref<number[]>([]);
   const activeStep = computed<number>(() => {
     const step = Number($route.query.step);
     return Number.isNaN(step) ? 1 : step;
@@ -176,11 +176,15 @@ export const useMainForm = () => {
 
   function getStepByRejectedField(): number | null {
     for (const field of formStatuses.value) {
-      if (field.status === PropertyStatus.Rejected) {
+      if (field.status === PropertyStatus.Correction) {
         const step = fieldToStepMap.value[field.name];
-        if (step) return step;
+
+        invalidSteps.value.push(step);
+
+        // if (step) return step;
       }
     }
+
     return null;
   }
 
@@ -189,6 +193,6 @@ export const useMainForm = () => {
     creditSecurityTypeOptions, saveField, saveFile,
     activeStep, formStatuses, applicationId, currentRules,
     generateFieldToStepMap, fieldToStepMap, getRejectedFields,
-    getFirstInvalidStep, getStepByRejectedField,
+    getFirstInvalidStep, getStepByRejectedField, invalidSteps
   };
 };

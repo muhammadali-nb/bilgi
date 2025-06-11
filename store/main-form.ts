@@ -24,6 +24,7 @@ export const useAppMainForm = defineStore('main-form', () => {
     getRejectedFields,
     getFirstInvalidStep,
     getStepByRejectedField,
+    invalidSteps,
   } = useMainForm();
   const $toast = useToastStore();
   const {
@@ -73,6 +74,7 @@ export const useAppMainForm = defineStore('main-form', () => {
     if (!error.value && data.value?.properties) {
       formObj.value = setFormModel(data.value.properties);
       applicationId.value = data.value.id.toString();
+      console.log(data.value);
       formStatuses.value = data.value.propertyStatuses;
       applicationStatus.value = data.value.status;
     }
@@ -91,6 +93,6 @@ export const useAppMainForm = defineStore('main-form', () => {
     $v, formObj, submitApplication, getApplication, rules, applicationStatus,
     isRejected, creditSecurityTypeOptions, gracePeriodOptions, saveField, saveFile,
     handleBlurSave, formStatuses, applicationId, getFirstInvalidStep, getRejectedFields,
-    generateFieldToStepMap, fieldToStepMap, getStepByRejectedField,
+    generateFieldToStepMap, fieldToStepMap, getStepByRejectedField, invalidSteps,
   };
 });

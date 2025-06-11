@@ -4,6 +4,7 @@ import VIcon from './v-icon.vue';
 
 defineProps<{
   steps: string[]
+  invalidSteps?: number[]
 }>();
 
 const activeStep = defineModel<number>('activeStep');
@@ -19,6 +20,7 @@ const activeStep = defineModel<number>('activeStep');
             active: index + 1 === activeStep,
             completed: index + 1 < (activeStep ?? 0),
             upcoming: index + 1 > (activeStep ?? 0),
+            invalid: invalidSteps?.includes(index + 1),
           }"
         >
           <div class="circle">
@@ -93,6 +95,11 @@ const activeStep = defineModel<number>('activeStep');
     &.upcoming .label {
       color: var(--site-secondary-text);
       opacity: 0.5;
+    }
+
+    &.invalid .circle {
+      background-color: var(--secondary-500); // красный фон
+      color: white;
     }
   }
 

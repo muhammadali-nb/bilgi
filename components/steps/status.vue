@@ -10,9 +10,10 @@ const statusMeta = computed(() => getApplicationStatusMeta(appMainForm.applicati
 
 // const statusMeta = getApplicationStatusMeta(appMainForm.applicationStatus ?? 1);
 
-const goToRejectedFieldStep = () => {
-  const step = appMainForm.getStepByRejectedField();
-  $router.push({ name: $route.name as string, query: { ...$route.query, step: step ?? 1 } });
+const goToRejectedFieldStep = async () => {
+  appMainForm.getStepByRejectedField();
+
+  $router.push({ name: $route.name as string, query: { ...$route.query, step: appMainForm.invalidSteps[0] ?? 1 } });
 };
 
 // function handleActionClick() {

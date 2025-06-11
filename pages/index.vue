@@ -42,7 +42,7 @@ await applicationInit();
         {{ currentTitle }}
       </h3>
       <template v-if="!isFinished">
-        <Stepper v-model:active-step="activeStep" :steps="steps" class="home__steps" />
+        <Stepper v-model:active-step="activeStep" :steps="steps" class="home__steps" :invalid-steps="appMainForm.invalidSteps" />
         <FirstStep v-if="activeStep === 1" @submit="submitStep" />
         <SecondStep v-if="activeStep === 2" @prev="prev" @submit="submitStep" />
         <ThirdStep v-if="activeStep === 3" @prev="prev" @submit="submitStep" />
